@@ -1,0 +1,649 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    /* margin: 0; */
+    /* padding: 0; */
+    background-color: #f4f4f4;
+    width: 100%;
+    /* display: grid; */
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+header {
+    background-color: #3a8dff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+    /* max-width: 600px; */
+    width: 80%;
+    /* margin: 0 auto; */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    /* display: inline-flex; */
+    display: flex;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    width: 30%;
+    /* background-color: #99b4d1; */
+    /* border-radius: 5px; */
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+select {
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 0;
+    /*border: 1px solid #ddd;*/
+    border: 2px solid #608094;
+    border-radius: 4px;
+    background: #16394c;
+    color: #fff;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+footer p {
+    margin: 0;
+}
+
+.button-container {
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+    /* gap: 20px; */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    /* margin-top: 5px; */
+    /* position: relative; */
+}
+.BotonClass {
+    justify-content: center;
+    /* width: 70%; */
+    align-items: center;
+    display: flex;
+    /* border: 1px solid red; */
+    margin-left: auto;
+    margin-right: auto;
+    /* position: relative; */
+}
+
+.btn {
+    background-color: #007BFF;    
+    color: white;
+    padding: 15px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    margin: 5px;
+    transition: background-color 0.3s ease;    
+}
+
+/* .btn:hover { */
+    /* background-color: #0056b3; */
+    /* transform-style: preserve-3d; */
+    /* transform: rotateX(2deg) rotateY(2deg) rotateZ(2deg); */
+    /* perspective: 300px; */
+    /* transform: rotatex(3.142rad); */
+    /* transform: rotate3d(0, 1, 0.5, 3.142rad); */
+    /* animation: rotation 2s linear infinite;  */
+/* } */
+
+.btn:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: skewX(-45deg);
+    transition: left 0.5s ease;    
+}
+
+.btn:hover:before {
+    left: 100%;
+}
+
+
+.weather-card {
+    /* background-color: #34495E; */
+    background: #16394c;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 40%;
+    height: 200px;
+    padding: 20px;
+    text-align: center;
+    /* margin: 0 auto; */
+    margin: 5px;
+    border: 4px solid #608094;
+}
+.weather-card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+.weather-card .current-weather {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin: 20px 0; */
+    /* width: 275px; */
+    width: 140px;
+    height: 137px;
+    float: left;
+    /* left: 30px; */
+    /* position: absolute; */
+}
+.weather-card .current-weather img {
+    /* width: 50px; */
+    /* width: 140px; */
+    width: 100px;
+    /* height: 50px; */
+    /* height: 137px; */
+    /* height: auto; */
+    height: 100px;
+    /* margin-bottom: 15px; */
+    background-size: cover;
+    /* left: 800px; */
+    text-align: left;
+    /* border: 1px solid red; */
+    justify-content: left;
+
+}
+.weather-card .current-weather .temp {
+    font-size: 48px;
+    margin: 0;
+}
+.weather-card .current-weather .description {
+    font-size: 14px;
+    font-weight: bold;
+    /* position: absolute; */
+    position: relative;
+    /* left: auto; */
+    /* top: 325px; */
+    /* top: -35px; */
+    top: 0;
+    /* width: 100px; */
+    width: auto;
+    /* border: 1px solid red; */
+    color: #fff;
+}
+.weather-card .details {
+    font-size: 14px;
+    margin: 0 0 15px 0;
+    text-align: left;
+    height: 137px;
+    float: right;
+    /* position: absolute; */
+    position: relative;
+    /* left: unset; */
+    /* right: 300px; */
+    color: #fff;
+    display: block;
+    /* border: 1px solid red; */
+    width: 140px;
+}
+
+.weather-card .details p{
+    margin: 10px 0 10px 0;
+    width: auto;
+}
+
+.weather-card .details .temp {
+    font-size: 32px;
+    /* position: absolute; */
+    position: relative;
+    left: -160px;
+    top: -100px;
+    width: auto;
+    /* border: 1px solid red; */
+    text-align: center;
+}
+/* .weather-card .forecast {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    width: 100%;
+    top: 5px;
+} */
+/* .weather-card .forecast .day {
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+} */
+/* .weather-card .forecast .day p {
+    margin: 5px;
+} */
+/* .weather-card .forecast .day img {
+    width: 30px;
+    height: 30px;
+} */
+/* .weather-card .forecast .day .temp {
+    font-size: 14px;
+    color: #fff;
+} */
+
+.sun {
+    width: 100px;
+    height: 100px;
+    /* background: url('sol.JPG') no-repeat center center; */
+    background-size: contain;
+    animation: rotateSun 5s linear infinite;
+}
+
+#map {
+    height: 100%;
+  }
+
+  .custom-map-control-button {
+    background-color: #fff;
+    border: 0;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+    padding: 0 0.5em;
+    font: 400 18px Roboto, Arial, sans-serif;
+    overflow: hidden;
+    height: 40px;
+    cursor: pointer;
+  }
+  .custom-map-control-button:hover {
+    background: rgb(235, 235, 235);
+  }
+
+#provincia {
+    /* text-transform: lowercase; */
+    margin-bottom: 8px;
+}
+
+.api {
+    display: flex;
+    margin: 10px 0 10px 0;
+}
+
+.RadioClass {
+    width: 10%;
+    height: 200px;
+    padding: 20px;
+    /* background-color: #99b4d1; */
+    /* border-radius: 5px; */
+}
+
+.ImgSocial {
+    display: flex;
+    justify-content: center;
+}
+
+.ImgSocial img {
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+
+@media only screen and (max-width: 400px) {
+    body {
+        width: 100%;
+        position: relative;
+        margin: 0;
+        /* padding: 0; */
+    }
+
+    header {
+        background-color: #3a8cffa4;
+        border-radius: 5px;
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    main {
+        width: 100%;
+        /* padding: 0; */
+        padding: 5px 0 5px 0;
+        margin-top: 5px;
+        margin-bottom: 0;
+        /* display: grid; */
+        display: block;
+        background-color: #333;
+    }
+
+    form {
+        background-color: #99b4d1;
+        /* background: #16394c; */
+        border: 1px solid blue;
+        border-radius: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        margin-bottom: 0;
+        width: 80%;
+        padding: 20px;
+    }
+
+    /* .MainForm { */
+        /* display: flex; */
+        /* padding: 0; */
+        /* margin: 0; */
+
+    /* } */
+
+    .api {
+        display: inline-flex;
+        border-radius: 5px;
+        border: 1px solid blue;
+        padding: 5px;
+        margin: 5px;
+        flex-grow: 1;
+        background-image: linear-gradient(150deg, #9500ff, #09f, #00ddff);
+        width: 140px;
+    }
+    .api span {
+        width: 100%;
+        /* text-align: center; */
+    }
+    .RadioClass {
+        /* display: inline-flex; */
+        width: 80%;
+        height: auto;
+        background-color: #99b4d1;
+        /* background: #16394c; */
+        border: 1px solid blue;
+        border-radius: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        margin-bottom: 0;
+        /* align-items: center; */
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .radio {
+        vertical-align: middle;
+        margin-top: -1px;
+    }
+
+    .weather-card {
+        /* background-color: #99b4d1; */
+        background: #16394cbd;
+        border: 1px solid blue;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 80%;
+        height: 150px;
+    }
+
+    .weather-card h2 {
+        margin: 0;
+    }
+
+    .weather-card .current-weather {
+        width: 100px;
+        margin-top: 5px;
+    }
+
+    .weather-card .current-weather .description {
+        font-size: 12px;
+    }
+
+    .weather-card .details {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    .weather-card .details .temp {
+        font-size: 18px;
+        left: -110px;
+    }
+
+    .weather-card .current-weather img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .button-container {
+        /* display: inline-flex; */
+        /* display: grid; */
+        /* place-items: center; */
+        width: 100%;
+        padding: 0;
+        margin-top: 5px;
+        margin-bottom: 0;
+        background-color: #333;
+    }
+
+    .BotonClass {
+        width: 80%;
+        background-color: #99b4d1;
+        /* background: #16394c; */
+        border: 1px solid blue;
+        border-radius: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        /* padding: 20px; */
+        padding: 10px 20px 10px 20px;
+        display: grid;
+        align-items: center;
+        /* place-items: center; */
+    }
+
+    button {
+        display: block;
+        text-align: center;
+        flex-grow: 1;
+    }
+
+    button :hover{
+        transform: rotate(45deg);
+    }
+
+    button span {
+        font-size: 14px;
+    }
+
+    .btn {
+        width: 150px;
+        margin: 5px;
+    }
+
+    footer {
+        border-radius: 5px;
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+}
+
+@media only screen and (orientation: landscape) and (max-width: 640px) {
+    body {
+        width: 100%;
+        position: relative;
+        margin: 0;
+        /* padding: 0; */
+    }
+
+    header {
+        border-radius: 5px;
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    main {
+        width: 100%;
+        /* padding: 0; */
+        padding: 0;
+        margin-top: 5px;
+        margin-bottom: 0;
+        display: grid;
+        background-color: #333;
+    }
+
+    form {
+        background-color: #99b4d1;
+        border: 1px solid blue;
+        border-radius: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        margin-bottom: 0;
+        width: 70%;
+        padding: 20px;
+    }
+
+    /* .MainForm { */
+        /* display: flex; */
+        /* padding: 0; */
+        /* margin: 0; */
+
+    /* } */
+
+    .api {
+        display: inline-flex;
+        border-radius: 5px;
+        border: 1px solid blue;
+        padding: 5px;
+        margin: 5px;
+        flex-grow: 1;
+        background-image: linear-gradient(150deg, #9500ff, #09f, #00ddff);
+    }
+
+    .RadioClass {
+        display: inline-flex;
+        width: 70%;
+        height: auto;
+        background-color: #99b4d1;
+        border: 1px solid blue;
+        border-radius: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+
+    .radio {
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+
+    .weather-card {
+        border: 1px solid blue;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        width: 70%;
+    }
+
+    .weather-card .current-weather {
+        width: 100px;
+    }
+
+    .weather-card .details .temp {
+        font-size: 22px;
+        left: -110px;
+    }
+
+    .button-container {
+        /* display: inline-flex; */
+        display: grid;
+        /* place-items: center; */
+        /* justify-content: center; */
+        width: 100%;
+        padding: 0;
+        margin-top: 5px;
+        margin-bottom: 0;
+        background-color: #333;
+    }
+
+    .BotonClass {
+        background-color: #99b4d1;
+        border: 1px solid blue;
+        border-radius: 5px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        /* padding: 20px; */
+        padding: 10px 20px 10px 20px;
+        width: 50%;
+        display: grid;
+        align-items: center;
+        /* place-items: center; */
+    }
+
+    button {
+        display: block;
+    }
+
+    .btn {
+        width: 150px;
+        margin: 5px;
+        /* display: inline-flex; */
+    }
+
+    .btn:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.3);
+        transform: skewX(-45deg);
+        transition: left 0.5s ease;
+    }
+
+    footer {
+        border-radius: 5px;
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+}
