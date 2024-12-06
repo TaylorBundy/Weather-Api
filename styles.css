@@ -303,6 +303,14 @@ footer p {
     /* border-radius: 5px; */
 }
 
+.radio {
+    cursor: pointer;
+}
+
+.api span {
+    cursor: pointer;
+}
+
 .ImgSocial {
     display: flex;
     justify-content: center;
