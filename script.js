@@ -18,6 +18,7 @@ let locations = '';
 let locations2 = '';
 let current = '';
 let current2 = '';
+let current3 = '';
 let country = '';
 let region = '';
 //let temp = '';
@@ -45,9 +46,33 @@ const btnlimpiar = document.querySelector('#btnLimpiar');
 const btnactualizar = document.querySelector('#btnActualizar');
 const mainform = document.querySelector('#MainForm');
 let descFinal = '';
+let descFinal1 = '';
+let descFinal2 = '';
+let descFinal3 = '';
+let descFinal4 = '';
+let descFinal5 = '';
+//const descFinalx = [];
+let descFinalx = [];
 let isday = '';
 const apiweb = document.querySelector('#ApiWeb');
 const apilocal = document.querySelector('#ApiLocal');
+const dia1 = document.querySelector('#Dia1');
+const dia2 = document.querySelector('#Dia2');
+const dia3 = document.querySelector('#Dia3');
+const dia4 = document.querySelector('#Dia4');
+const dia5 = document.querySelector('#Dia5');
+const tempd1 = document.querySelector('#Temp-D1');
+const tempd2 = document.querySelector('#Temp-D2');
+const tempd3 = document.querySelector('#Temp-D3');
+const tempd4 = document.querySelector('#Temp-D4');
+const tempd5 = document.querySelector('#Temp-D5');
+const icond1 = document.querySelector('#Icon-D1');
+const icond2 = document.querySelector('#Icon-D2');
+const icond3 = document.querySelector('#Icon-D3');
+const icond4 = document.querySelector('#Icon-D4');
+const icond5 = document.querySelector('#Icon-D5');
+
+
 //var Animated_GIF = require('gif-transparency');
 //module.exports = require('gif-transparency');
 
@@ -116,6 +141,7 @@ function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
 }
 
+let HourTime = '';
 //cuando termina de cargar la pagina, obtenemos ubicacion
 window.onload = function() {
     try {
@@ -123,6 +149,42 @@ window.onload = function() {
       navigator.geolocation.getCurrentPosition(success, error, options);
     }
     finally {
+      let DiaActual = 0;
+      const days = ["Dom","Lun","Mar","Mie","Jue","Vie","Sab"];
+      const date = new Date();      
+      let day = days[date.getDay()];
+      DiaActual = days.indexOf(day);
+      var iterator = days.values();
+      HourTime = date.toLocaleString('en-US', { hour: 'numeric', hour24: true });
+      //console.log(HourTime);
+      //console.log(iterator.next().value);
+      //console.log(iterator.next().value);
+      //console.log(DiaActual);
+      //for (i = 0; i < days.length; i++) {
+        //console.log(days[i]);
+      //}
+      //days.forEach((numero, index) => {
+        //console.log('Indice: ' + index + ' Valor: ' + numero);
+      //});
+
+      if (DiaActual < 6) {
+        dia1.textContent = iterator.next().value;
+        dia2.textContent = iterator.next().value;
+        dia3.textContent = iterator.next().value;
+        dia4.textContent = iterator.next().value;
+        dia5.textContent = iterator.next().value;
+      } else if (DiaActual == 6) {
+        dia1.textContent = days[0];
+        dia2.textContent = days[1];
+        dia3.textContent = days[2];
+        dia4.textContent = days[3];
+        dia5.textContent = days[4];
+      }
+      //let diass = date.toDateString();
+      //console.log(diass.charAt(0) + diass.slice(1));
+
+      //console.log(day);
+      //console.log(days.indexOf(day));
       //
     }
 };
@@ -244,6 +306,20 @@ function actualizarCiudades() {
 
 //const querystring = {"query":"New York"};
 
+const sol = 'Imagenes/sol.gif';
+const nubladoparcial = 'Imagenes/nublado-parcial.gif';
+const lluviadispersa = 'Imagenes/lluvia-dispersa.gif';
+const nievemoderada = 'Imagenes/nieve-moderada.gif';
+const nieveliviana = 'Imagenes/nieve-liviana.gif';
+const nievemoderada2 = 'Imagenes/nieve-moderada-2.gif';
+const nieveheavy = 'Imagenes/nieve-heavy.gif';
+const nublado = 'Imagenes/nublado.gif';
+const neblinoso = 'Imagenes/neblinoso.gif';
+const nochedespejada = 'Imagenes/noche.gif';
+const nochenublada = 'Imagenes/noche-nublada.gif';
+const nochellovizna = 'Imagenes/llovizna.gif';
+
+
 //creamos la funcion para obtener los datos del clima
 async function obtener() {
   //torta.value = torta.textContent;
@@ -262,7 +338,9 @@ async function obtener() {
     var name = locacion["neighborhood"];
   } */
   //const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&num_of_days=1&includelocation=yes&showlocaltime=yes&lang=es';
-const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&num_of_days=1&mca=no&fx=no&includelocation=no&showlocaltime=yes&lang=es';
+const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
+//const url1 = 'https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&date=today&enddate=tomorrow&includelocation=no&lang=es';
+//const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&date=today&enddate=tomorrow&includelocation=no&lang=es';
   //const url2 = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
   try {
     if (apiweb.checked) {
@@ -275,8 +353,13 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       current = await data["current"];
       resp2 = await fetch(url1);
       data2 = await resp2.json();
+      //console.log(data2);
       locations2 = await data2["data"];
       current2 = await locations2["current_condition"][0];
+      current3 = await locations2["weather"];
+      //HourTime = await locations2["time_zone"][0]["localtime"];
+      //let hooo = HourTime.substring(11, 16);
+      
       //console.log(current2);
       //console.log(current2.temp_C);
       //console.log(current2.windspeedKmph);
@@ -293,17 +376,17 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       data = await resp.json();
       locations = await data["observations"][0];
       //console.log(locations);
-      console.log(data);
+      //console.log(data);
       current = await locations["imperial"]["temp"];
       //console.log(current);
     }
     //resp = await fetch(origen);
-    
-    
+
+
     //const resp3 = await fetch(url2);
-    
+
     //data = await resp.json();
-    
+
     //const data2 = await resp2.json();
     //const data3 = await resp3.json();
     //var coco = data3["observations"][0];
@@ -318,7 +401,7 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
 
     //current = await data["current"];
     //current = await data[curent];
-    
+
 
     //console.log(current);
     //console.log(current.weather_descriptions[0]);
@@ -335,9 +418,27 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       //ciudad.textContent = locations.name + ', ' + locations.region + ', ' + locations.country;
       ciudad.textContent = locations2["request"][0].query;
       //temp.textContent = current.temperature + '°C';
-      temp.textContent = current2.temp_C + '°C';      
+      temp.textContent = current2.temp_C + '°C';
       description.textContent = current2["weatherDesc"][0].value;
       descFinal = description.textContent.trim();
+      /* descFinal1 = current3[1].hourly[0]["weatherDesc"][0].value;
+      descFinal2 = current3[2].hourly[0]["weatherDesc"][0].value;
+      descFinal3 = current3[3].hourly[0]["weatherDesc"][0].value;
+      descFinal4 = current3[4].hourly[0]["weatherDesc"][0].value;
+      descFinal5 = current3[5].hourly[0]["weatherDesc"][0].value; */
+      try {
+        descFinalx = [];
+      }
+      finally {
+        for (let c = 1; c < current3.length; c++) {
+          //descFinalx = current3[i].hourly[0]["weatherDesc"][0].value;
+          descFinalx.push(current3[c].hourly[0]["weatherDesc"][0].value.trim());
+        }        
+      }
+      //console.log(HourTime);
+      //console.log(descFinalx);
+      //console.log(descFinalx.length);
+
       //descFinal = description.textContent;
       //isday = current.is_day;
       humid.textContent = 'Humedad: ' + current2.humidity + ' %';
@@ -345,6 +446,27 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       precip.textContent = 'Precipitación: ' + current2.precipMM + ' mm';
       wind.textContent = 'Viento: ' + current2.windspeedKmph + ' kmph';
       winddir.textContent = 'Direcc Viento: ' + current2.winddir16Point;
+
+      /* tempd1.textContent = current3[1].maxtempC + '°C';
+      tempd2.textContent = current3[2].maxtempC + '°C';
+      tempd3.textContent = current3[3].maxtempC + '°C';
+      tempd4.textContent = current3[4].maxtempC + '°C';
+      tempd5.textContent = current3[5].maxtempC + '°C'; */
+
+      tempd1.textContent = current3[1].avgtempC + '°C';
+      tempd2.textContent = current3[2].avgtempC + '°C';
+      tempd3.textContent = current3[3].avgtempC + '°C';
+      tempd4.textContent = current3[4].avgtempC + '°C';
+      tempd5.textContent = current3[5].avgtempC + '°C';
+
+      /* icond1.textContent = current3[1].hourly[0]["weatherDesc"][0].value;
+      icond2.textContent = current3[2].hourly[0]["weatherDesc"][0].value;
+      icond3.textContent = current3[3].hourly[0]["weatherDesc"][0].value;
+      icond4.textContent = current3[4].hourly[0]["weatherDesc"][0].value;
+      icond5.textContent = current3[5].hourly[0]["weatherDesc"][0].value; */
+
+      //console.log(current3[1].hourly[0]["weatherDesc"][0].value);
+
     } else if (apilocal.checked) {
       weather.style.display = 'block';
       //ciudad.textContent = locations.neighborhood + ', ' + locations.region + ', ' + locations.country;
@@ -368,8 +490,9 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
     //console.log(descFinal);
     //if (description.textContent = 'Clear') {
     if (descFinal == 'Clear') {
-      if (isday != 'no') {
-        icon.src = 'Imagenes/sol.gif';        
+      //if (isday != 'no') {
+      if (HourTime >= '6 AM') {
+        icon.src = 'Imagenes/sol.gif';
       } else {
         icon.src = 'Imagenes/noche.gif';
       }
@@ -378,14 +501,16 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       icon.src = 'Imagenes/sol.gif';
       description.textContent = 'Soleado';
     } else if (descFinal == 'Partly Cloudy' || descFinal == 'Partly cloudy') {
-      if (isday != 'no') {
+      //if (isday != 'no') {
+      if (HourTime >= '6 AM') {
         icon.src = 'Imagenes/nublado-parcial.gif';
       } else {
         icon.src = 'Imagenes/noche-nublada.gif';
       }
       description.textContent = 'Parcialmente nublado';
     } else if (descFinal == 'Patchy rain nearby') {
-      if (isday != 'no') {
+      //if (isday != 'no') {
+      if (HourTime >= '6 AM') {
         icon.src = 'Imagenes/lluvia-dispersa.gif';
       } else {
         icon.src = 'Imagenes/llovizna.gif';
@@ -416,6 +541,75 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       icon.src = 'Imagenes/neblinoso.gif';
       description.textContent = 'Niebla helada';
     }
+    //const allforecast = document.querySelector('#AllForecast');
+    const allicon = document.querySelectorAll('img.IconForecast');
+    //console.log(allicon);
+    let toto = '';
+
+    descFinalx.forEach((item, index) => {
+      //console.log(item + index);
+      for (x = 0; x < allicon.length; x++) {
+        if (item == 'Clear' || item == 'Sunny') {
+          //if (HourTime > '6 AM') {
+            toto = sol;
+          //} else if (HourTime > '21 PM' || HourTime < '6 AM') {
+            //toto = nochedespejada;
+          //}
+          //allicon[index].src = 'Imagenes/sol.gif';
+          //icond1.src = 'Imagenes/sol.gif';
+        } else if (item == 'Cloudy' || item == 'Overcast') {
+          toto = nublado;
+          //allicon[index].src = 'Imagenes/nublado.gif';
+        } else if (item == 'Partly Cloudy' || item == 'Partly cloudy') {
+          toto = nubladoparcial;
+        } else if (item == 'Patchy rain nearby') {
+          toto = lluviadispersa;
+        } else if (item == 'Patchy light drizzle' || item == 'Light rain') {
+          toto = lluviadispersa;
+        } else if (item == 'Moderate snow') {
+          toto = nievemoderada;
+        } else if (item == 'Light snow') {
+          toto = nieveliviana;
+        } else if (item == 'Moderate or heavy snow showers') {
+          toto = nievemoderada2;
+        } else if (item == 'Heavy snow') {
+          toto = nieveheavy;
+        } else if (item == 'Freezing fog') {
+          toto = neblinoso;
+        }
+        //console.log(allicon[index]);
+      }
+      allicon[index].src = toto;
+    })
+
+
+
+    /* allicon.forEach((numero, index) => {
+      if (descFinalx == 'Clear ') {
+        allicon.item(index).src = sol;
+      } else if (descFinalx == 'Cloudy ') {
+        allicon.item(index).src = nublado;
+      }
+      console.log(' Valor: ' + index);
+      console.log('Indice: ' + index + ' Valor: ' + numero);
+    }); */
+
+    /* let MyArray =  [descFinal1.trim(), descFinal2.trim() , descFinal3.trim(), descFinal4.trim(), descFinal5.trim()];
+    for (i = 0; i < MyArray.length; i++) {
+      if (MyArray[i] == 'Clear') {
+        icond1.src = 'Imagenes/sol.gif';
+        icond2.src = 'Imagenes/sol.gif';
+        icond3.src = 'Imagenes/sol.gif';
+        icond4.src = 'Imagenes/sol.gif';
+        icond5.src = 'Imagenes/sol.gif';
+      } else if (MyArray[i] == 'Sunny') {
+        allicon.src = 'Imagenes/sol.gif';
+      } else if (MyArray[i] == 'Cloudy') {
+        allicon.src = 'Imagenes/nublado-parcial.gif';
+      }
+      console.log(MyArray[i]);
+    } */
+
     //pressure.textContent = 'Presión: ' + current.pressure + ' mb';
     //precip.textContent = 'Precipitación: ' + current.precip + ' mm';
     //wind.textContent = 'Viento: ' + current.wind_speed + ' kmph';
@@ -456,7 +650,7 @@ async function obtener2(lat, long) {
 
     ciudad.textContent = locations2["request"][0].query;
     //temp.textContent = current.temperature + '°C';
-    temp.textContent = current2.temp_C + '°C';      
+    temp.textContent = current2.temp_C + '°C';
     description.textContent = current2["weatherDesc"][0].value;
     descFinal = description.textContent.trim();
     //descFinal = description.textContent;
@@ -470,7 +664,7 @@ async function obtener2(lat, long) {
     //console.log(isday);
     if (descFinal == 'Clear') {
       if (isday != 'no') {
-        icon.src = 'Imagenes/sol.gif';        
+        icon.src = 'Imagenes/sol.gif';
       } else {
         icon.src = 'Imagenes/noche.gif';
       }
@@ -529,4 +723,14 @@ function valores() {
   //var contenidos = document.getElementById('provincia');
   //var chucha = document.querySelector('#xlocalidad');
   console.log(torta.value);
+}
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    document.querySelector("header > h1").style.fontSize = "12px";
+  } else {
+    document.querySelector("header > h1").style.fontSize = "18px";
+  }
 }
