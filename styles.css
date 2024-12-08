@@ -144,7 +144,8 @@ footer p {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 40%;
-    height: 200px;
+    /* height: 200px; */
+    height: auto;
     padding: 20px;
     text-align: center;
     /* margin: 0 auto; */
@@ -233,29 +234,34 @@ footer p {
     /* border: 1px solid red; */
     text-align: center;
 }
-/* .weather-card .forecast {
+
+.weather-card .forecast {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
     width: 100%;
     top: 5px;
-} */
-/* .weather-card .forecast .day {
+}
+
+.weather-card .forecast .day {
     text-align: center;
     font-size: 14px;
     color: #fff;
-} */
-/* .weather-card .forecast .day p {
+}
+
+.weather-card .forecast .day p {
     margin: 5px;
-} */
-/* .weather-card .forecast .day img {
+}
+
+.weather-card .forecast .day img {
     width: 30px;
     height: 30px;
-} */
-/* .weather-card .forecast .day .temp {
+}
+
+.weather-card .forecast .day .temp {
     font-size: 14px;
     color: #fff;
-} */
+}
 
 .sun {
     width: 100px;
@@ -339,6 +345,7 @@ footer p {
         border-radius: 5px;
         margin-top: 5px;
         margin-bottom: 0;
+        transition: 0.4s;
     }
 
     h1 {
@@ -421,7 +428,8 @@ footer p {
         margin-top: 5px;
         margin-bottom: 5px;
         width: 80%;
-        height: 150px;
+        /* height: 150px; */
+        height: auto;
     }
 
     .weather-card h2 {
@@ -518,6 +526,8 @@ footer p {
         border-radius: 5px;
         margin-top: 5px;
         margin-bottom: 0;
+        visibility: collapse;
+        display: none;
     }
 
     h1 {
