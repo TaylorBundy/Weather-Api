@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="Imagenes/favicon.ico">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-        <script type="text/javascript" defer src="script.js"></script>
-        <title>Provincias y Ciudades de Argentina</title>
         <link rel="stylesheet" href="styles.css">
+        <title>Provincias y Ciudades de Argentina</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+        <script type="text/javascript" src="script.js" defer></script>
     </head>
     <body>
         <header>
@@ -20,6 +20,7 @@
                 </div>
                 <div class="api">
                     <input type="radio" id="ApiLocal" class="radio" name="radio" onclick="obtener()"><span>Clima Local</span>
+                    <!-- <input type="radio" id="ApiLocal1" class="radio" name="radio"><span>Clima Local</span> -->
                 </div>
             </div>
             <form action="#" method="POST">
@@ -136,9 +137,18 @@
         </main>
         <div class="button-container">
             <div class="BotonClass">
-                <button id="btnObtener" class="btn" onclick="obtener()" onmouseover="Titulos()"><span>Obtener</span></button>
-                <button id="btnLimpiar" class="btn" onmouseover="Titulos()"><span>Limpiar</span></button>
-                <button id="btnActualizar" class="btn" onclick="obtener()" onmouseover="Titulos()"><span>Actualizar</span></button>
+                <div class="btn">
+                    <button id="btnObtener" class="btn1" onclick="obtener()" onmouseover="Titulos()"><span>Obtener</span></button>
+                </div>
+                <div class="btn">
+                    <button id="btnLimpiar" class="btn1" onmouseover="Titulos()"><span>Limpiar</span></button>
+                </div>
+                <div class="btn">
+                    <button id="btnActualizar" class="btn1" onclick="obtener()" onmouseover="Titulos()"><span>Actualizar</span></button>
+                </div>
+                <!-- <button id="btnObtener" class="btn" onclick="obtener()" onmouseover="Titulos()"><span>Obtener</span></button> -->
+                <!-- <button id="btnLimpiar" class="btn" onmouseover="Titulos()"><span>Limpiar</span></button> -->
+                <!-- <button id="btnActualizar" class="btn" onclick="obtener()" onmouseover="Titulos()"><span>Actualizar</span></button> -->
             </div>
         </div>
         <footer>
