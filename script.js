@@ -11,14 +11,20 @@ const url = "https://api.weatherstack.com/current?access_key=" + apikey + "&quer
 
 let resp = '';
 let resp2 = '';
+let resp3 = '';
 let origen = '';
+let origen1 = '';
+let origen2 = '';
 let data = '';
 let data2 = '';
+let data3 = '';
 let locations = '';
 let locations2 = '';
+let locations4 = '';
 let current = '';
 let current2 = '';
 let current3 = '';
+let current4 = '';
 let country = '';
 let region = '';
 //let temp = '';
@@ -54,6 +60,7 @@ let descFinal5 = '';
 //const descFinalx = [];
 let descFinalx = [];
 let isday = '';
+let fechas = [];
 const apiweb = document.querySelector('#ApiWeb');
 const apilocal = document.querySelector('#ApiLocal');
 const dia1 = document.querySelector('#Dia1');
@@ -71,6 +78,11 @@ const icond2 = document.querySelector('#Icon-D2');
 const icond3 = document.querySelector('#Icon-D3');
 const icond4 = document.querySelector('#Icon-D4');
 const icond5 = document.querySelector('#Icon-D5');
+
+const allicon = document.querySelectorAll('img.IconForecast');
+const allday = document.querySelectorAll('p.DayForecast');
+let toto = '';
+let days = [];
 
 
 //var Animated_GIF = require('gif-transparency');
@@ -132,7 +144,7 @@ function success(pos) {
       //latitud = '-39.217';
       //longitud = '-70.950';
       longitud = crd.longitude;
-      console.log(crd.latitude + ' - ' + crd.longitude);
+      //console.log(crd.latitude + ' - ' + crd.longitude);
       //console.log(latitud + ' - ' + longitud);
   }
   finally {
@@ -147,6 +159,7 @@ function error(err) {
 let HourTime = '';
 let Horas = '';
 let Minutos = '';
+let isDayTime = '';
 //cuando termina de cargar la pagina, obtenemos ubicacion
 window.onload = function() {
     try {
@@ -155,13 +168,37 @@ window.onload = function() {
     }
     finally {
       let DiaActual = 0;
-      const days = ["Dom","Lun","Mar","Mie","Jue","Vie","Sab"];
+      days = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
       const date = new Date();
+
+      //Horas = date.getHours();
+      //console.log(Horas);
       let day = days[date.getDay()];
       DiaActual = days.indexOf(day);
       var iterator = days.values();
-      HourTime = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour24: true }).replace('AM', '');
-      console.log(HourTime);
+
+      //HourTime = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour24: true }).replace('AM', '');
+      //HourTime = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour24: true });
+      HourTime = date.toLocaleString('es-ES', { hour: 'numeric', minute: 'numeric', hour24: true });
+      Horas = date.toLocaleString('es-ES', { hour: 'numeric', hour24: true });
+      Minutos = date.toLocaleString('es-ES', { minute: 'numeric', hour24: true });
+
+      if (HourTime.includes('AM')) {
+        HourTime = HourTime.replace('AM', '');
+      } else if (HourTime.includes('PM')) {
+        HourTime = HourTime.replace('PM', '');
+      }
+
+      isDayTime = Horas >= 6 && Horas < 20;
+      //console.log(isDayTime);
+
+
+
+      //console.log(Horas);
+      //console.log(Minutos);
+      //console.log(DiaActual);
+      //console.log(iterator.next().value);
+      //console.log(iterator.next().value);
       //console.log(iterator.next().value);
       //console.log(iterator.next().value);
       //console.log(DiaActual);
@@ -172,18 +209,68 @@ window.onload = function() {
         //console.log('Indice: ' + index + ' Valor: ' + numero);
       //});
 
-      if (DiaActual < 6) {
-        dia1.textContent = iterator.next().value;
-        dia2.textContent = iterator.next().value;
-        dia3.textContent = iterator.next().value;
-        dia4.textContent = iterator.next().value;
-        dia5.textContent = iterator.next().value;
+      if (DiaActual == 1) {
+        iterator.next();
+        iterator.next();
+        dia1.textContent = iterator.next().value.slice(0,3);
+        dia2.textContent = iterator.next().value.slice(0,3);
+        dia3.textContent = iterator.next().value.slice(0,3);
+        dia4.textContent = iterator.next().value.slice(0,3);
+        dia5.textContent = iterator.next().value.slice(0,3);
+      } else if (DiaActual == 2) {
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        dia1.textContent = iterator.next().value.slice(0,3);
+        dia2.textContent = iterator.next().value.slice(0,3);
+        dia3.textContent = iterator.next().value.slice(0,3);
+        dia4.textContent = iterator.next().value.slice(0,3);
+        dia5.textContent = days[0].slice(0,3);
+      } else if (DiaActual == 3) {
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        dia1.textContent = iterator.next().value.slice(0,3);
+        dia2.textContent = iterator.next().value.slice(0,3);
+        dia3.textContent = iterator.next().value.slice(0,3);
+        dia4.textContent = days[0].slice(0,3);
+        dia5.textContent = days[1].slice(0,3);
+      } else if (DiaActual == 4) {
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        dia1.textContent = iterator.next().value.slice(0,3);
+        dia2.textContent = iterator.next().value.slice(0,3);
+        dia3.textContent = days[0].slice(0,3);
+        dia4.textContent = days[1].slice(0,3);
+        dia5.textContent = days[2].slice(0,3);
+      } else if (DiaActual == 5) {
+        iterator.next().value;
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        dia1.textContent = iterator.next().value.slice(0,3);
+        dia2.textContent = days[0].slice(0,3);
+        dia3.textContent = days[1].slice(0,3);
+        dia4.textContent = days[2].slice(0,3);
+        dia5.textContent = days[3].slice(0,3);
       } else if (DiaActual == 6) {
-        dia1.textContent = days[0];
-        dia2.textContent = days[1];
-        dia3.textContent = days[2];
-        dia4.textContent = days[3];
-        dia5.textContent = days[4];
+        dia1.textContent = days[0].slice(0,3);
+        dia2.textContent = days[1].slice(0,3);
+        dia3.textContent = days[2].slice(0,3);
+        dia4.textContent = days[3].slice(0,3);
+        dia5.textContent = days[4].slice(0,3);
+      } else if (DiaActual == 0) {
+        dia1.textContent = days[1].slice(0,3);
+        dia2.textContent = days[2].slice(0,3);
+        dia3.textContent = days[3].slice(0,3);
+        dia4.textContent = days[4].slice(0,3);
+        dia5.textContent = days[5].slice(0,3);
       }
       //let diass = date.toDateString();
       //console.log(diass.charAt(0) + diass.slice(1));
@@ -191,6 +278,7 @@ window.onload = function() {
       //console.log(day);
       //console.log(days.indexOf(day));
       //
+
     }
 };
 
@@ -320,29 +408,17 @@ const nievemoderada2 = 'Imagenes/nieve-moderada-2.gif';
 const nieveheavy = 'Imagenes/nieve-heavy.gif';
 const nublado = 'Imagenes/nublado.gif';
 const neblinoso = 'Imagenes/neblinoso.gif';
+const neblina = 'Imagenes/neblina.gif';
 const nochedespejada = 'Imagenes/noche.gif';
 const nochenublada = 'Imagenes/noche-nublada.gif';
 const nochellovizna = 'Imagenes/llovizna.gif';
 let salesol = '';
+let puestasol = '';
 
 
 //creamos la funcion para obtener los datos del clima
 async function obtener() {
-  //torta.value = torta.textContent;
-  //console.log(torta.value);
   var sinacento = ciudadesSelect.value;
-  //console.log(sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, ""));
-  //origen = url + ciudadesSelect.value + ', ' + torta.value + ', Argentina';
-  /* if (apiweb.checked) {
-    origen = url + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + ', Argentina';
-    var locacion = "location";
-    var curent = "current";
-  } else if (apilocal.checked) {
-    origen = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
-    var locacion = "observations";
-    var curent = "imperial"["temp"];
-    var name = locacion["neighborhood"];
-  } */
   //const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&num_of_days=1&includelocation=yes&showlocaltime=yes&lang=es';
 const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
 //const url1 = 'https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&date=today&enddate=tomorrow&includelocation=no&lang=es';
@@ -363,35 +439,34 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       locations2 = await data2["data"];
       current2 = await locations2["current_condition"][0];
       current3 = await locations2["weather"];
-      //HourTime = await locations2["time_zone"][0]["localtime"];
-      //let hooo = HourTime.substring(11, 16);
 
-      //console.log(current2);
-      //console.log(current2.temp_C);
-      //console.log(current2.windspeedKmph);
-      //console.log(current2.pressure);
-      //console.log(current2.precipMM);
-      //console.log(current2.humidity);
-      //console.log(current2.FeelsLikeC);
     } else if (apilocal.checked) {
       document.querySelector("#ciudades").selectedIndex = 1;
       origen = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
       //origen = 'https://api.weather.com/v2/pws/observations/7day?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
-      const origen1 = 'https://api.weather.com/v2/pws/dailysummary/7day?stationId=IALUMI7&format=json&units=m&apiKey=a781055ea4224f7b81055ea4224f7b78';
+      origen1 = 'https://api.weather.com/v2/pws/dailysummary/7day?stationId=IALUMI7&format=json&units=m&apiKey=a781055ea4224f7b81055ea4224f7b78';
+      origen2 = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=-38.88,-71.19&format=json&units=m&language=es-ES&apiKey=a781055ea4224f7b81055ea4224f7b78';
       //var locacion = "observations";
       //var curent = "imperial"["temp"];
       //var name = locacion["neighborhood"];
       resp = await fetch(origen);
       data = await resp.json();
+      //console.log(data);
       resp2 = await fetch(origen1);
       data2 = await resp2.json();
-      console.log(data2);
+      //console.log(data2);
+      resp3 = await fetch(origen2);
+      data3 = await resp3.json();
+      //console.log(data3);
       locations = await data["observations"][0];
-      //console.log(locations);      
+      //console.log(locations);
       current = await locations["imperial"]["temp"];
       locations2 = data2["summaries"];
       current2 = locations2[0]["metric"].tempAvg;
-      console.log(current2);
+      locations4 = await data3['dayOfWeek'];
+      current3 = await data3['calendarDayTemperatureMax'];
+      descFinal = await data3['narrative'];
+      //console.log(current2);
     }
   }
   finally {
@@ -403,11 +478,7 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       temp.textContent = current2.temp_C + '°C';
       description.textContent = current2["weatherDesc"][0].value;
       descFinal = description.textContent.trim();
-      /* descFinal1 = current3[1].hourly[0]["weatherDesc"][0].value;
-      descFinal2 = current3[2].hourly[0]["weatherDesc"][0].value;
-      descFinal3 = current3[3].hourly[0]["weatherDesc"][0].value;
-      descFinal4 = current3[4].hourly[0]["weatherDesc"][0].value;
-      descFinal5 = current3[5].hourly[0]["weatherDesc"][0].value; */
+
       try {
         descFinalx = [];
       }
@@ -417,12 +488,47 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
           descFinalx.push(current3[c].hourly[0]["weatherDesc"][0].value.trim());
         }
       }
-      //console.log(HourTime);
-      //console.log(descFinalx);
-      //console.log(descFinalx.length);
 
-      //descFinal = description.textContent;
-      //isday = current.is_day;
+      try {
+        fechas = [];
+      }
+      finally {
+        for (let c = 1; c < current3.length; c++) {
+          //descFinalx = current3[i].hourly[0]["weatherDesc"][0].value;
+          fechas.push(current3[c].date);
+        }
+      }
+
+      salesol = current3[0]["astronomy"][0].sunrise;
+      puestasol = current3[0]["astronomy"][0].sunset;
+      //console.log(salesol);
+      //console.log(puestasol);
+
+      if (salesol.includes('AM')) {
+        //salesol = salesol.replace('AM', '').replace('0', '');
+        salesol = salesol.replace('AM', '');
+      } else if (salesol.includes('PM')) {
+        //salesol = salesol.replace('PM', '').replace('0', '');
+        salesol = salesol.replace('PM', '');
+      }
+
+      if (puestasol.includes('AM')) {
+        //salesol = salesol.replace('AM', '').replace('0', '');
+        puestasol = puestasol.replace('AM', '');
+      } else if (puestasol.includes('PM')) {
+        //salesol = salesol.replace('PM', '').replace('0', '');
+        puestasol = puestasol.replace('PM', '');
+      }
+
+      const horasPuestaSol = convertirAMinutos(puestasol, 'puestasol');
+      const horasSaleSol = convertirAMinutos(salesol, 'salesol');
+
+      if (Horas > horasPuestaSol || Horas == 0 || Horas < 6) {
+        isday = 'no';
+      } else {
+        isday = 'si';
+      }
+
       humid.textContent = 'Humedad: ' + current2.humidity + ' %';
       pressure.textContent = 'Presión: ' + current2.pressure + ' mb';
       precip.textContent = 'Precipitación: ' + current2.precipMM + ' mm';
@@ -441,16 +547,7 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       tempd4.textContent = current3[4].avgtempC + '°C';
       tempd5.textContent = current3[5].avgtempC + '°C';
 
-      //salesol = current3[0]["astronomy"][0].sunrise;
-      //console.log(salesol);
-
-      /* icond1.textContent = current3[1].hourly[0]["weatherDesc"][0].value;
-      icond2.textContent = current3[2].hourly[0]["weatherDesc"][0].value;
-      icond3.textContent = current3[3].hourly[0]["weatherDesc"][0].value;
-      icond4.textContent = current3[4].hourly[0]["weatherDesc"][0].value;
-      icond5.textContent = current3[5].hourly[0]["weatherDesc"][0].value; */
-
-      //console.log(current3[1].hourly[0]["weatherDesc"][0].value);
+      IconosWeb();
 
     } else if (apilocal.checked) {
       weather.style.display = 'block';
@@ -462,33 +559,80 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       //icon.src = current.weather_icons[0];
       //icon.src = 'Imagenes/weather_icon_full_sun.svg';
       //description.textContent = current.weather_descriptions[0];
-      descFinal = description.textContent.trim();
-      //descFinal = description.textContent;
-      isday = current.is_day;
+      var final = descFinal[0].lastIndexOf('Máx');
+      //console.log(final);
+      description.textContent = descFinal[0].slice(0,final - 2);
+      //descFinal = description.textContent.trim();
+      descFinal = description.textContent;
+      try {
+        fechas = [];
+      }
+      finally {
+        for (let c = 1; c < data3['validTimeLocal'].length; c++) {
+          //descFinalx = current3[i].hourly[0]["weatherDesc"][0].value;
+          fechas.push(data3['validTimeLocal'][c]);
+        }
+      }
+      //console.log(fechas);
+      if (Horas >= 6 && Horas < 21) {
+        isday = 'si';
+      } else {
+        isday = 'no';
+      }
+      //isday = current.is_day;
       humid.textContent = 'Humedad: ' + locations.humidity + ' %';
       //pressure.textContent = 'Presión: ' + locations["imperial"].pressure + ' mb';
       pressure.textContent = 'Presión: ' + (presi * 33.8637526).toFixed(2) + ' mb';
       precip.textContent = 'Precipitación: ' + locations["imperial"].precipTotal + ' mm';
       wind.textContent = 'Viento: ' + locations["imperial"].windSpeed + ' kmph';
+
+
+      for (let c = 1; c < locations4.length; c++) {
+        //console.log(locations4[c]);
+      }
+      for (let c = 1; c < current3.length; c++) {
+        //console.log(current3[c].toString());
+        /* tempd1.textContent = current3[c] + '°C';
+        tempd2.textContent = current3[c] + '°C';
+        tempd3.textContent = current3[c] + '°C';
+        tempd4.textContent = current3[c] + '°C';
+        tempd5.textContent = current3[c] + '°C'; */
+      }
+      tempd1.textContent = current3[1] + '°C';
+      tempd2.textContent = current3[2] + '°C';
+      tempd3.textContent = current3[3] + '°C';
+      tempd4.textContent = current3[4] + '°C';
+      tempd5.textContent = current3[5] + '°C';
+      console.log(descFinal);
+      /* tempd1.textContent = current3[1].avgtempC + '°C';
+      tempd2.textContent = current3[2].avgtempC + '°C';
+      tempd3.textContent = current3[3].avgtempC + '°C';
+      tempd4.textContent = current3[4].avgtempC + '°C';
+      tempd5.textContent = current3[5].avgtempC + '°C'; */
+
       //winddir.textContent = 'Direcc Viento: ' + current.wind_dir;
+      IconosLocal();
     }
 
-    salesol = current3[0]["astronomy"][0].sunrise;
-    if (salesol.includes('AM')) {
-      salesol = salesol.replace('AM', '').replace('0', '');
-    } else if (salesol.includes('PM')) {
-      salesol = salesol.replace('PM', '').replace('0', '');
-    }
 
-    const minutosHora1 = convertirAMinutos(HourTime);
-    const minutosHora2 = convertirAMinutos(salesol);
+    //puestasol = puestasol.split(':').map(Number);
+    //console.log(puestasol);
 
-    if (minutosHora1 >= minutosHora2) {
-      isday = 'si';
-    } else if (minutosHora1 < minutosHora2) {
-      isday = 'no';
-    }
+    //const minutosHora1 = convertirAMinutos(HourTime);
+    //const minutosHora2 = convertirAMinutos(salesol);
 
+    //console.log(horasPuestaSol);
+    //console.log(horasSaleSol);
+    //console.log(minutosHora1);
+    //console.log(minutosHora2);
+
+    //if (minutosHora1 >= minutosHora2) {
+      //isday = 'si';
+    //} else if (minutosHora1 < minutosHora2) {
+      //isday = 'no';
+    //}
+    //console.log(Horas);
+    //console.log(isday);
     //console.log(descFinal);
     //if (description.textContent = 'Clear') {
     if (descFinal == 'Clear') {
@@ -527,7 +671,7 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
     } else if (descFinal == 'Moderate snow') {
       icon.src = 'Imagenes/nieve-moderada.gif';
       description.textContent = 'Nieve moderada';
-    } else if (descFinal == 'Light snow') {
+    } else if (descFinal == 'Light snow' || descFinal == 'Patchy light snow') {
       icon.src = 'Imagenes/nieve-liviana.gif';
       description.textContent = 'Nieve ligera';
     } else if (descFinal == 'Moderate or heavy snow showers') {
@@ -542,11 +686,14 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
     } else if (descFinal == 'Freezing fog') {
       icon.src = 'Imagenes/neblinoso.gif';
       description.textContent = 'Niebla helada';
+    } else if (descFinal == 'Mist') {
+      icon.src = 'Imagenes/neblina.gif';
+      description.textContent = 'Neblina';
     }
     //const allforecast = document.querySelector('#AllForecast');
-    const allicon = document.querySelectorAll('img.IconForecast');
+    //const allicon = document.querySelectorAll('img.IconForecast');
     //console.log(allicon);
-    let toto = '';
+
 
     descFinalx.forEach((item, index) => {
       //console.log(item + index);
@@ -578,12 +725,142 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
           toto = nieveheavy;
         } else if (item == 'Freezing fog') {
           toto = neblinoso;
+        } else if (item == 'Mist') {
+          toto = neblina;
         }
         //console.log(allicon[index]);
       }
       allicon[index].src = toto;
     })
   }
+}
+
+function IconosWeb() {
+  if (descFinal == 'Clear') {
+    //if (isday != 'no') {
+    if (isday == 'si') {
+      icon.src = 'Imagenes/sol.gif';
+    } else {
+      icon.src = 'Imagenes/noche.gif';
+    }
+    description.textContent = 'Despejado';
+  } else if (descFinal == 'Sunny') {
+    icon.src = 'Imagenes/sol.gif';
+    description.textContent = 'Soleado';
+  } else if (descFinal == 'Partly Cloudy' || descFinal == 'Partly cloudy') {
+    //if (isday != 'no') {
+    if (isday == 'si') {
+      icon.src = 'Imagenes/nublado-parcial.gif';
+    } else {
+      icon.src = 'Imagenes/noche-nublada.gif';
+    }
+    description.textContent = 'Parcialmente nublado';
+  } else if (descFinal == 'Patchy rain nearby') {
+    //if (isday != 'no') {
+    if (isday == 'si') {
+      icon.src = 'Imagenes/lluvia-dispersa.gif';
+    } else {
+      icon.src = 'Imagenes/llovizna.gif';
+    }
+    description.textContent = 'Lluvia dispersa cerca';
+  } else if (descFinal == 'Patchy light drizzle') {
+    icon.src = 'Imagenes/lluvia-dispersa.gif';
+    description.textContent = 'Llovizna ligera dispersa';
+  } else if (descFinal == 'Light rain') {
+    icon.src = 'Imagenes/lluvia-dispersa.gif';
+    description.textContent = 'Llovizna ligera';
+  } else if (descFinal == 'Moderate snow') {
+    icon.src = 'Imagenes/nieve-moderada.gif';
+    description.textContent = 'Nieve moderada';
+  } else if (descFinal == 'Light snow' || descFinal == 'Patchy light snow') {
+    icon.src = 'Imagenes/nieve-liviana.gif';
+    description.textContent = 'Nieve ligera';
+  } else if (descFinal == 'Moderate or heavy snow showers') {
+    icon.src = 'Imagenes/nieve-moderada-2.gif';
+    description.textContent = 'Chubascos de nieve moderados o fuertes';
+  } else if (descFinal == 'Heavy snow') {
+    icon.src = 'Imagenes/nieve-heavy.gif';
+    description.textContent = 'Mucha nieve';
+  } else if (descFinal == 'Overcast' || descFinal == 'Cloudy') {
+    icon.src = 'Imagenes/nublado.gif';
+    description.textContent = 'Nublado';
+  } else if (descFinal == 'Freezing fog') {
+    icon.src = 'Imagenes/neblinoso.gif';
+    description.textContent = 'Niebla helada';
+  } else if (descFinal == 'Mist') {
+    icon.src = 'Imagenes/neblina.gif';
+    description.textContent = 'Neblina';
+  }
+}
+
+function IconosLocal() {
+
+  /* if (isday == 'si') {
+    icon.src = 'Imagenes/sol.gif';
+  } else {
+    icon.src = 'Imagenes/noche.gif';
+  } */
+
+  if (descFinal == 'Cielo parcialmente cubierto') {
+    if (isday == 'si') {
+      icon.src = 'Imagenes/nublado-parcial.gif';
+    } else {
+      icon.src = 'Imagenes/noche-nublada.gif';
+    }
+  }
+
+  /* if (descFinal == 'Clear') {
+    if (isday == 'si') {
+      icon.src = 'Imagenes/sol.gif';
+    } else {
+      icon.src = 'Imagenes/noche.gif';
+    }
+    description.textContent = 'Despejado';
+  } else if (descFinal == 'Sunny') {
+    icon.src = 'Imagenes/sol.gif';
+    description.textContent = 'Soleado';
+  } else if (descFinal == 'Partly Cloudy' || descFinal == 'Partly cloudy') {
+    if (isday == 'si') {
+      icon.src = 'Imagenes/nublado-parcial.gif';
+    } else {
+      icon.src = 'Imagenes/noche-nublada.gif';
+    }
+    description.textContent = 'Parcialmente nublado';
+  } else if (descFinal == 'Patchy rain nearby') {
+    if (isday == 'si') {
+      icon.src = 'Imagenes/lluvia-dispersa.gif';
+    } else {
+      icon.src = 'Imagenes/llovizna.gif';
+    }
+    description.textContent = 'Lluvia dispersa cerca';
+  } else if (descFinal == 'Patchy light drizzle') {
+    icon.src = 'Imagenes/lluvia-dispersa.gif';
+    description.textContent = 'Llovizna ligera dispersa';
+  } else if (descFinal == 'Light rain') {
+    icon.src = 'Imagenes/lluvia-dispersa.gif';
+    description.textContent = 'Llovizna ligera';
+  } else if (descFinal == 'Moderate snow') {
+    icon.src = 'Imagenes/nieve-moderada.gif';
+    description.textContent = 'Nieve moderada';
+  } else if (descFinal == 'Light snow') {
+    icon.src = 'Imagenes/nieve-liviana.gif';
+    description.textContent = 'Nieve ligera';
+  } else if (descFinal == 'Moderate or heavy snow showers') {
+    icon.src = 'Imagenes/nieve-moderada-2.gif';
+    description.textContent = 'Chubascos de nieve moderados o fuertes';
+  } else if (descFinal == 'Heavy snow') {
+    icon.src = 'Imagenes/nieve-heavy.gif';
+    description.textContent = 'Mucha nieve';
+  } else if (descFinal == 'Overcast' || descFinal == 'Cloudy') {
+    icon.src = 'Imagenes/nublado.gif';
+    description.textContent = 'Nublado';
+  } else if (descFinal == 'Freezing fog') {
+    icon.src = 'Imagenes/neblinoso.gif';
+    description.textContent = 'Niebla helada';
+  } else if (descFinal == 'Mist') {
+    icon.src = 'Imagenes/neblina.gif';
+    description.textContent = 'Neblina';
+  } */
 }
 
 //creamos la funcion para obtener los datos del clima posicion actual
@@ -712,11 +989,14 @@ async function obtener2(lat, long) {
     } else if (descFinal == 'Freezing fog') {
       icon.src = 'Imagenes/neblinoso.gif';
       description.textContent = 'Niebla helada';
+    } else if (descFinal == 'Mist') {
+      icon.src = 'Imagenes/neblina.gif';
+      description.textContent = 'Neblina';
     }
 
-    const allicon = document.querySelectorAll('img.IconForecast');
+    //const allicon = document.querySelectorAll('img.IconForecast');
     //console.log(allicon);
-    let toto = '';
+    //let toto = '';
 
     descFinalx.forEach((item, index) => {
       //console.log(item + index);
@@ -748,6 +1028,8 @@ async function obtener2(lat, long) {
           toto = nieveheavy;
         } else if (item == 'Freezing fog') {
           toto = neblinoso;
+        } else if (item == 'Mist') {
+          toto = neblina;
         }
         //console.log(allicon[index]);
       }
@@ -761,11 +1043,147 @@ async function obtener2(lat, long) {
   }
 }
 
-function convertirAMinutos(hora) {
+function convertirAMinutos(hora, elsol) {
   const [horas, minutos] = hora.split(':').map(Number);
-  return horas * 60 + minutos;
+  if (elsol == 'salesol') {
+    return horas * 60 + minutos;
+  } else if (elsol == 'puestasol') {
+    return horas + 12;
+  }
+  //console.log(horas);
+  //return horas * 60 + minutos;
 }
 
-/* function valores() {
-  console.log(torta.value);
-} */
+const TitulosIconos = [
+  {name : 'Patchy rain nearby', valor : 'Lluvia  moderada a intervalos'},
+  {name : 'Sunny', valor : 'Soleado'},
+  {name : 'Clear', valor : 'Despejado'},
+  {name : 'despejado', valor : 'Despejado'},
+  {name : 'despejado', valor : 'Despejado'},
+  {name : 'despejado', valor : 'Despejado'},
+  {name : 'despejado', valor : 'Despejado'},
+  {name : 'despejado', valor : 'Despejado'},
+  {name : 'despejado', valor : 'Despejado'},
+  {name : 'despejado', valor : 'Despejado'},
+  {name : 'despejado', valor : 'Despejado'},
+  {name : 'despejado', valor : 'Despejado'},
+];
+
+for (let i = 0; i < allicon.length; i++) {
+  allicon[i].addEventListener("mouseover", function() {
+    TitulosIcon();
+    //cbox[i].classList.toggle("red");
+  });
+};
+
+function TitulosIcon() {
+  //const allicon = document.querySelectorAll('img.IconForecast');
+  try {
+    descFinalx = [];
+  }
+  finally {
+    for (let c = 1; c < current3.length; c++) {
+      //descFinalx = current3[i].hourly[0]["weatherDesc"][0].value;
+      descFinalx.push(current3[c].hourly[0]["weatherDesc"][0].value.trim());
+    }
+  }
+  //let toto = '';
+
+  descFinalx.forEach((item, index) => {
+    //console.log(item + index);
+    for (x = 0; x < allicon.length; x++) {
+      if (item == 'Clear') {
+        toto = 'Despejado';
+      } else if (item == 'Sunny') {
+        toto = 'Soleado';
+      } else if (item == 'Cloudy' || item == 'Overcast') {
+        toto = 'Nublado';
+        //allicon[index].src = 'Imagenes/nublado.gif';
+      } else if (item == 'Partly Cloudy' || item == 'Partly cloudy') {
+        toto = 'Parcialmente nublado';
+      } else if (item == 'Patchy rain nearby') {
+        toto = 'Lluvia  moderada a intervalos';
+      } else if (item == 'Patchy light drizzle' || item == 'Light rain') {
+        toto = 'Llovizna ligera dispersa';
+      } else if (item == 'Moderate snow') {
+        toto = 'Nieve moderada';
+      } else if (item == 'Light snow') {
+        toto = 'Nieve ligera';
+      } else if (item == 'Moderate or heavy snow showers') {
+        toto = 'Chubascos de nieve moderados o fuertes';
+      } else if (item == 'Heavy snow') {
+        toto = 'Mucha nieve';
+      } else if (item == 'Freezing fog') {
+        toto = 'Niebla helada';
+      } else if (item == 'Mist') {
+        toto = 'Neblina';
+      }
+      //console.log(allicon[index]);
+    }
+    allicon[index].title = toto;
+  })
+}
+
+for (let i = 0; i < allday.length; i++) {
+  allday[i].addEventListener("mouseover", function() {
+    if (apiweb.checked) {
+      TitulosFechas();
+    } else if (apilocal.checked) {
+      TitulosFechas2();
+    }
+  });
+};
+
+let dia = '';
+let fff = '';
+
+function TitulosFechas() {
+  try {
+    fechas = [];
+  }
+  finally {
+    for (let c = 1; c < current3.length; c++) {
+      fechas.push(current3[c].date);
+    }
+  }
+
+  fechas.forEach((item, index) => {
+    for (x = 0; x < allday.length; x++) {
+      dia = allday[index].textContent;
+    }
+    //allday[index].title = toto;
+    for (let c = 0; c < days.length; c++) {
+      fff = days[c];
+      if (fff.includes(dia)) {
+        allday[index].title = days[c] + ' ' + item;
+      }
+    }
+  })
+}
+
+function TitulosFechas2() {
+  try {
+    fechas = [];
+  }
+  finally {
+    for (let c = 1; c < data3['validTimeLocal'].length; c++) {
+      let fechainicial = data3['validTimeLocal'][c];
+      let final = fechainicial.indexOf('T');
+      let fechafinal = fechainicial.slice(0, final);
+      fechas.push(fechafinal);
+    }
+  }
+
+  fechas.forEach((item, index) => {
+    for (x = 0; x < allday.length; x++) {
+      dia = allday[index].textContent;
+    }
+    //allday[index].title = toto;
+    for (let c = 0; c < days.length; c++) {
+      fff = days[c];
+      if (fff.includes(dia)) {
+        allday[index].title = days[c] + ' ' + item;
+      }
+    }
+  })
+}
