@@ -478,6 +478,7 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
 
       for (let f = 1; f < current3.length; f++) {
         alltemp[f-1].textContent = current3[f].maxtempC + '°C';
+        alltemp[f-1].title = 'Se esperan temperaturas máximas de ' + current3[f].maxtempC + '°C y minimas de ' + current3[f].mintempC + '°C';        
       }
 
       /* tempd1.textContent = current3[1].maxtempC + '°C';
