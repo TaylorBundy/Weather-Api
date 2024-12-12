@@ -440,6 +440,7 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       locations2 = await data2["data"];
       current2 = await locations2["current_condition"][0];
       current3 = await locations2["weather"];
+      //console.log(current3);
 
     } else if (apilocal.checked) {
       document.querySelector("#ciudades").selectedIndex = 1;
@@ -467,7 +468,7 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       locations4 = await data3['dayOfWeek'];
       current3 = await data3['calendarDayTemperatureMax'];
       descFinal = await data3['narrative'];
-      //console.log(current2);
+      //console.log(data3);
     }
   }
   finally {
@@ -536,17 +537,17 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       wind.textContent = 'Viento: ' + current2.windspeedKmph + ' kmph';
       winddir.textContent = 'Direcc Viento: ' + current2.winddir16Point;
 
-      /* tempd1.textContent = current3[1].maxtempC + '°C';
+      tempd1.textContent = current3[1].maxtempC + '°C';
       tempd2.textContent = current3[2].maxtempC + '°C';
       tempd3.textContent = current3[3].maxtempC + '°C';
       tempd4.textContent = current3[4].maxtempC + '°C';
-      tempd5.textContent = current3[5].maxtempC + '°C'; */
+      tempd5.textContent = current3[5].maxtempC + '°C';
 
-      tempd1.textContent = current3[1].avgtempC + '°C';
+      /* tempd1.textContent = current3[1].avgtempC + '°C';
       tempd2.textContent = current3[2].avgtempC + '°C';
       tempd3.textContent = current3[3].avgtempC + '°C';
       tempd4.textContent = current3[4].avgtempC + '°C';
-      tempd5.textContent = current3[5].avgtempC + '°C';
+      tempd5.textContent = current3[5].avgtempC + '°C'; */
 
       IconosWeb();
 
@@ -920,11 +921,17 @@ async function obtener2(lat, long) {
       }
     }
 
-    tempd1.textContent = current3[1].avgtempC + '°C';
+    tempd1.textContent = current3[1].maxtempC + '°C';
+    tempd2.textContent = current3[2].maxtempC + '°C';
+    tempd3.textContent = current3[3].maxtempC + '°C';
+    tempd4.textContent = current3[4].maxtempC + '°C';
+    tempd5.textContent = current3[5].maxtempC + '°C';
+
+    /* tempd1.textContent = current3[1].avgtempC + '°C';
     tempd2.textContent = current3[2].avgtempC + '°C';
     tempd3.textContent = current3[3].avgtempC + '°C';
     tempd4.textContent = current3[4].avgtempC + '°C';
-    tempd5.textContent = current3[5].avgtempC + '°C';
+    tempd5.textContent = current3[5].avgtempC + '°C'; */
 
     salesol = current3[0]["astronomy"][0].sunrise;
     if (salesol.includes('AM')) {
