@@ -369,7 +369,23 @@ footer p {
         margin-top: 5px;
         margin-bottom: 0;
         width: 80%;
-        padding: 20px;
+        /* padding: 20px; */
+        padding: 10px 20px 10px 20px;
+    }
+
+    select {
+        font-size: 12px;
+        height: 30px;
+        padding: 5px 10px 5px 10px;        
+    }
+
+    select, option {
+        height: 30px;
+        font-size: 12px;
+    }
+
+    label {
+        font-size: 12px;
     }    
 
     .api {
@@ -673,7 +689,7 @@ footer p {
     /* button { */
         /* display: block; */
         /* width: 100px; */
-        
+
     /* } */
 
     .btn {
