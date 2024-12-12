@@ -323,7 +323,7 @@ footer p {
 
 
 /* @media only screen and (max-width: 400px)  { */
-@media only screen and (max-width: 432px)  {
+@media only screen and (max-width: 450px)  {
     body {
         width: 100%;
         position: relative;
@@ -518,7 +518,8 @@ footer p {
     }
 }
 
-@media only screen and (orientation: landscape) and (max-width: 640px) {
+/* @media only screen and (orientation: landscape) and (max-width: 640px) { */
+@media only screen and (orientation: landscape) and (max-width: 970px) {
     body {
         width: 100%;
         position: relative;
