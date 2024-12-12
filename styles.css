@@ -322,7 +322,8 @@ footer p {
 }
 
 
-@media only screen and (max-width: 400px) {
+/* @media only screen and (max-width: 400px)  { */
+@media only screen and (max-width: 432px)  {
     body {
         width: 100%;
         position: relative;
