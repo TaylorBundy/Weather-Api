@@ -377,22 +377,24 @@ let tempC = '';
 async function obtener() {
   var sinacento = ciudadesSelect.value;
   //const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&num_of_days=1&includelocation=yes&showlocaltime=yes&lang=es';
-const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
+const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ',' + torta.value + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
 //const url1 = 'https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&date=today&enddate=tomorrow&includelocation=no&lang=es';
 //const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&date=today&enddate=tomorrow&includelocation=no&lang=es';
   //const url2 = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
   try {
     if (apiweb.checked) {
       origen = url + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + ', Argentina';
-      resp = await fetch(origen);
-      data = await resp.json();
-      locations = await data["location"];
-      current = await data["current"];
+      //resp = await fetch(origen);
+      //data = await resp.json();
+      //locations = await data["location"];
+      //current = await data["current"];
       resp2 = await fetch(url1);
       data2 = await resp2.json();
       locations2 = await data2["data"];
+      //console.log(locations2);
       current2 = await locations2["current_condition"][0];
       current3 = await locations2["weather"];      
+      //console.log(url1);
     } else if (apilocal.checked) {
       document.querySelector("#ciudades").selectedIndex = 1;
       origen = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
@@ -715,8 +717,8 @@ async function obtener2(lat, long) {
   //const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + lat + ',' + long + '&format=json&num_of_days=6&mca=no&fx=no&includelocation=no&showlocaltime=yes&lang=es';
   const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + lat + ',' + long + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
   try {
-    resp = await fetch(origen);
-    data = await resp.json();
+    //resp = await fetch(origen);
+    //data = await resp.json();
     resp2 = await fetch(url1);
     data2 = await resp2.json();
     locations = await data["location"];
