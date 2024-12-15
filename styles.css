@@ -377,7 +377,7 @@ footer p {
         margin-bottom: 0;
         transition: 0.4s;
         height: auto;
-        padding: 5px;
+        padding: 5px 0 5px 0;
         width: 100%;
         /* position: fixed; */
     }
