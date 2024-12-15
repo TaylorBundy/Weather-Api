@@ -148,6 +148,8 @@ window.onload = function() {
       document.querySelector('#provincia').selectedIndex = 0;
       navigator.geolocation.getCurrentPosition(success, error, options);      
       //alert(window.screen.height + ' ' + window.screen.width);
+      console.log(btnobtener.offsetWidth);
+      alert(btnobtener.offsetWidth);
     }
     finally {
       let DiaActual = 0;
