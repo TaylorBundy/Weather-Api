@@ -2,64 +2,99 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    width: 100%;
+    position: relative;
+    /* width: 100%; */
     justify-content: center;
     align-items: center;
-    position: relative;
+    /* display: flex; */
+    /* display: grid; */
+    margin: 0;
+    padding: 0;
 }
 
 header {
+    width: 80%;
+    height: auto;
     background-color: #3a8dff;
     color: white;
-    padding: 20px;
+    /* padding: 20px; */
+    /* padding: 10px 20px 10px 20px; */
+    position: relative;
     text-align: center;
+    /* display: flex; */
+    /* top: 0; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    font-size: 1em;
+    margin: 5px;
+    padding: 10px;
 }
 
 main {
-    padding: 20px;
+    /* padding: 20px; */
+    /* padding: 10px 20px 10px 20px; */
     width: 80%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5px;
     margin-bottom: 5px;
     background-color: white;
+    /* background-color: red; */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    display: flex;
+    /* display: flex; */
+    /* display: grid; */
     justify-content: center;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    margin: 5px;
-    width: 30%;
+    margin: 5px 0 0 0;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    border: 4px solid #608094;
+    border-radius: 5px;
+    /* flex-grow: 1; */
 }
 
 label {
     font-size: 16px;
-    margin-bottom: 8px;
+    /* margin-bottom: 8px; */
+    /* margin: 5px 5px 8px 5px; */
+    margin: 5px;
 }
 
 select {
     padding: 10px;
     font-size: 16px;
-    margin-top: 0;
-    border: 2px solid #608094;
+    /* margin-top: 0; */
+    /* margin: 5px 5px 8px 5px; */
+    margin: 5px;
+    border: 4px solid #608094;
     border-radius: 5px;
     background: #16394c;
     color: #fff;
 }
 
 footer {
+    width: 80%;
+    margin-top: 5px;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
-    padding: 20px;
+    /* padding: 20px; */
     background-color: #333;
     color: white;
 }
 
 footer p {
     margin: 0;
+    padding: 10px;
 }
 
 .button-container {
@@ -74,14 +109,16 @@ footer p {
     padding: 20px;
 }
 .BotonClass {
-    justify-content: center;
-    /* width: 70%; */
-    align-items: center;
     display: flex;
-    /* border: 1px solid red; */
+    justify-content: center;
+    margin: 5px 0 0 0;
+    width: 80%;
+    height: auto;
     margin-left: auto;
     margin-right: auto;
-    /* position: relative; */
+    /* align-items: center; */
+    border: 4px solid #608094;
+    border-radius: 5px;
 }
 
 /* .btn { */
@@ -133,31 +170,32 @@ footer p {
     background: #16394c;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 40%;
-    /* height: 200px; */
-    height: auto;
-    padding: 20px;
-    text-align: center;
-    /* margin: 0 auto; */
-    margin: 5px;
+    width: 80%;        
+    height: auto;    
+    text-align: center;    
+    margin: 5px 0 0 0;
     border: 4px solid #608094;
+    margin-left: auto;
+    margin-right: auto;
+    /* flex-grow: 1; */
+    /* display: flex; */
 }
 .weather-card h2 {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 18px;
     margin-bottom: 10px;
     color: #fff;
 }
 .weather-card .current-weather {
     display: flex;
+    margin: 5px 5px 5px 15px;
     flex-direction: column;
-    align-items: center;
-    /* margin: 20px 0; */
-    /* width: 275px; */
+    align-items: center;    
     width: 140px;
     height: 137px;
     float: left;
-    /* left: 30px; */
-    /* position: absolute; */
 }
 .weather-card .current-weather img {
     /* width: 50px; */
@@ -228,7 +266,7 @@ footer p {
 .weather-card .forecast {
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin: 20px 5px 5px 5px;    
     width: 100%;
     top: 5px;
 }
@@ -281,26 +319,26 @@ footer p {
     background: rgb(235, 235, 235);
   }
 
-#provincia {
-    /* text-transform: lowercase; */
-    margin-bottom: 8px;
-}
-
 .api {
     display: flex;
     margin: 10px 0 10px 0;
 }
 
 .RadioClass {
-    width: 10%;
-    height: 200px;
-    padding: 20px;
-    /* background-color: #99b4d1; */
-    /* border-radius: 5px; */
+    width: 80%;
+    margin-top: 5px;
+    margin-bottom: 0;
+    border: 4px solid #608094;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .radio {
     cursor: pointer;
+    margin-top: -1px;
 }
 
 .api span {
@@ -323,7 +361,8 @@ footer p {
 
 
 /* @media only screen and (max-width: 400px)  { */
-@media only screen and (max-width: 450px)  {
+/* @media only screen and (max-width: 450px)  { */
+@media screen and (min-width: 360px) and (max-width: 501px)  {
     body {
         width: 100%;
         position: relative;
@@ -339,6 +378,7 @@ footer p {
         transition: 0.4s;
         height: auto;
         padding: 5px;
+        width: 100%;
         /* position: fixed; */
     }
 
@@ -370,13 +410,14 @@ footer p {
         margin-bottom: 0;
         width: 80%;
         /* padding: 20px; */
-        padding: 10px 20px 10px 20px;
+        /* padding: 10px 20px 10px 20px; */
+        padding: 10px;
     }
 
     select {
         font-size: 12px;
         height: 30px;
-        padding: 5px 10px 5px 10px;        
+        padding: 5px 10px 5px 10px;
     }
 
     select, option {
@@ -386,7 +427,7 @@ footer p {
 
     label {
         font-size: 12px;
-    }    
+    }
 
     .api {
         display: inline-flex;
@@ -405,7 +446,8 @@ footer p {
     }
     .RadioClass {
         display: flex;
-        width: 85%;
+        /* width: 85%; */
+        width: 80%;
         height: auto;
         background-color: #99b4d1;
         /* background: #16394c; */
@@ -418,6 +460,8 @@ footer p {
         /* align-items: center; */
         /* display: flex; */
         /* justify-content: space-between; */
+        /* padding: 10px; */
+        /* padding: 5px 20px 5px 20px; */
         padding: 10px;
         flex-grow: 1;
     }
@@ -438,15 +482,21 @@ footer p {
         width: 80%;
         /* height: 150px; */
         height: auto;
+        /* padding: 10px 20px 10px 20px; */
+        padding: 10px;
     }
 
     .weather-card h2 {
-        margin: 0;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;        
+        /* margin: 0; */
     }
 
     .weather-card .current-weather {
         width: 100px;
         margin-top: 5px;
+        /* border: 1px solid red; */
     }
 
     .weather-card .current-weather .description {
@@ -481,7 +531,7 @@ footer p {
     }
 
     .BotonClass {
-        width: 90%;
+        width: 80%;
         background-color: #99b4d1;
         /* background: #16394c; */
         border: 1px solid blue;
@@ -490,12 +540,14 @@ footer p {
         margin-right: auto;
         margin-top: 5px;
         margin-bottom: 5px;
+        /* padding: 5px 20px 5px 20px; */
+        padding: 10px;
         /* padding: 20px; */
         /* padding: 10px 20px 10px 20px; */
         /* display: grid; */
         display: flex;
         align-items: center;
-        flex-wrap: wrap;
+        /* flex-wrap: wrap; */
         /* place-items: center; */
     }
 
@@ -531,11 +583,19 @@ footer p {
         border-radius: 5px;
         margin-top: 5px;
         margin-bottom: 0;
+        padding: 5px 0 5px 0;
+        width: 100%;
     }
 }
 
+
+
+
+
 /* @media only screen and (orientation: landscape) and (max-width: 640px) { */
-@media only screen and (orientation: landscape) and (max-width: 970px) {
+/* @media only screen and (orientation: landscape) and (max-width: 970px) { */
+/* @media screen and (min-width: 640px) and (max-width: 1154px) and (orientation: landscape) { */
+@media screen and (max-width: 1154px) and (orientation: landscape) {
     body {
         width: 100%;
         position: relative;
@@ -549,6 +609,7 @@ footer p {
         margin-bottom: 0;
         visibility: collapse;
         display: none;
+        width: 100%;
     }
 
     h1 {
@@ -651,29 +712,29 @@ footer p {
         background-color: #333;
     }
 
-    .BotonClass2 {
-        background-color: #99b4d1;
-        border: 1px solid blue;
-        border-radius: 5px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 5px;
-        margin-bottom: 5px;
+    /* .BotonClass2 { */
+        /* background-color: #99b4d1; */
+        /* border: 1px solid blue; */
+        /* border-radius: 5px; */
+        /* margin-left: auto; */
+        /* margin-right: auto; */
+        /* margin-top: 5px; */
+        /* margin-bottom: 5px; */
         /* padding: 20px; */
         /* padding: 10px 20px 10px 20px; */
-        padding: 10px;
-        width: 50%;
-        display: flex;
+        /* padding: 10px; */
+        /* width: 50%; */
+        /* display: flex; */
         /* display: grid; */
         /* align-items: center; */
         /* place-items: center; */
-    }
+    /* } */
 
     .BotonClass {
-        /* display: inline-flex; */
+        display: inline-flex;
         /* flex-direction: column; */
         /* align-items: center; */
-        width: 55%;
+        width: 80%;
         height: auto;
         background-color: #99b4d1;
         border: 1px solid blue;
@@ -714,5 +775,127 @@ footer p {
         border-radius: 5px;
         margin-top: 5px;
         margin-bottom: 0;
+        width: 100%;
+    }
+}
+
+@media only screen and (width: 360px) and (height: 640px) {
+    .btn1 {
+        width: 90px;
+    }
+    .weather-card .details .temp {
+        font-size: 18px;
+        left: -100px;
+    }
+    .weather-card .current-weather {
+        width: 120px;
+        margin: 0;
+    }
+    .weather-card .details {
+        width: 120px;
+        margin: 0;
+    }
+    .weather-card .current-weather .description {
+        margin: 2px;
+    }
+    .weather-card .forecast {
+        justify-content: center;
+        gap: 10px;
+        margin: 0;
+    }
+    .RadioClass {
+        padding: 5px 10px 5px 10px;
+    }
+}
+
+@media only screen and (width: 432px) and (height: 960px) {
+    .btn1 {
+        width: 100px;
+    }
+    .weather-card .details .temp {
+        font-size: 20px;
+        left: -130px;
+        top: -90px;
+    }
+}
+
+@media only screen and (width: 501px) and (height: 1154px) {
+    .btn1 {
+        width: 120px;
+    }
+    .weather-card .details .temp {
+        font-size: 20px;
+        left: -150px;
+        top: -80px;
+    }
+}
+
+@media only screen and (width: 640px) and (height: 360px) and (orientation: landscape) {
+    label {
+        font-size: 12px;
+    }
+    .api span {
+        font-size: 12px;
+    }
+    .btn1 {
+        width: 90px;
+    }
+    .weather-card .details .temp {
+        font-size: 18px;
+        left: -130px;
+    }
+    .weather-card .forecast {
+        justify-content: center;
+        gap: 10px;
+        margin: 0;
+    }
+    select, option {
+        height: 30px;
+        font-size: 12px;
+        padding: 5px 10px 5px 10px;
+    }
+}
+
+@media only screen and (width: 960px) and (height: 432px) and (orientation: landscape) {
+    label {
+        font-size: 12px;
+    }
+    .api span {
+        font-size: 12px;
+    }
+    .btn1 {
+        width: 100px;
+    }
+    .weather-card .details .temp {
+        font-size: 20px;
+        left: -130px;
+        top: -90px;
+    }
+    select, option {
+        height: 30px;
+        font-size: 12px;
+        padding: 5px 10px 5px 10px;
+    }
+}
+
+@media only screen and (width: 1154px) and (height: 501px) and (orientation: landscape) {
+    label {
+        font-size: 12px;
+    }
+    .api span {
+        font-size: 12px;
+    }
+    .btn1 {
+        width: 120px;
+    }
+    .weather-card .details .temp {
+        font-size: 20px;
+        left: -150px;
+        top: -80px;
+    }
+    select, option {
+        height: 30px;
+        font-size: 12px;
+        padding: 5px 10px 5px 10px;
     }
 }
