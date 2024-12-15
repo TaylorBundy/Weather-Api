@@ -4,8 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="Imagenes/favicon.ico">
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" media="screen and (min-width: 500px)" href="styles2.css" />
+        <link rel="stylesheet" media="screen" href="styles.css">
+        <!-- <link rel="stylesheet" media="screen and (min-width: 501px) and (max-width: 1154px)" href="styles2.css" /> -->
+        <!-- <link rel="stylesheet" href="responsive_styles.css"> -->
         <title>Provincias y Ciudades de Argentina</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
         <script type="text/javascript" src="script.js" defer></script>
@@ -87,11 +88,12 @@
                 </select>
             </form>
             <input id="xlocalidad" style="visibility: collapse; display: none;">
-            <div class="weather-card" id="weather-card" style="display: block;">
+            <!-- <div class="weather-card" id="weather-card" style="display: block;"> -->
+            <div class="weather-card" id="weather-card">
                 <h2 id="ciudad">Esperando Ciudad!</h2>
                 <div class="current-weather">
                     <img src="Imagenes/sol-loading.gif" id="icon">
-                    <p class="description" id="description"></p>
+                    <p class="description" id="description">Descripción</p>
                 </div>
                 <div class="details">
                     <p id="wind">Viento: </p>
@@ -99,59 +101,67 @@
                     <p id="precip">Precipitación: </p>
                     <p id="pressure">Presión: </p>
                     <p id="humidity">Humedad: </p>
-                    <p class="temp" id="temp"></p>
+                    <p class="temp" id="temp">Temp</p>
                 </div>
                 <!-- <div class="forecast" style="visibility: collapse; display: none;"> -->
                 <div class="forecast" id="AllForecast">
                     <div class="day">
-                        <p id="Dia1" class="DayForecast"></p>
+                        <p id="Dia1" class="DayForecast">Día</p>
                         <!-- <img src="https://cdn-icons-png.flaticon.com/512/1163/1163657.png" alt="Cloudy" id="Icon-D1"> -->
                         <img src="Imagenes/sol-loading.gif" alt="Cloudy" id="Icon-D1" class="IconForecast">
-                        <p class="temp" id="Temp-D1"></p>
+                        <p class="temp" id="Temp-D1">Temp</p>
                     </div>
                     <div class="day">
-                        <p id="Dia2" class="DayForecast"></p>
+                        <p id="Dia2" class="DayForecast">Día</p>
                         <!-- <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Sunny" id="Icon-D2"> -->
                         <img src="Imagenes/sol-loading.gif" alt="Sunny" id="Icon-D2" class="IconForecast">
-                        <p class="temp" id="Temp-D2"></p>
+                        <p class="temp" id="Temp-D2">Temp</p>
                     </div>
                     <div class="day">
-                        <p id="Dia3" class="DayForecast"></p>
+                        <p id="Dia3" class="DayForecast">Día</p>
                         <!-- <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Sunny" id="Icon-D3"> -->
                         <img src="Imagenes/sol-loading.gif" alt="Sunny" id="Icon-D3" class="IconForecast">
-                        <p class="temp" id="Temp-D3"></p>
+                        <p class="temp" id="Temp-D3">Temp</p>
                     </div>
                     <div class="day">
-                        <p id="Dia4" class="DayForecast"></p>
+                        <p id="Dia4" class="DayForecast">Día</p>
                         <!-- <img src="https://cdn-icons-png.flaticon.com/512/1163/1163657.png" alt="Cloudy" id="Icon-D4"> -->
                         <img src="Imagenes/sol-loading.gif" alt="Cloudy" id="Icon-D4" class="IconForecast">
-                        <p class="temp" id="Temp-D4"></p>
+                        <p class="temp" id="Temp-D4">Temp</p>
                     </div>
                     <div class="day">
-                        <p id="Dia5" class="DayForecast"></p>
+                        <p id="Dia5" class="DayForecast">Día</p>
                         <!-- <img src="https://cdn-icons-png.flaticon.com/512/1163/1163657.png" alt="Cloudy" id="Icon-D5"> -->
                         <img src="Imagenes/sol-loading.gif" alt="Cloudy" id="Icon-D5" class="IconForecast">
-                        <p class="temp" id="Temp-D5"></p>
+                        <p class="temp" id="Temp-D5">Temp</p>
                     </div>
                 </div>
             </div>
-        </main>
-        <div class="button-container">
+        <!-- </main> -->
+        <!-- <main id="ButtonMain"> -->
+        <!-- <div class="button-container"> -->
             <div class="BotonClass">
                 <div class="btn">
-                    <button id="btnObtener" class="btn1" onclick="obtener()" onmouseover="Titulos()"><span>Obtener</span></button>
+                    <button id="btnObtener" class="btn1" onclick="obtener()" onmouseover="Titulos()">
+                        <span>Obtener</span>
+                    </button>
                 </div>
                 <div class="btn">
-                    <button id="btnLimpiar" class="btn1" onmouseover="Titulos()"><span>Limpiar</span></button>
+                    <button id="btnLimpiar" class="btn1" onmouseover="Titulos()">
+                        <span>Limpiar</span>
+                    </button>
                 </div>
                 <div class="btn">
-                    <button id="btnActualizar" class="btn1" onclick="obtener()" onmouseover="Titulos()"><span>Actualizar</span></button>
+                    <button id="btnActualizar" class="btn1" onclick="obtener()" onmouseover="Titulos()">
+                        <span>Actualizar</span>
+                    </button>
                 </div>
                 <!-- <button id="btnObtener" class="btn" onclick="obtener()" onmouseover="Titulos()"><span>Obtener</span></button> -->
                 <!-- <button id="btnLimpiar" class="btn" onmouseover="Titulos()"><span>Limpiar</span></button> -->
                 <!-- <button id="btnActualizar" class="btn" onclick="obtener()" onmouseover="Titulos()"><span>Actualizar</span></button> -->
             </div>
-        </div>
+        <!-- </div> -->
+        </main>
         <footer>
             <p>&copy; 2024 Proyecto Web - Weather API - By Taylor Bundy</p>
             <div class="ImgSocial">
