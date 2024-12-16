@@ -135,6 +135,7 @@ footer p {
     overflow: hidden;
     margin: 5px;
     transition: background-color 0.3s ease;
+    width: 150px;
 }
 
 /* .btn:hover { */
@@ -567,12 +568,14 @@ footer p {
         padding: 0;
         /* display: inline-flex; */
         /* text-align: center; */
+        display: flex;
+        flex-grow: 1;
     }    
 
     .btn1 {
         /* width: 100px; */
         /* margin: 5px; */
-        flex-grow: 0;
+        flex-grow: 1;
         /* padding: 5px; */
     }
 
@@ -777,9 +780,16 @@ footer p {
 }
 
 @media only screen and (width: 360px) and (height: 640px) and (orientation: portrait) {
+    .btn {
+        display: flex;
+        flex-grow: 1;
+    }
+
     .btn1 {
         width: 80px;
         padding: 5px;
+        /* display: flex; */
+        flex-grow: 1;
     }
     .weather-card .details .temp {
         font-size: 18px;
