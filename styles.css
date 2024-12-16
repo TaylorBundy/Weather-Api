@@ -883,7 +883,7 @@ footer p {
     }
     .weather-card .details .temp {
         font-size: 18px;
-        /* left: -140px; */
+        left: -140px;
     }
     .weather-card .forecast {
         justify-content: center;
