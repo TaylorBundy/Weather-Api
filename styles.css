@@ -362,7 +362,7 @@ footer p {
 
 /* @media only screen and (max-width: 400px)  { */
 /* @media only screen and (max-width: 450px)  { */
-@media screen and (min-width: 360px) and (max-width: 501px)  {
+@media only screen and (min-width: 360px) and (max-width: 501px)  {
     body {
         width: 100%;
         position: relative;
@@ -518,17 +518,17 @@ footer p {
         height: 70px;
     }
 
-    .button-container {
+    /* .button-container { */
         /* display: inline-flex; */
         /* display: grid; */
         /* place-items: center; */
-        width: 100%;
+        /* width: 100%; */
         /* padding: 0; */
-        padding: 5px 0 5px 0;
-        margin-top: 5px;
-        margin-bottom: 0;
-        background-color: #333;
-    }
+        /* padding: 5px 0 5px 0; */
+        /* margin-top: 5px; */
+        /* margin-bottom: 0; */
+        /* background-color: #333; */
+    /* } */
 
     .BotonClass {
         width: 80%;
@@ -702,15 +702,15 @@ footer p {
         background-color: #333; */
     /* } */
 
-    .button-container {
-        width: 100%;
+    /* .button-container { */
+        /* width: 100%; */
         /* padding: 0; */
-        padding: 0;
-        margin-top: 5px;
-        margin-bottom: 0;
-        display: grid;
-        background-color: #333;
-    }
+        /* padding: 0; */
+        /* margin-top: 5px; */
+        /* margin-bottom: 0; */
+        /* display: grid; */
+        /* background-color: #333; */
+    /* } */
 
     /* .BotonClass2 { */
         /* background-color: #99b4d1; */
