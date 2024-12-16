@@ -376,13 +376,24 @@ let maxfinal = '';
 let minfinal = '';
 let tempC = '';
 
+//creamos funcion que actualiza datos
+function Actualiza() {
+  if (ciudad.textContent.includes('Lat')) {
+    //obtener2();
+    obtener2(latitud, longitud);
+    console.log(latitud + ' ' + longitud);
+  } else {
+    obtener();
+  }
+};
+
 //creamos la funcion para obtener los datos del clima
 async function obtener() {
   var sinacento = ciudadesSelect.value;
   //const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&num_of_days=1&includelocation=yes&showlocaltime=yes&lang=es';
-const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ',' + torta.value + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
-//const url1 = 'https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&date=today&enddate=tomorrow&includelocation=no&lang=es';
-//const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&date=today&enddate=tomorrow&includelocation=no&lang=es';
+  const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ',' + torta.value + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
+  //const url1 = 'https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&date=today&enddate=tomorrow&includelocation=no&lang=es';
+  //const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&date=today&enddate=tomorrow&includelocation=no&lang=es';
   //const url2 = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
   try {
     if (apiweb.checked) {
@@ -395,6 +406,7 @@ const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' +
       data2 = await resp2.json();
       locations2 = await data2["data"];
       //console.log(locations2);
+      console.log(data2);
       current2 = await locations2["current_condition"][0];
       current3 = await locations2["weather"];      
       //console.log(url1);
@@ -724,6 +736,7 @@ async function obtener2(lat, long) {
     //data = await resp.json();
     resp2 = await fetch(url1);
     data2 = await resp2.json();
+    console.log(data2);
     locations = await data["location"];
     current = await data["current"];
     locations2 = await data2["data"];
@@ -734,6 +747,7 @@ async function obtener2(lat, long) {
     weather.style.display = 'block';
     ciudad.textContent = locations2["request"][0].query;
     temp.textContent = current2.temp_C + '°C';
+    temp.title = 'Sensación Térmica: ' + current2.FeelsLikeC + '°C';
     description.textContent = current2["weatherDesc"][0].value;
     descFinal = description.textContent.trim();
     humid.textContent = 'Humedad: ' + current2.humidity + ' %';
@@ -751,11 +765,16 @@ async function obtener2(lat, long) {
       }
     }
 
-    tempd1.textContent = current3[1].maxtempC + '°C';
+    for (let f = 1; f < current3.length; f++) {
+      alltemp[f-1].textContent = current3[f].maxtempC + '°C';
+      alltemp[f-1].title = 'Se esperan temperaturas máximas de ' + current3[f].maxtempC + '°C y minimas de ' + current3[f].mintempC + '°C';        
+    }
+
+    /* tempd1.textContent = current3[1].maxtempC + '°C';
     tempd2.textContent = current3[2].maxtempC + '°C';
     tempd3.textContent = current3[3].maxtempC + '°C';
     tempd4.textContent = current3[4].maxtempC + '°C';
-    tempd5.textContent = current3[5].maxtempC + '°C';
+    tempd5.textContent = current3[5].maxtempC + '°C'; */
 
     IconosWeb();
     IconosWebExt();
