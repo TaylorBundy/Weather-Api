@@ -122,6 +122,11 @@ footer p {
     border-radius: 5px;
 }
 
+.btn {
+    display: flex;
+    flex-grow: 1;    
+}
+
 /* .btn { */
 .btn1 {
     background-color: #007BFF;
@@ -135,7 +140,8 @@ footer p {
     overflow: hidden;
     margin: 5px;
     transition: background-color 0.3s ease;
-    width: 150px;
+    /* width: 150px; */
+    flex-grow: 1;
 }
 
 /* .btn:hover { */
@@ -565,7 +571,7 @@ footer p {
     }
 
     .btn {
-        padding: 0;
+        /* padding: 0; */
         /* display: inline-flex; */
         /* text-align: center; */
         display: flex;
@@ -576,7 +582,7 @@ footer p {
         /* width: 100px; */
         /* margin: 5px; */
         flex-grow: 1;
-        /* padding: 5px; */
+        padding: 5px;
     }
 
     footer {
