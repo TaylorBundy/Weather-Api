@@ -779,7 +779,7 @@ footer p {
     }
 }
 
-@media only screen and (width: 360px) and (height: 640px) {
+@media only screen and (width: 360px) and (height: 640px) and (orientation: portrait) {
     .btn1 {
         width: 80px;
     }
