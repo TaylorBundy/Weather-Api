@@ -97,17 +97,18 @@ footer p {
     padding: 10px;
 }
 
-.button-container {
+/* .button-container { */
     /* display: flex; */
     /* justify-content: center; */
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 20px;
-}
+    /* background-color: #fff; */
+    /* border-radius: 5px; */
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+    /* width: 80%; */
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    /* padding: 20px; */
+/* } */
+
 .BotonClass {
     display: flex;
     justify-content: center;
@@ -291,33 +292,34 @@ footer p {
     color: #fff;
 }
 
-.sun {
-    width: 100px;
-    height: 100px;
+/* .sun { */
+    /* width: 100px; */
+    /* height: 100px; */
     /* background: url('sol.JPG') no-repeat center center; */
-    background-size: contain;
-    animation: rotateSun 5s linear infinite;
-}
+    /* background-size: contain; */
+    /* animation: rotateSun 5s linear infinite; */
+/* } */
 
-#map {
-    height: 100%;
-  }
+/* #map { */
+    /* height: 100%; */
+  /* } */
 
-  .custom-map-control-button {
-    background-color: #fff;
-    border: 0;
-    border-radius: 2px;
-    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
-    margin: 10px;
-    padding: 0 0.5em;
-    font: 400 18px Roboto, Arial, sans-serif;
-    overflow: hidden;
-    height: 40px;
-    cursor: pointer;
-  }
-  .custom-map-control-button:hover {
-    background: rgb(235, 235, 235);
-  }
+  /* .custom-map-control-button { */
+    /* background-color: #fff; */
+    /* border: 0; */
+    /* border-radius: 2px; */
+    /* box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3); */
+    /* margin: 10px; */
+    /* padding: 0 0.5em; */
+    /* font: 400 18px Roboto, Arial, sans-serif; */
+    /* overflow: hidden; */
+    /* height: 40px; */
+    /* cursor: pointer; */
+  /* } */
+
+  /* .custom-map-control-button:hover { */
+    /* background: rgb(235, 235, 235); */
+  /* } */
 
 .api {
     display: flex;
@@ -563,20 +565,15 @@ footer p {
 
     .btn {
         padding: 0;
-        display: inline-flex;
-        text-align: center;
-    }
-
-    /* .btn { */
-        /* width: 150px; */
-        /* margin: 5px; */
-    /* } */
+        /* display: inline-flex; */
+        /* text-align: center; */
+    }    
 
     .btn1 {
-        width: 100px;
-        margin: 5px;
-        flex-grow: 1;
-        padding: 5px;
+        /* width: 100px; */
+        /* margin: 5px; */
+        flex-grow: 0;
+        /* padding: 5px; */
     }
 
     footer {
@@ -782,6 +779,7 @@ footer p {
 @media only screen and (width: 360px) and (height: 640px) and (orientation: portrait) {
     .btn1 {
         width: 80px;
+        padding: 5px;
     }
     .weather-card .details .temp {
         font-size: 18px;
