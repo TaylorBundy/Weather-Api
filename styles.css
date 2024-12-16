@@ -503,9 +503,10 @@ footer p {
     }
 
     .weather-card .current-weather {
-        width: 100px;
-        margin-top: 5px;
+        width: 120px;
+        /* margin-top: 5px; */
         /* border: 1px solid red; */
+        margin: 0;
     }
 
     .weather-card .current-weather .description {
@@ -514,17 +515,25 @@ footer p {
 
     .weather-card .details {
         font-size: 12px;
-        margin-top: 5px;
+        width: 120px;
+        margin: 0;
+        /* margin-top: 5px; */
     }
 
     .weather-card .details .temp {
         font-size: 18px;
-        left: -110px;
+        left: -100px;
     }
 
     .weather-card .current-weather img {
         width: 70px;
         height: 70px;
+    }
+
+    .weather-card .forecast {
+        justify-content: center;
+        gap: 10px;
+        margin: 0;
     }
 
     /* .button-container { */
