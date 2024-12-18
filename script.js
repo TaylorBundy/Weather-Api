@@ -616,6 +616,8 @@ function IconosLocalExt() {
         toto = nublado;
       } else if (item == 'Chubascos matinales') {
         toto = lluvialigera;
+      } else if (item == 'Cielo prácticamente cubierto') {
+        toto = nublado;
       }
     }
     allicon[index].src = toto;
@@ -748,6 +750,7 @@ function IconosWeb() {
     }
     description.textContent = 'Lluvia ligera y helada';
   }
+  icon.alt = description.textContent;
 }
 
 function IconosLocal() {
@@ -801,6 +804,7 @@ function IconosLocal() {
       icon.src = nochelluvialigera;
     }
   }
+  icon.alt = description.textContent;
 }
 
 function convertirAMinutos(hora, elsol) {
@@ -868,12 +872,14 @@ function TitulosIcon() {
       }
     }
     allicon[index].title = toto;
+    allicon[index].alt = toto;
   })
 }
 
 function TitulosIconLocal() {
   descFinalx.forEach((item, index) => {
     allicon[index].title = item;
+    allicon[index].alt = item;
   })
 }
 

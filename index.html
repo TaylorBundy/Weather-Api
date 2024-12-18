@@ -17,6 +17,7 @@
         </header>
         <main id="MainForm">
             <div class="RadioClass">
+                <label for="radio">Inputs</label>
                 <div class="api">
                     <input type="radio" id="ApiWeb" class="radio" name="radio" checked="checked" onclick="obtener()"><span>Web</span>
                 </div>
@@ -25,6 +26,7 @@
                 </div>
             </div>
             <form action="#" method="POST">
+                <label for="provincia">Provincia:</label>
                 <select id="provincia" onmouseover="Titulos()">
                     <option selected="true" value="">Seleccionar una Provincia</option>
                     <option value="06">Buenos Aires</option>
@@ -61,7 +63,7 @@
             <div class="weather-card" id="weather-card">
                 <h2 id="ciudad">Esperando Ciudad!</h2>
                 <div class="current-weather">
-                    <img src="Imagenes/sun-loading.svg" id="icon">
+                    <img src="Imagenes/sun-loading.svg" alt="Sun Loading" id="icon">
                     <p class="description" id="description">Descripción</p>
                 </div>
                 <div class="details">
