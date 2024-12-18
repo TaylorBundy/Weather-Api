@@ -663,7 +663,11 @@ function IconosWeb() {
     }
     description.textContent = 'Lluvia dispersa cerca';
   } else if (descFinal == 'Patchy light drizzle') {
-    icon.src = lluviadispersa;
+    if (isday == 'si') {
+      icon.src = lluviadispersa;
+    } else {
+      icon.src = nochelluviadispersa;
+    }
     description.textContent = 'Llovizna ligera dispersa';
   } else if (descFinal == 'Light drizzle') {
     if (isday == 'si') {
@@ -715,7 +719,11 @@ function IconosWeb() {
     }
     description.textContent = 'Mucha nieve';
   } else if (descFinal == 'Overcast' || descFinal == 'Cloudy') {
-    icon.src = nublado;
+    if (isday == 'si') {
+      icon.src = nublado;
+    } else {
+      icon.src = nochenublada;
+    }
     description.textContent = 'Nublado';
   } else if (descFinal == 'Freezing fog') {
     icon.src = neblinoso;
