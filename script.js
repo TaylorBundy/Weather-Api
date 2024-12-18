@@ -129,7 +129,18 @@ function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
   ciudad.textContent = 'Acceso denegado a ubicación!';
 }
-
+const urllocal = 'file:///C:/HTML/Proyectos/Weather/index.html';
+var data5 = new Date();
+data5.setTime(data5.getTime() + 365 * 24 * 60 * 60 * 1000);
+var expira = data5.toUTCString();
+let nombre_cookie = [];
+const nombre_cookie2 = [
+  {name: 'facebook', valor: facebook.id, src: facebook.src},
+  {name: 'instagram', valor: instagram.id, src: instagram.src},
+  {name: 'github', valor: github.id, src: github.src},
+  {name: 'icon', valor: icon.id, src: icon.src}
+];
+let valorCookie = [];
 let HourTime = '';
 let Horas = '';
 let Minutos = '';
@@ -228,8 +239,140 @@ window.onload = function() {
         dia4.textContent = days[4].slice(0,3);
         dia5.textContent = days[5].slice(0,3);
       }
+      setTimeout(function() {        
+        for (let i = 0; i < nombre_cookie2.length; i++) {
+          nombre_cookie.push(nombre_cookie2[i].name);
+          valorCookie.push(nombre_cookie2[i].src);
+          //console.log(nombre_cookie);
+        }
+        //nombre_cookie = facebook.id;
+        var urlactual = location.href;
+        for (let f = 0; f < nombre_cookie.length; f++) {
+        if (urllocal == urlactual) {
+          //comprobarCookieLocal(nombre_cookie[f]);
+          //var puto = comprobarCookieLocal(nombre_cookie);
+          //console.log(puto);
+          if (comprobarCookieLocal(nombre_cookie[f])) {
+            //
+            facebook.src = valorCookie[f];
+            instagram.src = valorCookie[f];
+            github.src = valorCookie[f];
+            icon.src = valorCookie[f];
+          } else {
+            crearCookie(nombre_cookie[f], valorCookie[f], expira);
+          }
+        } else {
+          if (comprobarCookie(nombre_cookie[f])) {
+            //
+            facebook.src = valorCookie[f];
+            instagram.src = valorCookie[f];
+            github.src = valorCookie[f];
+            icon.src = valorCookie[f];
+          } else {
+            crearCookie(nombre_cookie[f], valorCookie[f], expira);
+          }
+          //comprobarCookie(nombre_cookie[f]);
+        }
+        }
+      }, 500);    
     }
 };
+
+if (document.readyState) {
+  try {
+    for (let i = 0; i < nombre_cookie2.length; i++) {
+      nombre_cookie.push(nombre_cookie2[i].name);
+      valorCookie.push(nombre_cookie2[i].src);
+    }
+    //nombre_cookie = facebook.id;
+    //valorCookie = facebook.src;
+  }
+  finally {
+    for (let i = 0; i < nombre_cookie.length; i++) {
+      //crearCookie(nombre_cookie[i], valorCookie[i], expira);
+    }
+    
+  }
+}
+
+function crearCookie(nombre, valorCookie, dias) {
+  if (dias) {
+    var expira = data5.toUTCString();
+  }
+  //var nuevaCookie = nombre + "=" + valorCookie + ";expires=" + expira
+  var nuevaCookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira;
+  //document.cookie = nuevaCookie;
+  //document.cookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira
+  var urlactual = location.href;
+  //if (window.localStorage) {
+  if (urlactual == urllocal) {
+    try {
+      localStorage.setItem(nombre, valorCookie);
+    }
+    finally {
+      //console.log(localStorage.getItem(nombre));
+    }
+  } else {
+    document.cookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira;
+  }
+}
+
+function obtenerCookie(clave) {
+  //if (window.localStorage) {
+    //var ca = localStorage.getItem(clave);
+    //var name = clave;
+  //} else {
+    var name = clave + "=";
+    var ca = document.cookie.split(';');
+  //}
+  //console.log(name)
+  for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') c = c.substring(1);
+      if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+  }
+  return "";
+}
+
+//creamos funcion para comprobar si existe la cookie
+function comprobarCookie(clave) {
+  var clave = obtenerCookie(clave);
+  //console.log(clave);
+  if (clave != "") {
+      // La cookie existe.
+      //console.log(clave)
+      if (clave != null) {
+        return
+        //divApi2.value = clave;
+      } else {
+        //divApi2.focus();
+      }
+      //console.log(clave);
+  } else {
+      // La cookie no existe.
+      //divApi2.focus();
+  }
+}
+
+//creamos funcion para comprobar si existe la cookie en localstorage
+function comprobarCookieLocal(clave) {
+  //if (divApi2.value != 'No necesita ApiKey') {
+    var clave = localStorage.getItem(clave);
+    if (clave != "") {
+      // La cookie existe.
+      //console.log(clave)
+      if (clave != null) {
+        //divApi2.value = clave;
+        return
+      } else {
+        //divApi2.focus();
+      }
+    } else {
+      //divApi2.focus();
+      return "";
+    }
+  //}
+}
 
 //creamos la funcion para ordenar alfabeticamente la lista de ciudades
 function OrdenaCiudades() {
