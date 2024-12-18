@@ -1,8 +1,12 @@
+// script.js
+/*jshint sub:true*/
 //creamos variables
 let latitud = '';
 let longitud = '';
 const apikey = "f17c12b6195a949f2f8ea7408141cfa4";
 const apikey2 = '7cb84f0ad047435f9d802656240412';
+//const url = "https://api.weatherstack.com/current?access_key=" + apikey + "&query=";
+//const url = "https://api.weatherstack.com/forecast?access_key=" + apikey + "&query=";
 const url = "https://api.weatherstack.com/current?access_key=" + apikey + "&query=";
 
 let resp = '';
@@ -23,6 +27,7 @@ let current3 = '';
 let current4 = '';
 let country = '';
 let region = '';
+//let temp = '';
 const weather = document.querySelector('#weather-card');
 const ciudad = document.querySelector('#ciudad');
 const temp = document.querySelector('#temp');
@@ -39,8 +44,11 @@ const ciudades = document.querySelector("#ciudades");
 const facebook = document.querySelector('#facebook');
 const instagram = document.querySelector('#instagram');
 const github = document.querySelector('#github');
+//const ciudades2 = document.querySelector("#ciudades").value;
+//const contenido = $("#provincia option:selected").text();
 const btnobtener = document.querySelector('#btnObtener');
-//let btnobtener2 = document.getElementById('btnObtener');
+let btnobtener2 = document.getElementById('btnObtener');
+const btnlimpiar = document.querySelector('#btnLimpiar');
 const btnactualizar = document.querySelector('#btnActualizar');
 const mainform = document.querySelector('#MainForm');
 let descFinal = '';
@@ -49,6 +57,7 @@ let descFinal2 = '';
 let descFinal3 = '';
 let descFinal4 = '';
 let descFinal5 = '';
+//const descFinalx = [];
 let descFinalx = [];
 let isday = '';
 let fechas = [];
@@ -236,6 +245,7 @@ function OrdenaCiudades() {
   });
   setTimeout(function() {
     try {
+      //$("#ciudades").empty().append(my_options).selectpicker("refresh");
       $("#ciudades").empty().append(my_options);
     }
     finally {
@@ -243,6 +253,7 @@ function OrdenaCiudades() {
         document.querySelector("#ciudades").selectedIndex = 0;
       } else if (apilocal.checked) {
         document.querySelector("#ciudades").selectedIndex = 1;
+        //obtener();
       }
     }
   }, 100);
@@ -256,6 +267,9 @@ function Titulos() {
   if (btnactualizar.onmouseover) {
     btnactualizar.title = 'Actualizar información del clima';
   }
+  //if (btnlimpiar.onmouseover) {
+    //btnlimpiar.title = 'Limpiar datos de los campos';
+  //}
   if (provincia.onmouseover) {
     provincia.title = 'Seleccione una provincia de la lista!';
   }
@@ -272,41 +286,76 @@ function Titulos() {
     github.title = 'Ir a los repositorios de GitHub de Taylor Bundy';
   }
 }
+
+// Objeto con provincias y sus ciudades
+const provinciasCiudades = {
+    "Buenos Aires": ["La Plata", "Mar del Plata", "Bahía Blanca", "Tandil", "Necochea"],
+    "CABA": ["Buenos Aires", "Balvanera", "Recoleta", "Villa del Parque", "Almagro"],
+    "Córdoba": ["Córdoba Capital", "Villa María", "Río Cuarto", "Carlos Paz", "Alta Gracia"],
+    "Mendoza": ["Mendoza Capital", "San Rafael", "Godoy Cruz", "Maipú", "Luján de Cuyo"],
+    "Misiones": ["Posadas"],
+    "Neuquen": ["Neuquen", "San Martín de los Andes", "Villa La Angostura",
+        "Plottier", "Centenario", "Cutral Có", "Zapala", "Rincón de los Sauces", "Chos Malal",
+        "Junín de los Andes", "Añelo", "El Huecú", "Loncopué", "Picún Leufú", "Piedra del Águila",
+        "Villa Pehuenia", "Alumine", "Caviahue-Copahue", "Andacollo", "Las Lajas", "Huinganco",
+        "Senillosa", "Vista Alegre", "Mariano Moreno", "Bajada del Agrio", "Villa Traful", "Los Miches",
+        "Varvarco", "Manzano Amargo", "Taquimilán", "Las Ovejas", "Tricao Malal", "Barrancas",
+        "Buta Ranquil", "Paso Aguerre", "Chorriaca", "Pilo Lil", "El Sauce", "Nahueve",
+        "Villa del Puente Picún Leufú", ],
+    "Tucumán": ["San Miguel de Tucumán", "Concepción", "Tafí Viejo", "Monteros", "Yerba Buena"]
+    // Agrega más provincias y ciudades según sea necesario
+};
+
 // Obtener los elementos del DOM
 //const provinciasSelect = document.getElementById("provincias");
-//const provinciasSelect = document.getElementById("provincias");
+const provinciasSelect = document.getElementById("provincias");
 const ciudadesSelect = document.getElementById("ciudades");
 
-const despejado = 'Imagenes/despejado.svg';
-const sol = 'Imagenes/sol.svg';
-const nochedespejada = 'Imagenes/noche.svg';
-const nubladoparcial = 'Imagenes/nublado-parcial.svg';
-const nochenubladoparcial = 'Imagenes/nublado-parcial-noche.svg';
-const nublado = 'Imagenes/nublado.svg';
-const nochenublada = 'Imagenes/nublado-noche.svg';
-const lluviahelada = 'Imagenes/lluvia-helada.svg';
-const nochelluviahelada = 'Imagenes/lluvia-helada-noche.svg';
-const llovizna = 'Imagenes/llovizna.svg';
-const nochellovizna = 'Imagenes/llovizna-noche.svg';
-const lluviadispersa = 'Imagenes/lluvia-dispersa.svg';
-const nochelluviadispersa = 'Imagenes/lluvia-dispersa-noche.svg';
-const lluvialigera = 'Imagenes/lluvia-ligera.svg';
-const nochelluvialigera = 'Imagenes/lluvia-ligera-noche.svg';
-const neblinoso = 'Imagenes/neblinoso.svg';
-const neblina = 'Imagenes/neblina.svg';
-const nocheneblina = 'Imagenes/neblina-noche.svg';
-const nievemoderada = 'Imagenes/nieve-moderada.svg';
-const nochenievemoderada = 'Imagenes/nieve-moderada-noche.svg';
-const nieveheavy = 'Imagenes/nieve-heavy.svg';
-const nochenieveheavy = 'Imagenes/nieve-heavy-noche.svg';
-const nieveliviana = 'Imagenes/nieve-liviana.svg';
-const nochenieveliviana = 'Imagenes/nieve-liviana-noche.svg';
-const tormenta = 'Imagenes/tormenta.svg';
-const tormentas = 'Imagenes/tormentas-2.svg';
-const nochetormenta = 'Imagenes/tormenta-noche.svg';
-const formaciontormenta = 'Imagenes/formacion-tormenta.svg';
-//const nievemoderada2 = 'Imagenes/nieve-moderada-2.gif';
+// Función para actualizar el menú de ciudades según la provincia seleccionada
+function actualizarCiudades() {
+    // Obtener la provincia seleccionada
+    const provinciaSeleccionada = provinciasSelect.value;
 
+    // Limpiar las opciones anteriores de ciudades
+    ciudadesSelect.innerHTML = '<option value="">Seleccione una ciudad</option>';
+
+    // Habilitar el select de ciudades solo si hay una provincia seleccionada
+    if (provinciaSeleccionada) {
+        // Obtener las ciudades correspondientes a la provincia seleccionada
+        const ciudades = provinciasCiudades[provinciaSeleccionada];
+
+        // Agregar las ciudades al select de ciudades
+        ciudades.forEach(ciudad => {
+            const option = document.createElement("option");
+            option.value = ciudad;
+            option.textContent = ciudad;
+            ciudadesSelect.appendChild(option);
+        });
+
+        // Habilitar el select de ciudades
+        ciudadesSelect.disabled = false;
+    } else {
+        // Si no se selecciona una provincia, deshabilitar el select de ciudades
+        ciudadesSelect.disabled = true;
+    }
+}
+
+const sol = 'Imagenes/sol.gif';
+const nubladoparcial = 'Imagenes/nublado-parcial.gif';
+const lluviadispersa = 'Imagenes/lluvia-dispersa.gif';
+const llovizna = 'Imagenes/llovizna.gif';
+const nievemoderada = 'Imagenes/nieve-moderada.gif';
+const nieveliviana = 'Imagenes/nieve-liviana.gif';
+const nievemoderada2 = 'Imagenes/nieve-moderada-2.gif';
+const nieveheavy = 'Imagenes/nieve-heavy.gif';
+const nublado = 'Imagenes/nublado.gif';
+const neblinoso = 'Imagenes/neblinoso.gif';
+const neblina = 'Imagenes/neblina.gif';
+const nochedespejada = 'Imagenes/noche.gif';
+const nochenublada = 'Imagenes/noche-nublada.gif';
+const nochellovizna = 'Imagenes/llovizna.gif';
+const tormenta = 'Imagenes/tormenta.gif';
+const formaciontormenta = 'Imagenes/formaciontormenta.gif';
 let salesol = '';
 let puestasol = '';
 let presi = '';
@@ -320,6 +369,7 @@ let tempC = '';
 //creamos funcion que actualiza datos
 function Actualiza() {
   if (ciudad.textContent.includes('Lat')) {
+    //obtener2();
     obtener2(latitud, longitud);
   } else {
     obtener();
@@ -329,18 +379,30 @@ function Actualiza() {
 //creamos la funcion para obtener los datos del clima
 async function obtener() {
   var sinacento = ciudadesSelect.value;
+  //const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&num_of_days=1&includelocation=yes&showlocaltime=yes&lang=es';
   const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ',' + torta.value + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
+  //const url1 = 'https://api.worldweatheronline.com/premium/v1/past-weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&date=today&enddate=tomorrow&includelocation=no&lang=es';
+  //const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + '&format=json&date=today&enddate=tomorrow&includelocation=no&lang=es';
+  //const url2 = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
   try {
     if (apiweb.checked) {
       origen = url + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + ', Argentina';
+      //resp = await fetch(origen);
+      //data = await resp.json();
+      //locations = await data["location"];
+      //current = await data["current"];
+      //resp2 = await fetch(url1);
+      //data2 = await resp2.json();
       data2 = await obtenerDatosApi(url1);
       locations2 = await data2["data"];
+      //console.log(locations2);
       current2 = await locations2["current_condition"][0];
       current3 = await locations2["weather"];
-      console.log(data2);
+      //console.log(url1);
     } else if (apilocal.checked) {
       document.querySelector("#ciudades").selectedIndex = 1;
       origen = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
+      //origen = 'https://api.weather.com/v2/pws/observations/7day?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
       origen1 = 'https://api.weather.com/v2/pws/dailysummary/7day?stationId=IALUMI7&format=json&units=m&apiKey=a781055ea4224f7b81055ea4224f7b78';
       origen2 = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=-38.88,-71.19&format=json&units=m&language=es-AR&apiKey=a781055ea4224f7b81055ea4224f7b78';
       const options = {
@@ -354,8 +416,6 @@ async function obtener() {
       data2 = await resp2.json();
       resp3 = await fetch(origen2, options);
       data3 = await resp3.json();
-      console.log(data2);
-      console.log(data3);
       locations = await data["observations"][0];
       current = await locations["imperial"]["temp"];
       locations2 = data2["summaries"];
@@ -408,7 +468,7 @@ async function obtener() {
       }
 
       const horasPuestaSol = convertirAMinutos(puestasol, 'puestasol');
-      //const horasSaleSol = convertirAMinutos(salesol, 'salesol');
+      const horasSaleSol = convertirAMinutos(salesol, 'salesol');
 
       if (Horas > horasPuestaSol || Horas == 0 || Horas < 6) {
         isday = 'no';
@@ -426,6 +486,18 @@ async function obtener() {
         alltemp[f-1].textContent = current3[f].maxtempC + '°C';
         alltemp[f-1].title = 'Se esperan temperaturas máximas de ' + current3[f].maxtempC + '°C y minimas de ' + current3[f].mintempC + '°C';
       }
+
+      /* tempd1.textContent = current3[1].maxtempC + '°C';
+      tempd2.textContent = current3[2].maxtempC + '°C';
+      tempd3.textContent = current3[3].maxtempC + '°C';
+      tempd4.textContent = current3[4].maxtempC + '°C';
+      tempd5.textContent = current3[5].maxtempC + '°C'; */
+
+      /* tempd1.textContent = current3[1].avgtempC + '°C';
+      tempd2.textContent = current3[2].avgtempC + '°C';
+      tempd3.textContent = current3[3].avgtempC + '°C';
+      tempd4.textContent = current3[4].avgtempC + '°C';
+      tempd5.textContent = current3[5].avgtempC + '°C'; */
 
       IconosWeb();
       IconosWebExt();
@@ -485,6 +557,12 @@ async function obtener() {
       precip.textContent = 'Precipitación: ' + locations["imperial"].precipTotal + ' mm';
       wind.textContent = 'Viento: ' + locations["imperial"].windSpeed + ' kmph';
 
+      //for (let c = 1; c < locations4.length; c++) {
+        //console.log(locations4[c]);
+      //}
+      //for (let c = 1; c < current3.length; c++) {
+        //console.log(current3[c].toString());
+      //}
       let narr1 = '';
       for (let f = 1; f < current3.length; f++) {
         let tempfinal = current3[f];
@@ -492,6 +570,18 @@ async function obtener() {
         alltemp[f-1].textContent = tempfinal + '°C';
         alltemp[f -1].title = narr1.replace(' C', '°C');
       }
+
+      /* tempd1.textContent = current3[1] + '°C';
+      tempd2.textContent = current3[2] + '°C';
+      tempd3.textContent = current3[3] + '°C';
+      tempd4.textContent = current3[4] + '°C';
+      tempd5.textContent = current3[5] + '°C'; */
+
+      /* tempd1.textContent = current3[1].avgtempC + '°C';
+      tempd2.textContent = current3[2].avgtempC + '°C';
+      tempd3.textContent = current3[3].avgtempC + '°C';
+      tempd4.textContent = current3[4].avgtempC + '°C';
+      tempd5.textContent = current3[5].avgtempC + '°C'; */
       IconosLocal();
       IconosLocalExt();
     }
@@ -500,13 +590,25 @@ async function obtener() {
 
 //creamos la funcion para obtener los datos del clima posicion actual
 async function obtener2(lat, long) {
+  //origen = url + ciudadesSelect.value + ', ' + provinciasSelect.value + ', Argentina';
   origen = url + lat + ',' + long;
+  //console.log(lat);
+  //const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + lat + ',' + long + '&format=json&num_of_days=1&mca=no&fx=no&includelocation=no&showlocaltime=yes&lang=es';
+  //const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + lat + ',' + long + '&format=json&num_of_days=6&mca=no&fx=no&includelocation=no&showlocaltime=yes&lang=es';
   const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + lat + ',' + long + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
   try {
+    //resp = await fetch(origen);
+    //data = await resp.json();
+    //resp2 = await fetch(url1);
+    //data2 = await resp2.json();
     data2 = await obtenerDatosApi(url1);
+    //console.log(data2);
+    //locations = await data["location"];
+    //current = await data["current"];
     locations2 = await data2["data"];
     current2 = await locations2["current_condition"][0];
     current3 = await locations2["weather"];
+    //console.log(data2);
   }
   finally {
     weather.style.display = 'block';
@@ -535,8 +637,20 @@ async function obtener2(lat, long) {
       alltemp[f-1].title = 'Se esperan temperaturas máximas de ' + current3[f].maxtempC + '°C y minimas de ' + current3[f].mintempC + '°C';
     }
 
+    /* tempd1.textContent = current3[1].maxtempC + '°C';
+    tempd2.textContent = current3[2].maxtempC + '°C';
+    tempd3.textContent = current3[3].maxtempC + '°C';
+    tempd4.textContent = current3[4].maxtempC + '°C';
+    tempd5.textContent = current3[5].maxtempC + '°C'; */
+
     IconosWeb();
     IconosWebExt();
+
+    /* tempd1.textContent = current3[1].avgtempC + '°C';
+    tempd2.textContent = current3[2].avgtempC + '°C';
+    tempd3.textContent = current3[3].avgtempC + '°C';
+    tempd4.textContent = current3[4].avgtempC + '°C';
+    tempd5.textContent = current3[5].avgtempC + '°C'; */
 
     salesol = current3[0]["astronomy"][0].sunrise;
     if (salesol.includes('AM')) {
@@ -578,16 +692,12 @@ function IconosWebExt() {
         toto = llovizna;
       } else if (item == 'Patchy light drizzle' || item == 'Light rain') {
         toto = lluviadispersa;
-      } else if (item == 'Light rain shower') {
-        toto = lluvialigera;
-      } else if (item == 'Moderate rain') {
-        toto = lluvialigera;
       } else if (item == 'Moderate snow') {
         toto = nievemoderada;
       } else if (item == 'Light snow') {
         toto = nieveliviana;
       } else if (item == 'Moderate or heavy snow showers') {
-        toto = nievemoderada;
+        toto = nievemoderada2;
       } else if (item == 'Heavy snow') {
         toto = nieveheavy;
       } else if (item == 'Freezing fog') {
@@ -611,10 +721,6 @@ function IconosLocalExt() {
         toto = nubladoparcial;
       } else if (item == 'Tormentas eléctricas' || item == 'Tormentas') {
         toto = tormenta;
-      } else if (item == 'Nubes matinales que se disiparán por la tarde' || item == 'Nuboso') {
-        toto = nublado;
-      } else if (item == 'Chubascos matinales') {
-        toto = lluvialigera;
       }
     }
     allicon[index].src = toto;
@@ -625,24 +731,8 @@ function IconosWeb() {
   if (descFinal == 'Clear') {
     if (isday == 'si') {
       icon.src = sol;
-      //icon.style.backgroundImage = 'url(' + despejado + ')';
-      //icon.style.backgroundPosition = -74 + 'px';
-      //icon.style.backgroundSize = 'cover';
-      //icon.style.backgroundRepeat = 'no-repeat';
     } else {
       icon.src = nochedespejada;
-      //try {
-        //icon.src = '';
-        //document.getElementById('icon').style.clear;
-      //}
-      //finally {
-        //icon.style.backgroundImage = 'url(' + tormentas + ')';
-      //}
-      //document.getElementById('icon').style.backgroundImage = 'url(' + tormentas + ')';
-      //icon.src = tormentas;
-      //icon.style.backgroundPosition = -74 + 'px';
-      //icon.style.backgroundSize = 'cover';
-      //icon.style.backgroundRepeat = 'no-repeat';
     }
     description.textContent = 'Despejado';
   } else if (descFinal == 'Sunny') {
@@ -652,67 +742,36 @@ function IconosWeb() {
     if (isday == 'si') {
       icon.src = nubladoparcial;
     } else {
-      icon.src = nochenubladoparcial;
+      icon.src = nochenublada;
     }
     description.textContent = 'Parcialmente nublado';
   } else if (descFinal == 'Patchy rain nearby') {
     if (isday == 'si') {
       icon.src = lluviadispersa;
     } else {
-      icon.src = nochelluviadispersa;
+      icon.src = nochellovizna;
     }
     description.textContent = 'Lluvia dispersa cerca';
   } else if (descFinal == 'Patchy light drizzle') {
     icon.src = lluviadispersa;
     description.textContent = 'Llovizna ligera dispersa';
   } else if (descFinal == 'Light drizzle') {
-    if (isday == 'si') {
-      icon.src = llovizna;
-    } else {
-      icon.src = nochellovizna;
-    }
+    icon.src = llovizna;
     description.textContent = 'Llovizna';
   } else if (descFinal == 'Light rain') {
-    if (isday == 'si') {
-      icon.src = lluviadispersa;
-    } else {
-      icon.src = nochelluviadispersa;
-    }
+    icon.src = lluviadispersa;
     description.textContent = 'Llovizna ligera';
-  } else if (descFinal == 'Light rain shower' || descFinal == 'Moderate rain') {
-    if (isday == 'si') {
-      icon.src = lluvialigera;
-    } else {
-      icon.src = nochelluvialigera;
-    }
-    description.textContent = 'Lluvia ligera';
   } else if (descFinal == 'Moderate snow') {
-    if (isday == 'si') {
-      icon.src = nievemoderada;
-    } else {
-      icon.src = nochenievemoderada;
-    }
+    icon.src = nievemoderada;
     description.textContent = 'Nieve moderada';
   } else if (descFinal == 'Light snow' || descFinal == 'Patchy light snow') {
-    if (isday == 'si') {
-      icon.src = nieveliviana;
-    } else {
-      icon.src = nochenieveliviana;
-    }
+    icon.src = nieveliviana;
     description.textContent = 'Nieve ligera';
   } else if (descFinal == 'Moderate or heavy snow showers') {
-    if (isday == 'si') {
-      icon.src = nievemoderada;
-    } else {
-      icon.src = nochenievemoderada;
-    }
+    icon.src = nievemoderada2;
     description.textContent = 'Chubascos de nieve moderados o fuertes';
   } else if (descFinal == 'Heavy snow') {
-    if (isday == 'si') {
-      icon.src = nieveheavy;
-    } else {
-      icon.src = nochenieveheavy;
-    }
+    icon.src = nieveheavy;
     description.textContent = 'Mucha nieve';
   } else if (descFinal == 'Overcast' || descFinal == 'Cloudy') {
     icon.src = nublado;
@@ -721,19 +780,8 @@ function IconosWeb() {
     icon.src = neblinoso;
     description.textContent = 'Niebla helada';
   } else if (descFinal == 'Mist') {
-    if (isday == 'si') {
-      icon.src = neblina;
-    } else {
-      icon.src = nocheneblina;
-    }
+    icon.src = neblina;
     description.textContent = 'Neblina';
-  } else if (descFinal == 'Light freezing rain') {
-    if (isday == 'si') {
-      icon.src = lluviahelada;
-    } else {
-      icon.src = nochelluviahelada;
-    }
-    description.textContent = 'Lluvia ligera y helada';
   }
 }
 
@@ -759,34 +807,10 @@ function IconosLocal() {
       icon.src = nochenublada;
     }
     description.textContent = 'Cielo prácticamente cubierto';
-  } else if (descFinal == 'Nuboso') {
-    if (isday == 'si') {
-      icon.src = nublado;
-    } else {
-      icon.src = nochenublada;
-    }
-    description.textContent = 'Nuboso';
   } else if (descFinal == 'Formación de tormentas eléctricas por la tarde') {
     icon.src = formaciontormenta;
   } else if (descFinal == 'Tormentas eléctricas') {
-    if (isday == 'si') {
-      icon.src = tormenta;
-    } else {
-      icon.src = nochetormenta;
-    }
-  } else if (descFinal == 'Nubes matinales que se disiparán por la tarde') {
-    if (isday == 'si') {
-      icon.src = nublado;
-    } else {
-      icon.src = nochenublada;
-    }
-    description.textContent = 'Nubes matinales que se disiparán por la tarde';
-  } else if (descFinal == 'Chubascos matinales') {
-    if (isday == 'si') {
-      icon.src = lluvialigera;
-    } else {
-      icon.src = nochelluvialigera;
-    }
+    icon.src = tormenta;
   }
 }
 
@@ -820,6 +844,15 @@ for (let i = 0; i < allicon.length; i++) {
 };
 
 function TitulosIcon() {
+  /* try {
+    descFinalx = [];
+  }
+  finally {
+    for (let c = 1; c < current3.length; c++) {
+      descFinalx.push(current3[c].hourly[0]["weatherDesc"][0].value.trim());
+    }
+  } */
+
   descFinalx.forEach((item, index) => {
     for (x = 0; x < allicon.length; x++) {
       if (item == 'Clear') {
@@ -848,10 +881,6 @@ function TitulosIcon() {
         toto = 'Niebla helada';
       } else if (item == 'Mist') {
         toto = 'Neblina';
-      } else if (item == 'Moderate rain') {
-        toto = 'Lluvia moderada';
-      } else if (item == 'Light rain shower') {
-        toto = 'Ligeras precipitaciones';
       }
     }
     allicon[index].title = toto;

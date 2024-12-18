@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 64">
+  <defs>
+    <linearGradient id="a" x1="26.75" y1="22.91" x2="37.25" y2="41.09" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1, 0, 0, 1, 14.336121, -9.500183)">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="0.45" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="gradient-1" x1="21.92" y1="18.75" x2="38.52" y2="47.52" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1, 0, 0, 1, 79.500809, 0.001696)">
+      <stop offset="0" stop-color="#86c3db"/>
+      <stop offset="0.45" stop-color="#86c3db"/>
+      <stop offset="1" stop-color="#5eafcf"/>
+      <animateTransform attributeName="gradientTransform" type="rotate" values="5 32 32; -15 32 32; 5 32 32" dur="10s" repeatCount="indefinite"/>
+    </linearGradient>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, -23.836002, 9.5)">
+    <circle cx="46.336" cy="22.5" r="10.5" stroke="#f8af18" stroke-miterlimit="10" stroke-width="0.5" fill="url(#a)"/>
+    <path d="M 46.336 6.21 L 46.336 0 M 46.336 45 L 46.336 38.79 M 57.856 10.98 L 62.246 6.59 M 30.426 38.41 L 34.816 34.02 M 34.816 11.02 L 30.426 6.63 M 62.246 38.41 L 57.856 34.02 M 30.046 22.5 L 23.836 22.5 M 68.836 22.5 L 62.626 22.5" fill="none" stroke="#fbbf24" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3">
+      <animateTransform attributeName="transform" dur="45s" values="0 32 32; 360 32 32" repeatCount="indefinite" type="rotate"/>
+    </path>
+  </g>
+  <path d="M 126.16 36.202 C 116.955 36.269 109.441 28.857 109.38 19.652 C 109.384 18.251 109.569 16.856 109.93 15.502 C 97.279 17.075 91.075 31.752 98.762 41.922 C 106.449 52.091 122.262 50.125 127.226 38.384 C 127.539 37.643 127.798 36.881 128 36.102 C 127.39 36.162 126.78 36.202 126.16 36.202 Z" stroke="#72b9d5" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" fill="url(#gradient-1)">
+    <animateTransform attributeName="transform" type="rotate" values="-5 32 32; 15 32 32; -5 32 32" dur="10s" repeatCount="indefinite"/>
+  </path>
+</svg>

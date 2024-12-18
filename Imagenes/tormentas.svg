@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 64" xmlns:bx="https://boxy-svg.com">
+  <defs>
+    <linearGradient id="a" x1="16.5" y1="19.67" x2="21.5" y2="28.33" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fbbf24"/>
+      <stop offset="0.45" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="b" x1="22.56" y1="21.96" x2="39.2" y2="50.8" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f3f7fe"/>
+      <stop offset="0.45" stop-color="#f3f7fe"/>
+      <stop offset="1" stop-color="#deeafb"/>
+    </linearGradient>
+    <linearGradient id="c" x1="26.74" y1="37.88" x2="35.76" y2="53.52" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f7b23b"/>
+      <stop offset="0.45" stop-color="#f7b23b"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <bx:guide x="58.567595680293266" y="24.278211185532847" angle="0"/>
+    <linearGradient id="gradient-1" x1="13.58" y1="15.57" x2="24.15" y2="33.87" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1, 0, 0, 1, 21.323032, 23.440319)">
+      <stop offset="0" stop-color="#86c3db"/>
+      <stop offset="0.45" stop-color="#86c3db"/>
+      <stop offset="1" stop-color="#5eafcf"/>
+      <animateTransform attributeName="gradientTransform" type="rotate" values="10 19.22 24.293; -10 19.22 24.293; 10 19.22 24.293" dur="10s" repeatCount="indefinite"/>
+    </linearGradient>
+    <linearGradient id="gradient-2" x1="22.56" y1="21.96" x2="39.2" y2="50.8" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1, 0, 0, 1, 21.323032, 23.440319)">
+      <stop offset="0" stop-color="#f3f7fe"/>
+      <stop offset="0.45" stop-color="#f3f7fe"/>
+      <stop offset="1" stop-color="#deeafb"/>
+    </linearGradient>
+    <linearGradient id="gradient-3" x1="26.74" y1="37.88" x2="35.76" y2="53.52" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1, 0, 0, 1, 21.323032, 23.440319)">
+      <stop offset="0" stop-color="#f7b23b"/>
+      <stop offset="0.45" stop-color="#f7b23b"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <g transform="matrix(1, 0, 0, 1, -7.499999, -3.25)">
+    <g>
+      <g>
+        <circle cx="19" cy="24" r="5" stroke="#f8af18" stroke-miterlimit="10" stroke-width="0.5" fill="url(#a)"/>
+        <path d="M19,15.67V12.5m0,23V32.33m5.89-14.22,2.24-2.24M10.87,32.13l2.24-2.24m0-11.78-2.24-2.24M27.13,32.13l-2.24-2.24M7.5,24h3.17M30.5,24H27.33" fill="none" stroke="#fbbf24" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2">
+          <animateTransform attributeName="transform" type="rotate" values="0 19 24; 360 19 24" dur="45s" repeatCount="indefinite"/>
+        </path>
+      </g>
+      <path d="M46.5,31.5l-.32,0a10.49,10.49,0,0,0-19.11-8,7,7,0,0,0-10.57,6,7.21,7.21,0,0,0,.1,1.14A7.5,7.5,0,0,0,18,45.5a4.19,4.19,0,0,0,.5,0v0h28a7,7,0,0,0,0-14Z" stroke="#e6effc" stroke-miterlimit="10" stroke-width="0.5" fill="url(#b)"/>
+    </g>
+    <polygon points="30 36 26 48 30 48 28 58 38 44 32 44 36 36 30 36" stroke="#f6a823" stroke-miterlimit="10" stroke-width="0.5" fill="url(#c)">
+      <animate attributeName="opacity" values="1; 1; 1; 1; 1; 1; 0.1; 1; 0.1; 1; 1; 0.1; 1; 0.1; 1" dur="2s" repeatCount="indefinite"/>
+    </polygon>
+  </g>
+  <g transform="matrix(1, 0, 0, 1, 53.166367, -27.190001)">
+    <g>
+      <path d="M 50.653 50.12 C 44.793 50.159 40.012 45.44 39.973 39.58 C 39.977 38.689 40.095 37.802 40.323 36.94 C 32.271 37.94 28.321 47.281 33.213 53.755 C 38.104 60.228 48.169 58.978 51.329 51.505 C 51.529 51.033 51.694 50.547 51.823 50.05 C 51.434 50.094 51.044 50.117 50.653 50.12 Z" stroke="#72b9d5" stroke-linecap="round" stroke-linejoin="round" stroke-width="0.5" fill="url(#gradient-1)">
+        <animateTransform attributeName="transform" type="rotate" values="-10 19.22 24.293; 10 19.22 24.293; -10 19.22 24.293" dur="10s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 67.823 54.94 L 67.503 54.94 C 69.406 47.093 62.101 40.127 54.353 42.403 C 51.875 43.13 49.753 44.746 48.393 46.94 C 43.758 44.192 37.886 47.492 37.823 52.88 C 37.823 52.9 37.823 52.92 37.823 52.94 C 37.826 53.322 37.86 53.704 37.923 54.08 C 32.257 55.19 29.918 62.017 33.712 66.369 C 35.126 67.992 37.17 68.928 39.323 68.94 C 39.49 68.95 39.657 68.95 39.823 68.94 L 67.823 68.94 C 73.212 68.94 76.58 63.107 73.885 58.44 C 72.635 56.275 70.324 54.94 67.823 54.94 Z" stroke="#e6effc" stroke-miterlimit="10" stroke-width="0.5" fill="url(#gradient-2)"/>
+    </g>
+    <polygon points="51.323 59.44 47.323 71.44 51.323 71.44 49.323 81.44 59.323 67.44 53.323 67.44 57.323 59.44 51.323 59.44" stroke="#f6a823" stroke-miterlimit="10" stroke-width="0.5" fill="url(#gradient-3)">
+      <animate attributeName="opacity" values="1; 1; 1; 1; 1; 1; 0.1; 1; 0.1; 1; 1; 0.1; 1; 0.1; 1" dur="2s" repeatCount="indefinite"/>
+    </polygon>
+  </g>
+</svg>

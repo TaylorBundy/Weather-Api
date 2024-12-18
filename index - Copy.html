@@ -4,8 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="Imagenes/favicon.ico">
+        <!-- <link rel="stylesheet" media="screen" href="styles.css"> -->
         <link rel="stylesheet" href="styles.css">
-        <title>Pronóstico del clima de Argentina</title>
+        <!-- <link rel="stylesheet" media="screen and (min-width: 501px) and (max-width: 1154px)" href="styles2.css" /> -->
+        <!-- <link rel="stylesheet" href="responsive_styles.css"> -->
+        <title>Provincias y Ciudades de Argentina</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
         <script type="text/javascript" src="script.js" defer></script>
     </head>
@@ -20,9 +23,39 @@
                 </div>
                 <div class="api">
                     <input type="radio" id="ApiLocal" class="radio" name="radio" onclick="obtener()"><span>Clima Local</span>
+                    <!-- <input type="radio" id="ApiLocal1" class="radio" name="radio"><span>Clima Local</span> -->
                 </div>
             </div>
             <form action="#" method="POST">
+                <label for="provincias">Provincias:</label>
+                <!-- <select name="provincias" id="provincias" style="visibility: collapse; display: none;">
+                    <option value="">Seleccione una provincia</option>
+                    <option value="Buenos Aires">Buenos Aires</option>
+                    <option value="Catamarca">Catamarca</option>
+                    <option value="Chaco">Chaco</option>
+                    <option value="Chubut">Chubut</option>
+                    <option value="CABA">Ciudad Autónoma de Buenos Aires (CABA)</option>
+                    <option value="Córdoba">Córdoba</option>
+                    <option value="Corrientes">Corrientes</option>
+                    <option value="Entre Ríos">Entre Ríos</option>
+                    <option value="Formosa">Formosa</option>
+                    <option value="Jujuy">Jujuy</option>
+                    <option value="La Pampa">La Pampa</option>
+                    <option value="La Rioja">La Rioja</option>
+                    <option value="Mendoza">Mendoza</option>
+                    <option value="Misiones">Misiones</option>
+                    <option value="Neuquen">Neuquén</option>
+                    <option value="Río Negro">Río Negro</option>
+                    <option value="Salta">Salta</option>
+                    <option value="San Juan">San Juan</option>
+                    <option value="San Luis">San Luis</option>
+                    <option value="Santa Cruz">Santa Cruz</option>
+                    <option value="Santa Fe">Santa Fe</option>
+                    <option value="Santiago del Estero">Santiago del Estero</option>
+                    <option value="Tierra del Fuego">Tierra del Fuego</option>
+                    <option value="Tucumán">Tucumán</option>
+                </select> -->
+
                 <select id="provincia" onmouseover="Titulos()">
                     <option selected="true" value="">Seleccionar una Provincia</option>
                     <option value="06">Buenos Aires</option>
@@ -56,10 +89,11 @@
                 </select>
             </form>
             <input id="xlocalidad" style="visibility: collapse; display: none;">
+            <!-- <div class="weather-card" id="weather-card" style="display: block;"> -->
             <div class="weather-card" id="weather-card">
                 <h2 id="ciudad">Esperando Ciudad!</h2>
                 <div class="current-weather">
-                    <img src="Imagenes/sun-loading.svg" id="icon">
+                    <img src="Imagenes/sol-loading.gif" id="icon">
                     <p class="description" id="description">Descripción</p>
                 </div>
                 <div class="details">
@@ -70,46 +104,64 @@
                     <p id="humidity">Humedad: </p>
                     <p class="temp" id="temp">Temp</p>
                 </div>
+                <!-- <div class="forecast" style="visibility: collapse; display: none;"> -->
                 <div class="forecast" id="AllForecast">
                     <div class="day">
                         <p id="Dia1" class="DayForecast">Día</p>
-                        <img src="Imagenes/sun-loading.svg" alt="Cloudy" id="Icon-D1" class="IconForecast">
+                        <!-- <img src="https://cdn-icons-png.flaticon.com/512/1163/1163657.png" alt="Cloudy" id="Icon-D1"> -->
+                        <img src="Imagenes/sol-loading.gif" alt="Cloudy" id="Icon-D1" class="IconForecast">
                         <p class="temp" id="Temp-D1">Temp</p>
                     </div>
                     <div class="day">
                         <p id="Dia2" class="DayForecast">Día</p>
-                        <img src="Imagenes/sun-loading.svg" alt="Sunny" id="Icon-D2" class="IconForecast">
+                        <!-- <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Sunny" id="Icon-D2"> -->
+                        <img src="Imagenes/sol-loading.gif" alt="Sunny" id="Icon-D2" class="IconForecast">
                         <p class="temp" id="Temp-D2">Temp</p>
                     </div>
                     <div class="day">
                         <p id="Dia3" class="DayForecast">Día</p>
-                        <img src="Imagenes/sun-loading.svg" alt="Sunny" id="Icon-D3" class="IconForecast">
+                        <!-- <img src="https://cdn-icons-png.flaticon.com/512/869/869869.png" alt="Sunny" id="Icon-D3"> -->
+                        <img src="Imagenes/sol-loading.gif" alt="Sunny" id="Icon-D3" class="IconForecast">
                         <p class="temp" id="Temp-D3">Temp</p>
                     </div>
                     <div class="day">
                         <p id="Dia4" class="DayForecast">Día</p>
-                        <img src="Imagenes/sun-loading.svg" alt="Cloudy" id="Icon-D4" class="IconForecast">
+                        <!-- <img src="https://cdn-icons-png.flaticon.com/512/1163/1163657.png" alt="Cloudy" id="Icon-D4"> -->
+                        <img src="Imagenes/sol-loading.gif" alt="Cloudy" id="Icon-D4" class="IconForecast">
                         <p class="temp" id="Temp-D4">Temp</p>
                     </div>
                     <div class="day">
                         <p id="Dia5" class="DayForecast">Día</p>
-                        <img src="Imagenes/sun-loading.svg" alt="Cloudy" id="Icon-D5" class="IconForecast">
+                        <!-- <img src="https://cdn-icons-png.flaticon.com/512/1163/1163657.png" alt="Cloudy" id="Icon-D5"> -->
+                        <img src="Imagenes/sol-loading.gif" alt="Cloudy" id="Icon-D5" class="IconForecast">
                         <p class="temp" id="Temp-D5">Temp</p>
                     </div>
                 </div>
             </div>
+        <!-- </main> -->
+        <!-- <main id="ButtonMain"> -->
+        <!-- <div class="button-container"> -->
             <div class="BotonClass">
                 <div class="btn">
                     <button id="btnObtener" class="btn1" onclick="obtener()" onmouseover="Titulos()">
                         <span>Obtener</span>
                     </button>
                 </div>
+                <!-- <div class="btn">
+                    <button id="btnLimpiar" class="btn1" onmouseover="Titulos()">
+                        <span>Limpiar</span>
+                    </button>
+                </div> -->
                 <div class="btn">
                     <button id="btnActualizar" class="btn1" onclick="Actualiza()" onmouseover="Titulos()">
                         <span>Actualizar</span>
                     </button>
                 </div>
+                <!-- <button id="btnObtener" class="btn" onclick="obtener()" onmouseover="Titulos()"><span>Obtener</span></button> -->
+                <!-- <button id="btnLimpiar" class="btn" onmouseover="Titulos()"><span>Limpiar</span></button> -->
+                <!-- <button id="btnActualizar" class="btn" onclick="obtener()" onmouseover="Titulos()"><span>Actualizar</span></button> -->
             </div>
+        <!-- </div> -->
         </main>
         <footer>
             <p>&copy; 2024 Proyecto Web - Weather API - By Taylor Bundy</p>
@@ -122,13 +174,17 @@
         <script type="text/javascript">
             var respuesta;
             $.ajax({
+                //url: 'getLocalidades.php',
                 url: 'loc.json',
                 type:  'get',
                 beforeSend: function () {
                         //console.log("enviando");
                 },
                 success:  function (response) {
+                    //$("#resultado").html(response);
+                    //agregarItems(response);
                     respuesta=response;
+                    //console.log(respuesta);
                 }
             });
 
@@ -153,6 +209,7 @@
                                 }
                             })
                         } else {
+                            //console.log(conte);
                         }
                         $("#localidades").html($option);
                         $("#ciudades").html($option);

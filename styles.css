@@ -177,7 +177,9 @@ footer p {
 
 .weather-card {
     /* background-color: #34495E; */
-    background: #16394c;
+    /* background: #16394c; */
+    background: #122b38cb;
+    background-color: #184157;
     border-radius: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 80%;
@@ -211,20 +213,13 @@ footer p {
     left: 80px;
 }
 .weather-card .current-weather img {
-    /* width: 50px; */
-    /* width: 140px; */
-    width: 100px;
-    /* height: 50px; */
-    /* height: 137px; */
-    /* height: auto; */
-    height: 100px;
+    /* width: 100px; */
+    /* height: 100px; */
+    width: 64px;
+    height: 64px;
     /* margin-bottom: 15px; */
     background-size: cover;
-    /* left: 800px; */
     text-align: left;
-    /* border: 1px solid red; */
-    /* justify-content: left; */
-
 }
 .weather-card .current-weather .temp {
     font-size: 48px;
@@ -300,8 +295,10 @@ footer p {
 }
 
 .weather-card .forecast .day img {
-    width: 30px;
-    height: 30px;
+    /* width: 30px; */
+    width: 50px;
+    /* height: 30px; */
+    height: 50px;
 }
 
 .weather-card .forecast .day .temp {
@@ -541,6 +538,10 @@ footer p {
         width: 70px;
         height: 70px;
     }
+    .weather-card .forecast .day img {
+        width: 30px;
+        height: 30px;
+    }
 
     .weather-card .forecast {
         justify-content: center;
@@ -723,6 +724,11 @@ footer p {
         left: -125px;
     }
 
+    .weather-card .forecast .day img {
+        width: 30px;
+        height: 30px;
+    }
+
     /* .button-container { */
         /* display: inline-flex; */
         /* display: grid; */
@@ -839,6 +845,10 @@ footer p {
     .weather-card .current-weather .description {
         margin: 2px;
     }
+    .weather-card .forecast .day img {
+        width: 30px;
+        height: 30px;
+    }
     .weather-card .forecast {
         justify-content: center;
         gap: 10px;
@@ -858,6 +868,10 @@ footer p {
         left: -130px;
         top: -90px;
     }
+    .weather-card .forecast .day img {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 @media only screen and (width: 501px) and (height: 1154px) {
@@ -868,6 +882,10 @@ footer p {
         font-size: 20px;
         left: -150px;
         top: -80px;
+    }
+    .weather-card .forecast .day img {
+        width: 30px;
+        height: 30px;
     }
 }
 
@@ -889,6 +907,10 @@ footer p {
         justify-content: center;
         gap: 10px;
         margin: 0;
+    }
+    .weather-card .forecast .day img {
+        width: 30px;
+        height: 30px;
     }
     select, option {
         height: 30px;
@@ -912,6 +934,10 @@ footer p {
         left: -130px;
         top: -90px;
     }
+    .weather-card .forecast .day img {
+        width: 30px;
+        height: 30px;
+    }
     select, option {
         height: 30px;
         font-size: 12px;
@@ -933,6 +959,10 @@ footer p {
         font-size: 20px;
         left: -150px;
         top: -80px;
+    }
+    .weather-card .forecast .day img {
+        width: 30px;
+        height: 30px;
     }
     select, option {
         height: 30px;
