@@ -330,14 +330,14 @@ function Actualiza() {
 //creamos la funcion para obtener los datos del clima
 async function obtener() {
   var sinacento = ciudadesSelect.value;
-  const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ',' + torta.value + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
+  const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ',' + torta.value + ',Argentina' + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
   try {
     if (apiweb.checked) {
       origen = url + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + ', Argentina';
       data2 = await obtenerDatosApi(url1);
       locations2 = await data2["data"];
       current2 = await locations2["current_condition"][0];
-      current3 = await locations2["weather"];      
+      current3 = await locations2["weather"];
     } else if (apilocal.checked) {
       document.querySelector("#ciudades").selectedIndex = 1;
       origen = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
@@ -353,7 +353,7 @@ async function obtener() {
       resp2 = await fetch(origen1, options);
       data2 = await resp2.json();
       resp3 = await fetch(origen2, options);
-      data3 = await resp3.json();      
+      data3 = await resp3.json();
       locations = await data["observations"][0];
       current = await locations["imperial"]["temp"];
       locations2 = data2["summaries"];
@@ -366,7 +366,9 @@ async function obtener() {
   finally {
     if (apiweb.checked) {
       weather.style.display = 'block';
-      ciudad.textContent = locations2["request"][0].query;
+      let ciudadinfo = locations2["request"][0].query.split(',');
+      //ciudad.textContent = locations2["request"][0].query;
+      ciudad.textContent = ciudadinfo[0] + ', ' + torta.value + ', ' + ciudadinfo[1];
       temp.textContent = current2.temp_C + '°C';
       temp.title = 'Sensación Térmica: ' + current2.FeelsLikeC + '°C';
       description.textContent = current2["weatherDesc"][0].value;
