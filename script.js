@@ -69,12 +69,13 @@ const icond2 = document.querySelector('#Icon-D2');
 const icond3 = document.querySelector('#Icon-D3');
 const icond4 = document.querySelector('#Icon-D4');
 const icond5 = document.querySelector('#Icon-D5');
-
+const imgsocial = document.querySelectorAll('#AllImgSocial a img.imgsocial');
 const allicon = document.querySelectorAll('img.IconForecast');
 const allday = document.querySelectorAll('p.DayForecast');
 const alltemp = document.querySelectorAll('#AllForecast .day p.temp');
 let toto = '';
 let days = [];
+const favicon = document.querySelector('#favicon');
 
 //definimos constante plataforma
 const plataforma = navigator.userAgent;
@@ -239,7 +240,7 @@ window.onload = function() {
         dia4.textContent = days[4].slice(0,3);
         dia5.textContent = days[5].slice(0,3);
       }
-      setTimeout(function() {        
+      setTimeout(function() {
         for (let i = 0; i < nombre_cookie2.length; i++) {
           nombre_cookie.push(nombre_cookie2[i].name);
           valorCookie.push(nombre_cookie2[i].src);
@@ -247,51 +248,59 @@ window.onload = function() {
         }
         //nombre_cookie = facebook.id;
         var urlactual = location.href;
-        for (let f = 0; f < nombre_cookie.length; f++) {
+        //for (let f = 0; f < nombre_cookie.length; f++) {
         if (urllocal == urlactual) {
           //comprobarCookieLocal(nombre_cookie[f]);
           //var puto = comprobarCookieLocal(nombre_cookie);
           //console.log(puto);
+          for (let f = 0; f < nombre_cookie.length; f++) {
           if (comprobarCookieLocal(nombre_cookie[f])) {
             //
-            facebook.src = valorCookie[f];
-            instagram.src = valorCookie[f];
-            github.src = valorCookie[f];
-            icon.src = valorCookie[f];
+            //facebook.src = valorCookie[f];
+            //instagram.src = valorCookie[f];
+            //github.src = valorCookie[f];
+            //icon.src = valorCookie[f];
           } else {
             crearCookie(nombre_cookie[f], valorCookie[f], expira);
           }
-        } else {
-          if (comprobarCookie(nombre_cookie[f])) {
-            //
-            facebook.src = valorCookie[f];
-            instagram.src = valorCookie[f];
-            github.src = valorCookie[f];
-            icon.src = valorCookie[f];
-          } else {
-            crearCookie(nombre_cookie[f], valorCookie[f], expira);
           }
-          //comprobarCookie(nombre_cookie[f]);
+        } else {          
+          let toto1 = '';
+          valorCookie.forEach((item, index) => {            
+            toto1 = item;            
+            for (let i = 0; i < imgsocial.length; i++) {
+              if (comprobarCookie(nombre_cookie[index])) {
+                if (index == i) {
+                  imgsocial[index].src = toto1;
+                }
+                if (nombre_cookie[index] == 'icon') {
+                  icon.src = item;
+                }
+              } else {
+                crearCookie(nombre_cookie[index], item, expira);
+              }
+            }
+          })
         }
-        }
-      }, 500);    
+        //}
+      }, 500);
     }
 };
 
 if (document.readyState) {
   try {
-    for (let i = 0; i < nombre_cookie2.length; i++) {
-      nombre_cookie.push(nombre_cookie2[i].name);
-      valorCookie.push(nombre_cookie2[i].src);
-    }
+    //for (let i = 0; i < nombre_cookie2.length; i++) {
+      //nombre_cookie.push(nombre_cookie2[i].name);
+      //valorCookie.push(nombre_cookie2[i].src);
+    //}
     //nombre_cookie = facebook.id;
     //valorCookie = facebook.src;
   }
   finally {
-    for (let i = 0; i < nombre_cookie.length; i++) {
+    //for (let i = 0; i < nombre_cookie.length; i++) {
       //crearCookie(nombre_cookie[i], valorCookie[i], expira);
-    }
-    
+    //}
+
   }
 }
 
@@ -313,6 +322,7 @@ function crearCookie(nombre, valorCookie, dias) {
       //console.log(localStorage.getItem(nombre));
     }
   } else {
+    //localStorage.setItem(nombre, valorCookie);
     document.cookie = nombre + "=" + valorCookie + ";" + "expires" + "=" + expira;
   }
 }
@@ -323,9 +333,10 @@ function obtenerCookie(clave) {
     //var name = clave;
   //} else {
     var name = clave + "=";
+    //console.log(name);
     var ca = document.cookie.split(';');
   //}
-  //console.log(name)
+  //console.log(name);
   for (var i = 0; i < ca.length; i++) {
       var c = ca[i];
       while (c.charAt(0) == ' ') c = c.substring(1);
@@ -333,7 +344,7 @@ function obtenerCookie(clave) {
   }
   return "";
 }
-
+let claves = [];
 //creamos funcion para comprobar si existe la cookie
 function comprobarCookie(clave) {
   var clave = obtenerCookie(clave);
@@ -342,7 +353,82 @@ function comprobarCookie(clave) {
       // La cookie existe.
       //console.log(clave)
       if (clave != null) {
-        return
+        return clave
+        //claves.push(clave.split(';'));
+        //let claves1 = clave.split(';');
+        //console.log(claves1);
+        //claves.forEach((item, index) => {
+          //console.log(clave);
+          //console.log(index);
+          //imgsocial[index].src = item[0];
+        //});
+        //for (let s = 0; s < claves1.length; s++) {
+          //claves.push(claves1[s]);
+          //console.log(claves[s]);
+        //}
+        //nombre_cookie.forEach((item, index) => {
+          //for (let f = 0; f < nombre_cookie.length; f++) {
+            //console.log(nombre_cookie[f]);
+            //for (x = 0; x < imgsocial.length; x++) {
+              //item = imgsocial[x].id;
+              //console.log(imgsocial[x].id);
+              //console.log(nombre_cookie);
+              //console.log(imgsocial[0]);
+            //}
+            //imgsocial[nombre_cookie[f]].src = clave;
+          //}
+
+          //facebook.src = clave;
+          //console.log(facebook.id);
+          //imgsocial[item].src = clave;
+
+          //console.log(index);
+          //console.log(imgsocial[item].id);
+
+        //})
+
+        //claves1.forEach((item, index) => {
+          //imgsocial[0].src = item;
+          //console.log(item);
+
+        //})
+
+        //claves1.forEach((item, index) => {
+        //for (let f = 0; f < nombre_cookie.length; f++) {
+          //if (item.includes('facebook')) {
+            //toto = claves[item];
+            //console.log(item);
+            //console.log(f);
+          //}
+          //console.log(item);
+          //console.log(claves[index]);
+          //imgsocial[f].src = claves[f];
+        //}
+        //})
+
+        //imgsocial.forEach((item, index) => {
+          //for (x = 0; x < imgsocial.length; x++) {
+            //console.log(x);
+          //}
+          //imgsocial.src = claves[index];
+          //imgsocial[x].src = 'http://127.0.0.1:8000/Proyectos/Weather/Imagenes/facebook.svg';
+
+          //console.log(imgsocial[index]);
+          //}
+          //console.log(claves);
+        //});
+        //for (var g = 0; g < clave.length; g++) {
+          //console.log(clave);
+
+          //facebook.src = clave;
+        //}
+
+        //facebook.src = clave;
+        //instagram.src = clave;
+        //github.src = clave;
+        //icon.src = clave;
+        //return clave
+        //return true
         //divApi2.value = clave;
       } else {
         //divApi2.focus();
@@ -362,8 +448,9 @@ function comprobarCookieLocal(clave) {
       // La cookie existe.
       //console.log(clave)
       if (clave != null) {
+        console.log(clave);
         //divApi2.value = clave;
-        return
+        //return clave
       } else {
         //divApi2.focus();
       }
