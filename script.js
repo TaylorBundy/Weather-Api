@@ -293,6 +293,7 @@ const nochelluviadispersa = 'Imagenes/lluvia-dispersa-noche.svg';
 const lluvialigera = 'Imagenes/lluvia-ligera.svg';
 const nochelluvialigera = 'Imagenes/lluvia-ligera-noche.svg';
 const neblinoso = 'Imagenes/neblinoso.svg';
+const nocheneblinoso = 'Imagenes/neblinoso-noche.svg';
 const neblina = 'Imagenes/neblina.svg';
 const nocheneblina = 'Imagenes/neblina-noche.svg';
 const nievemoderada = 'Imagenes/nieve-moderada.svg';
@@ -726,7 +727,11 @@ function IconosWeb() {
     }
     description.textContent = 'Nublado';
   } else if (descFinal == 'Freezing fog') {
-    icon.src = neblinoso;
+    if (isday == 'si') {
+      icon.src = neblinoso;
+    } else {
+      icon.src = nocheneblinoso;
+    }
     description.textContent = 'Niebla helada';
   } else if (descFinal == 'Mist') {
     if (isday == 'si') {
