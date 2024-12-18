@@ -127,6 +127,7 @@ function success(pos) {
 
 function error(err) {
   console.warn(`ERROR(${err.code}): ${err.message}`);
+  ciudad.textContent = 'Acceso denegado a ubicación!';
 }
 
 let HourTime = '';
@@ -137,7 +138,11 @@ let isDayTime = '';
 window.onload = function() {
     try {
       document.querySelector('#provincia').selectedIndex = 0;
-      navigator.geolocation.getCurrentPosition(success, error, options);
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success, error, options);
+      } else {
+        ciudad.textContent = 'Acceso denegado a ubicación!';
+      }
     }
     finally {
       let DiaActual = 0;
