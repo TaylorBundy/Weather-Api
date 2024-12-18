@@ -337,8 +337,7 @@ async function obtener() {
       data2 = await obtenerDatosApi(url1);
       locations2 = await data2["data"];
       current2 = await locations2["current_condition"][0];
-      current3 = await locations2["weather"];
-      console.log(data2);
+      current3 = await locations2["weather"];      
     } else if (apilocal.checked) {
       document.querySelector("#ciudades").selectedIndex = 1;
       origen = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
@@ -354,9 +353,7 @@ async function obtener() {
       resp2 = await fetch(origen1, options);
       data2 = await resp2.json();
       resp3 = await fetch(origen2, options);
-      data3 = await resp3.json();
-      console.log(data2);
-      console.log(data3);
+      data3 = await resp3.json();      
       locations = await data["observations"][0];
       current = await locations["imperial"]["temp"];
       locations2 = data2["summaries"];

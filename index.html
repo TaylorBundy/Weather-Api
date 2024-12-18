@@ -16,17 +16,16 @@
             <h1>Seleccione una Provincia y Ciudad de Argentina</h1>
         </header>
         <main id="MainForm">
-            <div class="RadioClass">
-                <label for="radio">Inputs</label>
-                <div class="api">
-                    <input type="radio" id="ApiWeb" class="radio" name="radio" checked="checked" onclick="obtener()"><span>Web</span>
+            <div class="RadioClass">                
+                <div class="api">                    
+                    <input type="radio" aria-label="ApiWeb" id="ApiWeb" class="radio" name="radio" checked="checked" onclick="obtener()"><span>Web</span>
                 </div>
                 <div class="api">
-                    <input type="radio" id="ApiLocal" class="radio" name="radio" onclick="obtener()"><span>Clima Local</span>
+                    <input type="radio" aria-label="ApiLocal" id="ApiLocal" class="radio" name="radio" onclick="obtener()"><span>Clima Local</span>
                 </div>
             </div>
             <form action="#" method="POST">
-                <label for="provincia">Provincia:</label>
+                <label for="provincia">Provincias:</label>
                 <select id="provincia" onmouseover="Titulos()">
                     <option selected="true" value="">Seleccionar una Provincia</option>
                     <option value="06">Buenos Aires</option>
