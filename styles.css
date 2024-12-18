@@ -355,10 +355,13 @@ footer p {
 .radio {
     cursor: pointer;
     margin-top: -1px;
+    vertical-align: middle;
 }
 
 .api label {
     cursor: pointer;
+    margin: 0;
+    font-size: 14px;
 }
 
 .ImgSocial {
