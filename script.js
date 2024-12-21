@@ -1,3 +1,5 @@
+//const { event } = require("jquery");
+
 //creamos variables
 let latitud = '';
 let longitud = '';
@@ -52,6 +54,8 @@ let descFinal5 = '';
 let descFinalx = [];
 let isday = '';
 let fechas = [];
+const apiradio = document.querySelector('#apiRadio');
+const apiradio1 = document.querySelector('#apiRadio1');
 const apiweb = document.querySelector('#ApiWeb');
 const apilocal = document.querySelector('#ApiLocal');
 const dia1 = document.querySelector('#Dia1');
@@ -122,7 +126,28 @@ function success(pos) {
       longitud = crd.longitude;
   }
   finally {
-      obtener2(latitud, longitud);
+    setTimeout(function() {
+      try {
+        obtener2(latitud, longitud);
+      } finally {
+        for (let i = 0; i < allicon.length; i++) {
+          if (plataforma.includes('Win')) {
+            allicon[i].addEventListener("mouseover", function() {
+              TitulosIcon2();
+            });
+          } else if (plataforma.includes('Android')) {
+            //allicon[i].addEventListener("click", function() {
+              //if (apiweb.checked) {
+                //TitulosIcon();
+              //} else if (apilocal.checked){
+                //TitulosIconLocal();
+              //}
+            //});
+          }
+        };
+        //TitulosIcon2();
+      }
+    }, 500);
   }
 }
 
@@ -240,6 +265,7 @@ window.onload = function() {
         dia4.textContent = days[4].slice(0,3);
         dia5.textContent = days[5].slice(0,3);
       }
+      
       setTimeout(function() {
         for (let i = 0; i < nombre_cookie2.length; i++) {
           nombre_cookie.push(nombre_cookie2[i].name);
@@ -253,34 +279,34 @@ window.onload = function() {
           //comprobarCookieLocal(nombre_cookie[f]);
           //var puto = comprobarCookieLocal(nombre_cookie);
           //console.log(puto);
-          for (let f = 0; f < nombre_cookie.length; f++) {
-          if (comprobarCookieLocal(nombre_cookie[f])) {
+          //for (let f = 0; f < nombre_cookie.length; f++) {
+          //if (comprobarCookieLocal(nombre_cookie[f])) {
             //
             //facebook.src = valorCookie[f];
             //instagram.src = valorCookie[f];
             //github.src = valorCookie[f];
             //icon.src = valorCookie[f];
-          } else {
-            crearCookie(nombre_cookie[f], valorCookie[f], expira);
-          }
-          }
-        } else {          
-          let toto1 = '';
-          valorCookie.forEach((item, index) => {            
-            toto1 = item;            
-            for (let i = 0; i < imgsocial.length; i++) {
-              if (comprobarCookie(nombre_cookie[index])) {
-                if (index == i) {
-                  imgsocial[index].src = toto1;
-                }
-                if (nombre_cookie[index] == 'icon') {
-                  icon.src = item;
-                }
-              } else {
-                crearCookie(nombre_cookie[index], item, expira);
-              }
-            }
-          })
+          //} else {
+            //crearCookie(nombre_cookie[f], valorCookie[f], expira);
+          //}
+          //}
+        } else {
+          //let toto1 = '';
+          //valorCookie.forEach((item, index) => {
+            //toto1 = item;
+            //for (let i = 0; i < imgsocial.length; i++) {
+              //if (comprobarCookie(nombre_cookie[index])) {
+                //if (index == i) {
+                  //imgsocial[index].src = toto1;
+                //}
+                //if (nombre_cookie[index] == 'icon') {
+                  //icon.src = item;
+                //}
+              //} else {
+                //crearCookie(nombre_cookie[index], item, expira);
+              //}
+            //}
+          //})
         }
         //}
       }, 500);
@@ -483,8 +509,18 @@ function OrdenaCiudades() {
   }, 100);
 }
 
+apiradio.addEventListener("mouseover", Titulos());
+
 //creamos funcion para poner titulos
 function Titulos() {
+  if (apiweb.onmouseover) {
+    apiweb.title = 'Muestra información del clima según que Ciudad y Provincia seleccionemos';
+    apiradio.title = 'Muestra información del clima según que Ciudad y Provincia seleccionemos';
+  }
+  if (apilocal.onmouseover) {
+    apilocal.title = 'Muestra información del clima obtenida de la central metereológica de Villa Pehuenia';
+    apiradio1.title = 'Muestra información del clima obtenida de la central metereológica de Villa Pehuenia';
+  }
   if (btnobtener.onmouseover) {
     btnobtener.title = 'Obtener información del clima';
   }
@@ -572,7 +608,7 @@ async function obtener() {
       data2 = await obtenerDatosApi(url1);
       locations2 = await data2["data"];
       current2 = await locations2["current_condition"][0];
-      current3 = await locations2["weather"];
+      current3 = await locations2["weather"];      
     } else if (apilocal.checked) {
       document.querySelector("#ciudades").selectedIndex = 1;
       origen = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
@@ -588,7 +624,7 @@ async function obtener() {
       resp2 = await fetch(origen1, options);
       data2 = await resp2.json();
       resp3 = await fetch(origen2, options);
-      data3 = await resp3.json();
+      data3 = await resp3.json();      
       locations = await data["observations"][0];
       current = await locations["imperial"]["temp"];
       locations2 = data2["summaries"];
@@ -664,6 +700,8 @@ async function obtener() {
 
       IconosWeb();
       IconosWebExt();
+      TitulosIcon2();
+      TitulosFechas();
 
     } else if (apilocal.checked) {
       weather.style.display = 'block';
@@ -729,6 +767,8 @@ async function obtener() {
       }
       IconosLocal();
       IconosLocalExt();
+      TitulosIcon2();
+      TitulosFechas2();
     }
   }
 }
@@ -741,7 +781,7 @@ async function obtener2(lat, long) {
     data2 = await obtenerDatosApi(url1);
     locations2 = await data2["data"];
     current2 = await locations2["current_condition"][0];
-    current3 = await locations2["weather"];
+    current3 = await locations2["weather"];    
   }
   finally {
     weather.style.display = 'block';
@@ -788,6 +828,8 @@ async function obtener2(lat, long) {
     } else if (minutosHora1 < minutosHora2) {
       isday = 'no';
     }
+    TitulosIcon2();
+    TitulosFechas();
   }
 }
 
@@ -1054,21 +1096,68 @@ for (let i = 0; i < allicon.length; i++) {
   if (plataforma.includes('Win')) {
     allicon[i].addEventListener("mouseover", function() {
       if (apiweb.checked) {
-        TitulosIcon();
+        //TitulosIcon();
       } else if (apilocal.checked){
-        TitulosIconLocal();
+        //TitulosIconLocal();
       }
     });
   } else if (plataforma.includes('Android')) {
-    allicon[i].addEventListener("click", function() {
-      if (apiweb.checked) {
-        TitulosIcon();
-      } else if (apilocal.checked){
-        TitulosIconLocal();
-      }
-    });
+    //allicon[i].addEventListener("click", function() {
+      //if (apiweb.checked) {
+        //TitulosIcon();
+      //} else if (apilocal.checked){
+        //TitulosIconLocal();
+      //}
+    //});
   }
 };
+
+function TitulosIcon2() {
+  if (apiweb.checked) {
+    descFinalx.forEach((item, index) => {
+      for (x = 0; x < allicon.length; x++) {
+        if (item == 'Clear') {
+          toto = 'Despejado';
+        } else if (item == 'Sunny') {
+          toto = 'Soleado';
+        } else if (item == 'Cloudy' || item == 'Overcast') {
+          toto = 'Nublado';
+        } else if (item == 'Partly Cloudy' || item == 'Partly cloudy') {
+          toto = 'Parcialmente nublado';
+        } else if (item == 'Patchy rain nearby') {
+          toto = 'Lluvia moderada a intervalos';
+        } else if (item == 'Patchy light drizzle' || item == 'Light rain') {
+          toto = 'Llovizna ligera dispersa';
+        } else if (item == 'Light drizzle') {
+          toto = 'Llovizna';
+        } else if (item == 'Moderate snow') {
+          toto = 'Nieve moderada';
+        } else if (item == 'Light snow') {
+          toto = 'Nieve ligera';
+        } else if (item == 'Moderate or heavy snow showers') {
+          toto = 'Chubascos de nieve moderados o fuertes';
+        } else if (item == 'Heavy snow') {
+          toto = 'Mucha nieve';
+        } else if (item == 'Freezing fog') {
+          toto = 'Niebla helada';
+        } else if (item == 'Mist') {
+          toto = 'Neblina';
+        } else if (item == 'Moderate rain') {
+          toto = 'Lluvia moderada';
+        } else if (item == 'Light rain shower') {
+          toto = 'Ligeras precipitaciones';
+        }
+      }
+      allicon[index].title = toto;
+      allicon[index].alt = toto;       
+    })
+  } else if (apilocal.checked) {
+    descFinalx.forEach((item, index) => {
+      allicon[index].title = item;
+      allicon[index].alt = item;    
+    })
+  }
+}
 
 function TitulosIcon() {
   descFinalx.forEach((item, index) => {
@@ -1106,23 +1195,23 @@ function TitulosIcon() {
       }
     }
     allicon[index].title = toto;
-    allicon[index].alt = toto;
+    allicon[index].alt = toto;       
   })
 }
 
 function TitulosIconLocal() {
   descFinalx.forEach((item, index) => {
     allicon[index].title = item;
-    allicon[index].alt = item;
+    allicon[index].alt = item;    
   })
 }
 
 for (let i = 0; i < allday.length; i++) {
   allday[i].addEventListener("mouseover", function() {
     if (apiweb.checked) {
-      TitulosFechas();
+      //TitulosFechas();
     } else if (apilocal.checked) {
-      TitulosFechas2();
+      //TitulosFechas2();
     }
   });
 };
@@ -1177,4 +1266,69 @@ function TitulosFechas2() {
       }
     }
   })
+}
+
+if (plataforma.includes('Android')) {
+  const allDayPressed = e => {
+    //console.log(e.target.id);  // Get ID of Clicked Element
+    var tiituulo = document.getElementById(e.target.id);
+    //console.log(tiituulo.title);
+    alert(tiituulo.title);
+  }
+
+  for (let days of allday) {
+    days.addEventListener("click", allDayPressed);
+  }
+
+  const iconPressed = e => {
+    //console.log(e.target.id);  // Get ID of Clicked Element
+    var tiituulo = document.getElementById(e.target.id);
+    //console.log(tiituulo.title);
+    alert(tiituulo.title);
+  }
+
+  for (let icons of allicon) {
+    icons.addEventListener("click", iconPressed);
+  }
+
+  const allTempPressed = e => {
+    //console.log(e.target.id);  // Get ID of Clicked Element
+    var tiituulo = document.getElementById(e.target.id);
+    //console.log(tiituulo.title);
+    alert(tiituulo.title);
+  }
+
+  for (let temps of alltemp) {
+    temps.addEventListener("click", allTempPressed);
+  }
+
+  const tempPressed = e => {
+    //console.log(e.target.id);  // Get ID of Clicked Element
+    var tiituulo = document.getElementById(e.target.id);
+    //console.log(tiituulo.title);
+    alert(tiituulo.title);
+  }
+
+  temp.addEventListener("click", tempPressed);
+}
+
+//for (x = 0; x < allicon.length; x++) {
+  //allicon[x].addEventListener("click", function() {
+    //if (apiweb.checked) {
+      //TitulosIcon();
+    //} else if (apilocal.checked){
+      //TitulosIconLocal();
+    //}
+    //clickandroid(this.index);
+  //}); 
+//}
+
+function clickandroid(id) {
+  if (plataforma.includes('Win')) {
+    //
+  } else if (plataforma.includes('Android')) {
+    //console.log(id);
+    //console.log(toto);
+    //console.log(allicon[id]);
+  }
 }

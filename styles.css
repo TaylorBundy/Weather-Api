@@ -440,7 +440,8 @@ footer p {
     }
 
     select, option {
-        height: 30px;
+        /* height: 30px; */
+        height: auto;
         font-size: 12px;
     }
 
@@ -544,6 +545,7 @@ footer p {
     .weather-card .forecast .day img {
         width: 30px;
         height: 30px;
+        cursor: pointer;
     }
 
     .weather-card .forecast {
