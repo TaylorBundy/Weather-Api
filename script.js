@@ -1274,7 +1274,7 @@ if (plataforma.includes('Android')) {
     var tiituulo = document.getElementById(e.target.id);
     //console.log(tiituulo.title);
     alert(tiituulo.title);
-  }
+  };
 
   for (let days of allday) {
     days.addEventListener("click", allDayPressed);
@@ -1284,8 +1284,8 @@ if (plataforma.includes('Android')) {
     //console.log(e.target.id);  // Get ID of Clicked Element
     var tiituulo = document.getElementById(e.target.id);
     //console.log(tiituulo.title);
-    alert(tiituulo.title);
-  }
+    alert(tiituulo.title);    
+  };
 
   for (let icons of allicon) {
     icons.addEventListener("click", iconPressed);
@@ -1296,7 +1296,7 @@ if (plataforma.includes('Android')) {
     var tiituulo = document.getElementById(e.target.id);
     //console.log(tiituulo.title);
     alert(tiituulo.title);
-  }
+  };
 
   for (let temps of alltemp) {
     temps.addEventListener("click", allTempPressed);
@@ -1307,7 +1307,7 @@ if (plataforma.includes('Android')) {
     var tiituulo = document.getElementById(e.target.id);
     //console.log(tiituulo.title);
     alert(tiituulo.title);
-  }
+  };
 
   temp.addEventListener("click", tempPressed);
 }
