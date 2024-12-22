@@ -80,6 +80,7 @@ const alltemp = document.querySelectorAll('#AllForecast .day p.temp');
 let toto = '';
 let days = [];
 const favicon = document.querySelector('#favicon');
+const main = document.getElementById('MainForm');
 
 //definimos constante plataforma
 const plataforma = navigator.userAgent;
@@ -1312,6 +1313,21 @@ if (plataforma.includes('Android')) {
   temp.addEventListener("click", tempPressed);
 }
 
+const mainPressed = e => {
+  //console.log(e.target.id);  // Get ID of Clicked Element
+  var tiituulo = document.getElementById(e.target.id);
+  let jajajaja = document.getElementById('MainForm');
+  let color = jajajaja.style.backgroundColor;
+  var style=window.getComputedStyle(jajajaja,"");
+  //let color = document.getElementById('MainForm').style.backgroundColor;
+  //jajajaja.style.backgroundColor = "red";
+  console.log(jajajaja.style.backgroundColor);
+  console.log(style.getPropertyValue("background-color"));
+  //alert(tiituulo.title);
+};
+//document.getElementById('MainForm').style.backgroundImage = 'url(' + tormentas + ')';
+main.addEventListener("click", mainPressed);
+
 //for (x = 0; x < allicon.length; x++) {
   //allicon[x].addEventListener("click", function() {
     //if (apiweb.checked) {
@@ -1331,4 +1347,45 @@ function clickandroid(id) {
     //console.log(toto);
     //console.log(allicon[id]);
   }
+}
+
+// Hide Header on on scroll down
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var navbarHeight = $('header').outerHeight();
+
+$(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = $(this).scrollTop();
+    
+    // Make sure they scroll more than delta
+    if(Math.abs(lastScrollTop - st) <= delta)
+        return;
+    
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (st > lastScrollTop && st > navbarHeight){
+        // Scroll Down
+        $('header').removeClass('nav-down').addClass('nav-up');
+        $('main').removeClass('nav-down2').addClass('nav-up2');
+    } else {
+        // Scroll Up
+        if(st + $(window).height() < $(document).height()) {
+            $('header').removeClass('nav-up').addClass('nav-down');
+            $('main').removeClass('nav-up2').addClass('nav-down2');
+        }
+    }
+    
+    lastScrollTop = st;
 }

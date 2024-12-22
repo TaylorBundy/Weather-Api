@@ -13,42 +13,80 @@ body {
 }
 
 header {
-    width: 80%;
+    /* width: 80%; */
+    width: 100%;
     height: auto;
-    background-color: #3a8dff;
+    /* height: 48px; */
+    /* background-color: #3a8dff; */
+    /* background-color: #333; */
     color: white;
     border-radius: 5px;
+    /* position: relative; */
+    position: fixed;
+    /* width: 100%; */
+    /* height: 40px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
     /* padding: 20px; */
     /* padding: 10px 20px 10px 20px; */
-    position: relative;
+    /* position: relative; */
     text-align: center;
     /* display: flex; */
-    /* top: 0; */
+    top: 0;
     margin-left: auto;
     margin-right: auto;
+    /* transition: top 0.2s ease-in-out; */
+    /* transition: transform 0.3s ease, visibility 0s 0.3s linear; */
+    transition: top 1.5s ease-in;
+    /* transition: opacity 0.8s ease; */
+}
+
+.nav-up {
+    /* position: fixed; */
+    top: -38px;
+    opacity: 0.5;
+    /* transition: opacity 0.8s ease; */
+}
+
+.nav-up2 {
+    margin-top: 0;
+    /* transition: margin-top 2s ease-in; */
 }
 
 h1 {
+    background-color: #333;
+    width: 80%;
+    /* height: 48px; */
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+    border-radius: 5px;
     font-size: 1em;
-    margin: 5px;
-    padding: 10px;
+    /* margin: 5px; */
+    margin: 0;
+    padding: 10px 0 10px 0;
 }
 
 main {
     /* padding: 20px; */
     /* padding: 10px 20px 10px 20px; */
+    padding: 5px 0 5px 0;
     width: 80%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    background-color: white;
+    /* margin-top: 5px; */
+    margin-top: 43px;
+    /* margin-bottom: 5px; */
+    /* background-color: white; */
+    background-color: #333;
     /* background-color: red; */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     /* display: flex; */
     /* display: grid; */
     justify-content: center;
+    transition: margin-top 1.5s ease-in;
 }
 
 form {
@@ -59,6 +97,7 @@ form {
     margin-left: auto;
     margin-right: auto;
     border: 4px solid #608094;
+    background-color: #99b4d1;
     border-radius: 5px;
     /* flex-grow: 1; */
 }
@@ -67,7 +106,8 @@ label {
     font-size: 16px;
     /* margin-bottom: 8px; */
     /* margin: 5px 5px 8px 5px; */
-    margin: 5px;
+    /* margin: 5px; */
+    margin: 5px 5px 0 5px;
 }
 
 select {
@@ -121,6 +161,7 @@ footer p {
     margin-right: auto;
     /* align-items: center; */
     border: 4px solid #608094;
+    background-color: #99b4d1;
     border-radius: 5px;
 }
 
@@ -336,14 +377,21 @@ footer p {
   /* } */
 
 .api {
+    border-radius: 5px;
+    border: 1px solid blue;
     display: flex;
-    margin: 10px 0 10px 0;
+    width: 150px;
+    /* flex-grow: 1; */
+    margin: 5px 0 5px 0;
+    padding: 5px;
+    background-image: linear-gradient(150deg, #9500ff, #09f, #00ddff);
 }
 
 .RadioClass {
     width: 80%;
-    margin-top: 5px;
-    margin-bottom: 0;
+    /* margin-top: 5px; */
+    /* margin-bottom: 0; */
+    background-color: #99b4d1;
     border: 4px solid #608094;
     border-radius: 5px;
     display: flex;
@@ -362,6 +410,7 @@ footer p {
     cursor: pointer;
     margin: 0;
     font-size: 14px;
+    width: 150px;
 }
 
 .ImgSocial {
@@ -390,13 +439,15 @@ footer p {
     }
 
     header {
-        background-color: #3a8cffa4;
+        /* background-color: #3a8cffa4; */
+        background-color: #333;
+        /* background-color: #333333d3; */
         border-radius: 5px;
-        margin-top: 5px;
+        /* margin-top: 5px; */
         margin-bottom: 0;
         transition: 0.4s;
         height: auto;
-        padding: 5px 0 5px 0;
+        /* padding: 5px 0 5px 0; */
         width: 100%;
         /* position: fixed; */
     }
@@ -404,18 +455,21 @@ footer p {
     h1 {
         font-size: 14px;
         word-wrap: break-word;
-        margin: 5px;
+        /* margin: 5px; */
+        width: auto;
     }
 
     main {
         width: 100%;
         /* padding: 0; */
         padding: 5px 0 5px 0;
-        margin-top: 5px;
+        /* margin-top: 5px; */
+        margin-top: 39px;
         margin-bottom: 0;
         /* display: grid; */
         display: block;
         background-color: #333;
+        /* background-color: #333333d3; */
     }
 
     form {
@@ -475,8 +529,8 @@ footer p {
         border-radius: 5px;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 5px;
-        margin-bottom: 0;
+        /* margin-top: 5px; */
+        /* margin-bottom: 0; */
         /* align-items: center; */
         /* display: flex; */
         /* justify-content: space-between; */
@@ -622,9 +676,6 @@ footer p {
 }
 
 
-
-
-
 /* @media only screen and (orientation: landscape) and (max-width: 640px) { */
 /* @media only screen and (orientation: landscape) and (max-width: 970px) { */
 /* @media screen and (min-width: 640px) and (max-width: 1154px) and (orientation: landscape) { */
@@ -637,12 +688,14 @@ footer p {
     }
 
     header {
+        background-color: #333;
         border-radius: 5px;
-        margin-top: 5px;
+        /* margin-top: 5px; */
         margin-bottom: 0;
-        visibility: collapse;
-        display: none;
+        /* visibility: collapse; */
+        /* display: none; */
         width: 100%;
+        /* height: 51px; */
     }
 
     h1 {
@@ -653,7 +706,7 @@ footer p {
         width: 100%;
         /* padding: 0; */
         padding: 0;
-        margin-top: 5px;
+        margin-top: 43px;
         margin-bottom: 0;
         display: grid;
         background-color: #333;
@@ -894,7 +947,11 @@ footer p {
     }
 }
 
-@media only screen and (width: 640px) and (height: 360px) and (orientation: landscape) {
+@media only screen and (width: 740px) and (height: 360px) and (orientation: landscape) {
+    header {
+        margin: 0;
+    }
+
     label {
         font-size: 12px;
     }
@@ -922,9 +979,25 @@ footer p {
         font-size: 12px;
         padding: 5px 10px 5px 10px;
     }
+
+    h1 {
+        width: auto;
+        padding: 10px 40px 10px 40px;
+        font-size: 1em;
+    }
 }
 
 @media only screen and (width: 960px) and (height: 432px) and (orientation: landscape) {
+    header {
+        margin: 0;
+    }
+
+    h1 {
+        width: auto;
+        padding: 10px 40px 10px 40px;
+        font-size: 1em;
+    }
+
     label {
         font-size: 12px;
     }
