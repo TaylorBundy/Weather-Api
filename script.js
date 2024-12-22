@@ -1012,6 +1012,13 @@ function IconosWeb() {
       icon.src = nocheneblinoso;
     }
     description.textContent = 'Niebla helada';
+  } else if (descFinal == 'Fog') {
+    if (isday == 'si') {
+      icon.src = neblinoso;
+    } else {
+      icon.src = nocheneblinoso;
+    }
+    description.textContent = 'Niebla moderada';
   } else if (descFinal == 'Mist') {
     if (isday == 'si') {
       icon.src = neblina;
@@ -1141,6 +1148,8 @@ function TitulosIcon2() {
           toto = 'Mucha nieve';
         } else if (item == 'Freezing fog') {
           toto = 'Niebla helada';
+        } else if (item == 'Fog') {
+          toto = 'Niebla moderada';
         } else if (item == 'Mist') {
           toto = 'Neblina';
         } else if (item == 'Moderate rain') {
@@ -1311,42 +1320,6 @@ if (plataforma.includes('Android')) {
   };
 
   temp.addEventListener("click", tempPressed);
-}
-
-const mainPressed = e => {
-  //console.log(e.target.id);  // Get ID of Clicked Element
-  var tiituulo = document.getElementById(e.target.id);
-  let jajajaja = document.getElementById('MainForm');
-  let color = jajajaja.style.backgroundColor;
-  var style=window.getComputedStyle(jajajaja,"");
-  //let color = document.getElementById('MainForm').style.backgroundColor;
-  //jajajaja.style.backgroundColor = "red";
-  console.log(jajajaja.style.backgroundColor);
-  console.log(style.getPropertyValue("background-color"));
-  //alert(tiituulo.title);
-};
-//document.getElementById('MainForm').style.backgroundImage = 'url(' + tormentas + ')';
-main.addEventListener("click", mainPressed);
-
-//for (x = 0; x < allicon.length; x++) {
-  //allicon[x].addEventListener("click", function() {
-    //if (apiweb.checked) {
-      //TitulosIcon();
-    //} else if (apilocal.checked){
-      //TitulosIconLocal();
-    //}
-    //clickandroid(this.index);
-  //}); 
-//}
-
-function clickandroid(id) {
-  if (plataforma.includes('Win')) {
-    //
-  } else if (plataforma.includes('Android')) {
-    //console.log(id);
-    //console.log(toto);
-    //console.log(allicon[id]);
-  }
 }
 
 // Hide Header on on scroll down
