@@ -5,17 +5,23 @@ let latitud = '';
 let longitud = '';
 const apikey = "f17c12b6195a949f2f8ea7408141cfa4";
 const apikey2 = '7cb84f0ad047435f9d802656240412';
+const wunderApiKey = 'a781055ea4224f7b81055ea4224f7b78';
+const apiipApiKey = 'a23e0a8e-a226-43ce-b4cf-d8c3c9eff1bc';
+const stationID = 'IALUMI7';
 const url = "https://api.weatherstack.com/current?access_key=" + apikey + "&query=";
 
 let resp = '';
 let resp2 = '';
 let resp3 = '';
+let resp4 = '';
 let origen = '';
 let origen1 = '';
 let origen2 = '';
+let origen3 = '';
 let data = '';
 let data2 = '';
 let data3 = '';
+let data4 = '';
 let locations = '';
 let locations2 = '';
 let locations4 = '';
@@ -121,10 +127,11 @@ const options = {
 function success(pos) {
   const crd = pos.coords;
   try {
-      latitud = crd.latitude;
-      //latitud = '-39.217';
-      //longitud = '-70.950';
-      longitud = crd.longitude;
+      //latitud = crd.latitude;
+      latitud = '-39.217';
+      longitud = '-70.950';
+      //longitud = crd.longitude;
+      //console.log(latitud);
   }
   finally {
     setTimeout(function() {
@@ -152,9 +159,34 @@ function success(pos) {
   }
 }
 
+function success2(position) {
+  ciudad.textContent = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+}
+
+// function error(err) {
+//   console.warn(`ERROR(${err.code}): ${err.message}`);
+//   ciudad.textContent = 'Acceso denegado a ubicación!';
+// }
 function error(err) {
-  console.warn(`ERROR(${err.code}): ${err.message}`);
-  ciudad.textContent = 'Acceso denegado a ubicación!';
+  switch(err.code) {
+    case err.PERMISSION_DENIED:
+      ciudad.innerHTML = "User denied the request for Geolocation.";
+      ciudad.textContent = "User denied the request for Geolocation."
+      break;
+    case err.POSITION_UNAVAILABLE:
+      ciudad.innerHTML = "Location information is unavailable.";
+      ciudad.textContent = "Location information is unavailable."
+      break;
+    case err.TIMEOUT:
+      ciudad.innerHTML = "The request to get user location timed out.";
+      ciudad.textContent = "The request to get user location timed out."
+      break;
+    case err.UNKNOWN_ERROR:
+      ciudad.innerHTML = "An unknown error occurred.";
+      ciudad.textContent = "An unknown error occurred."
+      break;
+  }
 }
 const urllocal = 'file:///C:/HTML/Proyectos/Weather/index.html';
 var data5 = new Date();
@@ -172,12 +204,37 @@ let HourTime = '';
 let Horas = '';
 let Minutos = '';
 let isDayTime = '';
+let fechaFormateada = '';
+let DIA = '';
+let MES = '';
+let ANIO = '';
+
+let cityyy = '';
+let proviii = '';
+let paiiis = '';
+
+async function locali(apiip) {
+  const API_URL = `https://apiip.net/api/check?accessKey=${apiip}&language=es`;
+  const response = await fetch(API_URL);
+  const result = await response.json();
+  //console.log(result);
+  // Output the "code" value inside "currency" object
+  latitud = result["latitude"];
+  longitud = result["longitude"];
+  cityyy = result["city"];
+  proviii = result["regionName"];
+  paiiis = result["countryName"];
+  obtener2(latitud, longitud);
+  //console.log(result["latitude"]);
+}
 //cuando termina de cargar la pagina, obtenemos ubicacion
 window.onload = function() {
     try {
+      locali(apiipApiKey);
       document.querySelector('#provincia').selectedIndex = 0;
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(success, error, options);
+        //navigator.geolocation.getCurrentPosition(success, error, options);
+        //navigator.geolocation.watchPosition(success2, error);
       } else {
         ciudad.textContent = 'Acceso denegado a ubicación!';
       }
@@ -202,6 +259,16 @@ window.onload = function() {
       }
 
       isDayTime = Horas >= 6 && Horas < 20;
+      //console.log(date.getDate());
+      const diaNombre = days[date.getDay()];
+      DIA = String(date.getDate()).padStart(2, '0');
+      MES = String(date.getMonth() + 1).padStart(2, '0'); // los meses van de 0 a 11
+      ANIO = date.getFullYear();
+
+      fechaFormateada = `${diaNombre} ${DIA}-${MES}-${ANIO}`;
+
+      //console.log(fechaFormateada);
+      //console.log(DiaActual);
 
       if (DiaActual == 1) {
         iterator.next();
@@ -266,7 +333,7 @@ window.onload = function() {
         dia4.textContent = days[4].slice(0,3);
         dia5.textContent = days[5].slice(0,3);
       }
-      
+
       setTimeout(function() {
         for (let i = 0; i < nombre_cookie2.length; i++) {
           nombre_cookie.push(nombre_cookie2[i].name);
@@ -598,7 +665,7 @@ function Actualiza() {
     obtener();
   }
 };
-
+let diaActual = '';
 //creamos la funcion para obtener los datos del clima
 async function obtener() {
   var sinacento = ciudadesSelect.value;
@@ -615,6 +682,8 @@ async function obtener() {
       origen = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
       origen1 = 'https://api.weather.com/v2/pws/dailysummary/7day?stationId=IALUMI7&format=json&units=m&apiKey=a781055ea4224f7b81055ea4224f7b78';
       origen2 = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=-38.88,-71.19&format=json&units=m&language=es-AR&apiKey=a781055ea4224f7b81055ea4224f7b78';
+      origen3 = 'https://api.weather.com/v2/pws/history/hourly?stationId=' + stationID + '&format=json&units=m&date=20250422&apiKey=' + wunderApiKey;
+      //origen3 = 'https://api.weather.com/v2/pws/history/hourly?stationId=' + stationID + '&format=json&units=m&startDate=20250422&endDate=20250427&apiKey=' + wunderApiKey;
       const options = {
         headers:{
           'Accept-Encoding' : 'gzip'
@@ -625,14 +694,17 @@ async function obtener() {
       resp2 = await fetch(origen1, options);
       data2 = await resp2.json();
       resp3 = await fetch(origen2, options);
-      data3 = await resp3.json();      
+      data3 = await resp3.json();
+      resp4 = await fetch(origen3, options);
+      data4 = await resp4.json();      
       locations = await data["observations"][0];
       current = await locations["imperial"]["temp"];
-      locations2 = data2["summaries"];
+      locations2 = data2["summaries"];      
       current2 = locations2[0]["metric"].tempAvg;
       locations4 = await data3['dayOfWeek'];
-      current3 = await data3['calendarDayTemperatureMax'];
-      descFinal = await data3['narrative'];
+      current3 = await data3['calendarDayTemperatureMax'];      
+      descFinal = await data3['narrative'];      
+      diaActual = data3["dayOfWeek"][0];      
     }
   }
   finally {
@@ -644,7 +716,7 @@ async function obtener() {
       temp.textContent = current2.temp_C + '°C';
       temp.title = 'Sensación Térmica: ' + current2.FeelsLikeC + '°C';
       description.textContent = current2["weatherDesc"][0].value;
-      descFinal = description.textContent.trim();
+      descFinal = description.textContent.trim();      
 
       try {
         descFinalx = [];
@@ -661,7 +733,7 @@ async function obtener() {
       finally {
         for (let c = 1; c < current3.length; c++) {
           fechas.push(current3[c].date);
-        }
+        }        
       }
 
       salesol = current3[0]["astronomy"][0].sunrise;
@@ -747,7 +819,7 @@ async function obtener() {
       finally {
         for (let c = 1; c < data3['validTimeLocal'].length; c++) {
           fechas.push(data3['validTimeLocal'][c]);
-        }
+        }        
       }
       if (Horas >= 6 && Horas < 21) {
         isday = 'si';
@@ -782,11 +854,14 @@ async function obtener2(lat, long) {
     data2 = await obtenerDatosApi(url1);
     locations2 = await data2["data"];
     current2 = await locations2["current_condition"][0];
-    current3 = await locations2["weather"];    
+    current3 = await locations2["weather"];
+    //console.log(locations2);
   }
   finally {
     weather.style.display = 'block';
-    ciudad.textContent = locations2["request"][0].query;
+    //ciudad.textContent = locations2["request"][0].query;
+    ciudad.textContent = `${cityyy}, ${proviii}, ${paiiis}`;
+    //console.log(cityyy);
     temp.textContent = current2.temp_C + '°C';
     temp.title = 'Sensación Térmica: ' + current2.FeelsLikeC + '°C';
     description.textContent = current2["weatherDesc"][0].value;
@@ -1159,12 +1234,12 @@ function TitulosIcon2() {
         }
       }
       allicon[index].title = toto;
-      allicon[index].alt = toto;       
+      allicon[index].alt = toto;
     })
   } else if (apilocal.checked) {
     descFinalx.forEach((item, index) => {
       allicon[index].title = item;
-      allicon[index].alt = item;    
+      allicon[index].alt = item;
     })
   }
 }
@@ -1205,14 +1280,14 @@ function TitulosIcon() {
       }
     }
     allicon[index].title = toto;
-    allicon[index].alt = toto;       
+    allicon[index].alt = toto;
   })
 }
 
 function TitulosIconLocal() {
   descFinalx.forEach((item, index) => {
     allicon[index].title = item;
-    allicon[index].alt = item;    
+    allicon[index].alt = item;
   })
 }
 
@@ -1234,8 +1309,13 @@ function TitulosFechas() {
     fechas = [];
   }
   finally {
-    for (let c = 1; c < current3.length; c++) {
-      fechas.push(current3[c].date);
+    for (let c = 1; c < current3.length; c++) {      
+      const loco = current3[c].date;
+      const partes = loco.split('-');
+      const invertida = [partes[2], partes[1], partes[0]].join('-');
+      //console.log(invertida);
+      //fechas.push(current3[c].date);
+      fechas.push(invertida);
     }
   }
 
@@ -1256,13 +1336,21 @@ function TitulosFechas2() {
   try {
     fechas = [];
   }
-  finally {
-    for (let c = 1; c < data3['validTimeLocal'].length; c++) {
-      let fechainicial = data3['validTimeLocal'][c];
-      let final = fechainicial.indexOf('T');
-      let fechafinal = fechainicial.slice(0, final);
+  finally {    
+    for (let c = 1; c < 6; c++) {
+      //console.log(Number(DIA) + c);
+      //let fechainicial = data3['validTimeLocal'][c];
+      //let final = fechainicial.indexOf('T');
+      //let fechafinal = fechainicial.slice(0, final);
+      let fechafinal = `${Number(DIA) + c}-${MES}-${ANIO}`;
       fechas.push(fechafinal);
     }
+    // for (let c = 1; c < data3['validTimeLocal'].length; c++) {
+    //   let fechainicial = data3['validTimeLocal'][c];
+    //   let final = fechainicial.indexOf('T');
+    //   let fechafinal = fechainicial.slice(0, final);
+    //   fechas.push(fechafinal);
+    // }
   }
 
   fechas.forEach((item, index) => {
@@ -1294,7 +1382,7 @@ if (plataforma.includes('Android')) {
     //console.log(e.target.id);  // Get ID of Clicked Element
     var tiituulo = document.getElementById(e.target.id);
     //console.log(tiituulo.title);
-    alert(tiituulo.title);    
+    alert(tiituulo.title);
   };
 
   for (let icons of allicon) {
@@ -1319,7 +1407,60 @@ if (plataforma.includes('Android')) {
     alert(tiituulo.title);
   };
 
+  const cityPressed = e => {
+    //console.log(e.target.id);  // Get ID of Clicked Element
+    var tiituulo = document.getElementById(e.target.id);
+    //console.log(tiituulo.title);
+    alert(tiituulo.title);
+  };
+
   temp.addEventListener("click", tempPressed);
+  ciudad.addEventListener("click", cityPressed);
+}
+
+let DatosTabla = [];
+
+const iconPressed = e => {
+  //console.log(e.target.id);  // Get ID of Clicked Element
+  var tiituulo = document.getElementById(e.target.id);  
+  let elid = tiituulo.id;
+  const numero = 'Dia' + elid.replace(/\D/g, '');  
+  let aver = document.getElementById(numero).title;
+  let loco = aver.split(" ");
+  const partes = loco[1].split('-');  
+  const invertida = [partes[2], partes[1], partes[0]].join('-');  
+  const encontrado = current3.find(item => item.date === invertida);
+  const leti = encontrado["hourly"];
+  for (let c = 0; c < leti.length; c++) {
+    let tiiime = leti[c]["time"];
+    let desssc = leti[c]["lang_es"][0].value;
+    const str = tiiime.toString().padStart(4, '0');
+    const horaFormateada = `${str.slice(0, 2)}:${str.slice(2)}`;    
+    //console.log(horaFormateada + ' / ' + desssc);
+    DatosTabla.push(horaFormateada + ' / ' + desssc);
+  }
+  //console.log(leti);
+  let tabla = `Estado del clima - ${invertida}\n`;
+  tabla += "Hora   | Estado\n";
+  tabla += "-------------------\n";
+  DatosTabla.forEach(item => {
+    const [hora, estado] = item.split(' / ');
+    tabla += `${hora} | ${estado}\n`;
+  });
+  //alert(tiituulo.title);
+  alert(tabla);
+  tabla = "";
+  DatosTabla = [];
+};
+
+for (let icons of allicon) {  
+    icons.addEventListener("click", function(e) {
+      if (apiweb.checked) {
+        if (ciudad.textContent != 'Acceso denegado a ubicación!') {
+          iconPressed(e);
+        }
+      }
+  });
 }
 
 // Hide Header on on scroll down
@@ -1341,24 +1482,30 @@ setInterval(function() {
 
 function hasScrolled() {
     var st = $(this).scrollTop();
-    
+
     // Make sure they scroll more than delta
     if(Math.abs(lastScrollTop - st) <= delta)
         return;
-    
+
     // If they scrolled down and are past the navbar, add class .nav-up.
     // This is necessary so you never see what is "behind" the navbar.
     if (st > lastScrollTop && st > navbarHeight){
         // Scroll Down
-        $('header').removeClass('nav-down').addClass('nav-up');
-        $('main').removeClass('nav-down2').addClass('nav-up2');
+        //$('header').removeClass('nav-down').addClass('nav-up');
+        //$('main').removeClass('nav-down2').addClass('nav-up2');
     } else {
         // Scroll Up
         if(st + $(window).height() < $(document).height()) {
-            $('header').removeClass('nav-up').addClass('nav-down');
-            $('main').removeClass('nav-up2').addClass('nav-down2');
+            //$('header').removeClass('nav-up').addClass('nav-down');
+            //$('main').removeClass('nav-up2').addClass('nav-down2');
         }
     }
-    
+
     lastScrollTop = st;
 }
+
+ciudad.addEventListener("mouseover", function() {
+  const TituloActual = ciudad.textContent;
+  ciudad.title = TituloActual + ', ' + fechaFormateada;
+  //console.log(TituloActual);
+});
