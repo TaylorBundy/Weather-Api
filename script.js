@@ -4,7 +4,8 @@
 let latitud = '';
 let longitud = '';
 const apikey = "f17c12b6195a949f2f8ea7408141cfa4";
-const apikey2 = '7cb84f0ad047435f9d802656240412';
+//const apikey2 = '7cb84f0ad047435f9d802656240412';
+const apikey2 = 'f294effb63bd4ce5af4100721252704';
 const wunderApiKey = 'a781055ea4224f7b81055ea4224f7b78';
 const apiipApiKey = 'a23e0a8e-a226-43ce-b4cf-d8c3c9eff1bc';
 const stationID = 'IALUMI7';
@@ -210,6 +211,7 @@ let MES = '';
 let ANIO = '';
 
 let cityyy = '';
+let cityyy2 = '';
 let proviii = '';
 let paiiis = '';
 
@@ -617,6 +619,8 @@ function Titulos() {
 const ciudadesSelect = document.getElementById("ciudades");
 
 const despejado = 'Imagenes/despejado.svg';
+const diadespejado = 'Imagenes/dia-despejado.svg';
+//const nochedespejada = 'Imagenes/despejado.svg';
 const sol = 'Imagenes/sol.svg';
 const nochedespejada = 'Imagenes/noche.svg';
 const nubladoparcial = 'Imagenes/nublado-parcial.svg';
@@ -645,6 +649,7 @@ const tormenta = 'Imagenes/tormenta.svg';
 const tormentas = 'Imagenes/tormentas-2.svg';
 const nochetormenta = 'Imagenes/tormenta-noche.svg';
 const formaciontormenta = 'Imagenes/formacion-tormenta.svg';
+const cubierto = 'Imagenes/cubierto.svg';
 //const nievemoderada2 = 'Imagenes/nieve-moderada-2.gif';
 
 let salesol = '';
@@ -676,7 +681,7 @@ async function obtener() {
       data2 = await obtenerDatosApi(url1);
       locations2 = await data2["data"];
       current2 = await locations2["current_condition"][0];
-      current3 = await locations2["weather"];      
+      current3 = await locations2["weather"];
     } else if (apilocal.checked) {
       document.querySelector("#ciudades").selectedIndex = 1;
       origen = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
@@ -696,15 +701,15 @@ async function obtener() {
       resp3 = await fetch(origen2, options);
       data3 = await resp3.json();
       resp4 = await fetch(origen3, options);
-      data4 = await resp4.json();      
+      data4 = await resp4.json();
       locations = await data["observations"][0];
       current = await locations["imperial"]["temp"];
-      locations2 = data2["summaries"];      
+      locations2 = data2["summaries"];
       current2 = locations2[0]["metric"].tempAvg;
       locations4 = await data3['dayOfWeek'];
-      current3 = await data3['calendarDayTemperatureMax'];      
-      descFinal = await data3['narrative'];      
-      diaActual = data3["dayOfWeek"][0];      
+      current3 = await data3['calendarDayTemperatureMax'];
+      descFinal = await data3['narrative'];
+      diaActual = data3["dayOfWeek"][0];
     }
   }
   finally {
@@ -713,10 +718,11 @@ async function obtener() {
       let ciudadinfo = locations2["request"][0].query.split(',');
       //ciudad.textContent = locations2["request"][0].query;
       ciudad.textContent = ciudadinfo[0] + ', ' + torta.value + ', ' + ciudadinfo[1];
+      cityyy2 = ciudad.textContent;
       temp.textContent = current2.temp_C + '°C';
       temp.title = 'Sensación Térmica: ' + current2.FeelsLikeC + '°C';
       description.textContent = current2["weatherDesc"][0].value;
-      descFinal = description.textContent.trim();      
+      descFinal = description.textContent.trim();
 
       try {
         descFinalx = [];
@@ -733,7 +739,7 @@ async function obtener() {
       finally {
         for (let c = 1; c < current3.length; c++) {
           fechas.push(current3[c].date);
-        }        
+        }
       }
 
       salesol = current3[0]["astronomy"][0].sunrise;
@@ -779,6 +785,8 @@ async function obtener() {
     } else if (apilocal.checked) {
       weather.style.display = 'block';
       ciudad.textContent = locations.neighborhood + ', ' + torta.value + ', ' + locations.country;
+      //cityyy = locations.neighborhood;
+      cityyy2 = ciudad.textContent;
       tempC = (current - 32) / 1.8;
       temp.textContent = tempC.toFixed(1) + '°C';
       presi = locations["imperial"].pressure;
@@ -819,7 +827,7 @@ async function obtener() {
       finally {
         for (let c = 1; c < data3['validTimeLocal'].length; c++) {
           fechas.push(data3['validTimeLocal'][c]);
-        }        
+        }
       }
       if (Horas >= 6 && Horas < 21) {
         isday = 'si';
@@ -855,12 +863,12 @@ async function obtener2(lat, long) {
     locations2 = await data2["data"];
     current2 = await locations2["current_condition"][0];
     current3 = await locations2["weather"];
-    //console.log(locations2);
   }
   finally {
     weather.style.display = 'block';
     //ciudad.textContent = locations2["request"][0].query;
     ciudad.textContent = `${cityyy}, ${proviii}, ${paiiis}`;
+    cityyy2 = ciudad.textContent;
     //console.log(cityyy);
     temp.textContent = current2.temp_C + '°C';
     temp.title = 'Sensación Térmica: ' + current2.FeelsLikeC + '°C';
@@ -980,24 +988,8 @@ function IconosWeb() {
   if (descFinal == 'Clear') {
     if (isday == 'si') {
       icon.src = sol;
-      //icon.style.backgroundImage = 'url(' + despejado + ')';
-      //icon.style.backgroundPosition = -74 + 'px';
-      //icon.style.backgroundSize = 'cover';
-      //icon.style.backgroundRepeat = 'no-repeat';
     } else {
       icon.src = nochedespejada;
-      //try {
-        //icon.src = '';
-        //document.getElementById('icon').style.clear;
-      //}
-      //finally {
-        //icon.style.backgroundImage = 'url(' + tormentas + ')';
-      //}
-      //document.getElementById('icon').style.backgroundImage = 'url(' + tormentas + ')';
-      //icon.src = tormentas;
-      //icon.style.backgroundPosition = -74 + 'px';
-      //icon.style.backgroundSize = 'cover';
-      //icon.style.backgroundRepeat = 'no-repeat';
     }
     description.textContent = 'Despejado';
   } else if (descFinal == 'Sunny') {
@@ -1309,12 +1301,10 @@ function TitulosFechas() {
     fechas = [];
   }
   finally {
-    for (let c = 1; c < current3.length; c++) {      
+    for (let c = 1; c < current3.length; c++) {
       const loco = current3[c].date;
       const partes = loco.split('-');
       const invertida = [partes[2], partes[1], partes[0]].join('-');
-      //console.log(invertida);
-      //fechas.push(current3[c].date);
       fechas.push(invertida);
     }
   }
@@ -1336,21 +1326,11 @@ function TitulosFechas2() {
   try {
     fechas = [];
   }
-  finally {    
+  finally {
     for (let c = 1; c < 6; c++) {
-      //console.log(Number(DIA) + c);
-      //let fechainicial = data3['validTimeLocal'][c];
-      //let final = fechainicial.indexOf('T');
-      //let fechafinal = fechainicial.slice(0, final);
       let fechafinal = `${Number(DIA) + c}-${MES}-${ANIO}`;
       fechas.push(fechafinal);
     }
-    // for (let c = 1; c < data3['validTimeLocal'].length; c++) {
-    //   let fechainicial = data3['validTimeLocal'][c];
-    //   let final = fechainicial.indexOf('T');
-    //   let fechafinal = fechainicial.slice(0, final);
-    //   fechas.push(fechafinal);
-    // }
   }
 
   fechas.forEach((item, index) => {
@@ -1375,7 +1355,17 @@ if (plataforma.includes('Android')) {
   };
 
   for (let days of allday) {
-    days.addEventListener("click", allDayPressed);
+    //days.addEventListener("click", allDayPressed);
+    days.addEventListener("click", function(e) {
+      if (apiweb.checked || apilocal.checked) {
+        if (ciudad.textContent != 'Acceso denegado a ubicación!') {
+          //iconPressed(e);
+          //var clase = 'img.IconForecast';
+          var clase = 'p.DayForecast';
+          mostrarModal(e.target.id, clase);
+        }
+      }
+  });
   }
 
   const iconPressed = e => {
@@ -1386,7 +1376,16 @@ if (plataforma.includes('Android')) {
   };
 
   for (let icons of allicon) {
-    icons.addEventListener("click", iconPressed);
+    //icons.addEventListener("click", iconPressed);
+    icons.addEventListener("click", function(e) {
+      if (apiweb.checked) {
+        if (ciudad.textContent != 'Acceso denegado a ubicación!') {
+          //iconPressed(e);
+          var clase = 'img.IconForecast';
+          mostrarModal(e.target.id, clase);
+        }
+      }
+  });
   }
 
   const allTempPressed = e => {
@@ -1418,46 +1417,425 @@ if (plataforma.includes('Android')) {
   ciudad.addEventListener("click", cityPressed);
 }
 
+let tablaHTML = [];
 let DatosTabla = [];
+let indiceActual = 0; // Variable global para saber en qué paso estamos
+let todosIconos = []; // También global, para no estar buscándolo todo el tiempo
+let aver2 = '';
+let aver3 = '';
+let titulo = '';
+let titulo2 = '';
+let numero = '';
+let clase = '';
 
-const iconPressed = e => {
-  //console.log(e.target.id);  // Get ID of Clicked Element
-  var tiituulo = document.getElementById(e.target.id);  
-  let elid = tiituulo.id;
-  const numero = 'Dia' + elid.replace(/\D/g, '');  
-  let aver = document.getElementById(numero).title;
-  let loco = aver.split(" ");
-  const partes = loco[1].split('-');  
-  const invertida = [partes[2], partes[1], partes[0]].join('-');  
+// Función para mostrar el modal
+function mostrarModal(elid, clase) {
+  //indiceActual = '';
+  //const numero1 = elid.replace(/\D/g, '');
+  //const numero = 'Dia' + elid.replace(/\D/g, '');
+  //console.log(`ID: ${elid} - CLASE: ${clase}`);
+  if (clase == 'img.IconForecast') {
+    numero = 'Icon-D' + elid.replace(/\D/g, '');    
+  } else if (clase == 'p.DayForecast'){
+    numero = 'Dia' + elid.replace(/\D/g, '');    
+  }
+  todosIconos = [];
+  if (todosIconos.length === 0) {
+    //todosIconos = Array.from(document.querySelectorAll('img.IconForecast')); // ⚡ poné tu clase
+    todosIconos = Array.from(document.querySelectorAll(`${clase}`));
+  }
+
+  //var actual = document.getElementById(elid);
+  //console.log(todosIconos);
+  var actual = document.getElementById(`${numero}`);
+  indiceActual = todosIconos.indexOf(actual); // Seteamos índiceActual
+  if (clase == 'img.IconForecast') {
+    //const numero = 'Icon-D' + elid.replace(/\D/g, '');
+    //console.log(`ACTUAL: ${actual.id}`);
+    //console.log(indiceActual);
+    abrirModal(actual);
+  } else if (clase == 'p.DayForecast'){
+    //const numero = 'Dia' + elid.replace(/\D/g, '');
+    //console.log(numero);
+    //console.log(`ACTUAL: ${actual.id}`);
+    //console.log(indiceActual);
+    //mostrarModalGenerico({titulo: titulo, tabla: tabla, elemento: actual});
+    mostrarModalGenerico(actual);
+  }
+}
+
+// function mostrarModal2(elid, titulo, tabla, clase) {
+//   console.log(`ID: ${elid} - TITULO: ${titulo} - CLASE: ${clase}`);
+//   if (todosIconos.length === 0) {
+//     //todosIconos = Array.from(document.querySelectorAll('img.IconForecast')); // ⚡ poné tu clase
+//     todosIconos = Array.from(document.querySelectorAll(`${clase}`));
+//   }
+
+//   var actual = document.getElementById(elid);
+//   indiceActual = todosIconos.indexOf(actual); // Seteamos índiceActual
+//   if (clase == '') {
+//     abrirModal(actual);
+//   }
+//   if (clase == 'p.DayForecast'){
+//     mostrarModalGenerico({titulo, tabla, elid});
+//   }
+// }
+
+// Función para abrir el SweetAlert del ícono actual
+function abrirModal(elemento) {
+  const elid = elemento.id;
+  const numero = 'Dia' + elid.replace(/\D/g, '');
+  const aver = document.getElementById(numero).title;
+  const numero1 = elid.replace(/\D/g, '');
+  //console.log(numero1);
+  // if (indiceActual == -1) {
+  //   indiceActual++;
+  // }
+  if (indiceActual < todosIconos.length -1) {
+    const numero2 = Number(numero1) + 1;
+    const numero3 = 'Dia' + numero2;
+    aver2 = document.getElementById(numero3);
+    if (aver2) {
+      titulo = aver2.title;
+    }
+  }
+  if (indiceActual > 0) {
+    const numero4 = Number(numero1) - 1;
+    const numero5 = 'Dia' + numero4;
+    aver3 = document.getElementById(numero5);
+    if (aver3) {
+      titulo2 = aver3.title;
+    }
+  }
+
+  const loco = aver.split(" ");
+  const loco1 = loco[0].slice(0,3);
+  const partes = loco[1].split('-');
+  const invertida = [partes[2], partes[1], partes[0]].join('-');
   const encontrado = current3.find(item => item.date === invertida);
   const leti = encontrado["hourly"];
+
+  DatosTabla = []; // Limpiamos antes
   for (let c = 0; c < leti.length; c++) {
     let tiiime = leti[c]["time"];
-    let desssc = leti[c]["lang_es"][0].value;
+    let texto = leti[c]["lang_es"][0].value.trim();
+    let temp = leti[c]["tempC"];
     const str = tiiime.toString().padStart(4, '0');
-    const horaFormateada = `${str.slice(0, 2)}:${str.slice(2)}`;    
-    //console.log(horaFormateada + ' / ' + desssc);
-    DatosTabla.push(horaFormateada + ' / ' + desssc);
+    const horaFormateada = `${str.slice(0, 2)}:${str.slice(2)}`;
+    let desssc = texto.replace(/\s+/g, ' ').trim();
+    const icono = ObtenerIconosWeb(desssc, horaFormateada);
+    DatosTabla.push({ hora: horaFormateada, estado: desssc, temp: temp, icono: icono });
   }
-  //console.log(leti);
-  let tabla = `Estado del clima - ${invertida}\n`;
-  tabla += "Hora   | Estado\n";
-  tabla += "-------------------\n";
-  DatosTabla.forEach(item => {
-    const [hora, estado] = item.split(' / ');
-    tabla += `${hora} | ${estado}\n`;
-  });
-  //alert(tiituulo.title);
-  alert(tabla);
-  tabla = "";
-  DatosTabla = [];
-};
 
-for (let icons of allicon) {  
+  let tablaHTML = `
+  <table class="tabla-clima">
+    <thead>
+      <tr>
+        <th class="hora">Hora</th>
+        <th class="estado">Estado del clima por hora</th>
+        <th class="temp">Temp</th>
+      </tr>
+    </thead>
+    <tbody>
+  `;
+
+  DatosTabla.forEach(item => {
+    tablaHTML += `
+      <tr>
+        <td class="hora">${item.hora}</td>
+        <td class="estados"><img src="${item.icono}"><p>${item.estado}</p></td>
+        <td class="temp">${item.temp}°C</td>
+      </tr>`;
+  });
+
+  tablaHTML += `</tbody></table>`;
+
+  Swal.fire({
+    title: `Estado del clima - ${loco1} ${loco[1]}<br><small class="citty">${cityyy2}</small><br><small class="pasos">Día ${indiceActual + 1} de ${todosIconos.length}</small>`,
+    html: tablaHTML,
+    width: 600,
+    padding: '1em',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'Siguiente',
+    denyButtonText: 'Anterior',
+    cancelButtonText: 'Cerrar',
+    reverseButtons: true,
+    didOpen: () => {
+      const botonConfirm = document.querySelector('.swal2-confirm');
+      const botonDeny = document.querySelector('.swal2-deny');
+      const botonCancel = document.querySelector('.swal2-cancel');
+
+      if (botonConfirm) {
+        //botonConfirm.setAttribute('title', 'Ir al siguiente clima');
+        botonConfirm.setAttribute('title', `Ir al ${titulo}`);
+        if (indiceActual >= todosIconos.length - 1) {
+          botonConfirm.disabled = true;
+          botonConfirm.innerText = 'No hay más';
+          botonConfirm.style.backgroundColor = '#888';
+          botonConfirm.setAttribute('title', 'No hay mas datos');
+        }
+      }
+
+      if (botonDeny) {
+        //botonDeny.setAttribute('title', 'Volver al anterior');
+        botonDeny.setAttribute('title', `Volver al ${titulo2}`);
+        if (indiceActual <= 0) {
+          botonDeny.disabled = true;
+          botonDeny.innerText = 'No disponible';
+          botonDeny.style.backgroundColor = '#888';
+          botonDeny.setAttribute('title', 'No hay nada anterior');
+        }
+      }
+
+      if (botonCancel) {
+        botonCancel.setAttribute('title', 'Cerrar ventana');
+      }
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      if (indiceActual < todosIconos.length - 1) {
+        indiceActual++;
+        abrirModal(todosIconos[indiceActual]);
+      }
+    } else if (result.isDenied) {
+      if (indiceActual > 0) {
+        indiceActual--;
+        abrirModal(todosIconos[indiceActual]);
+      }
+    } else if (result.isDismissed) {
+      console.log('Usuario cerró el modal');
+      indiceActual = 0;
+      clase = '';
+      //console.log(indiceActual);
+    }
+  });
+}
+
+//function mostrarModalGenerico({ titulo = "Título", tabla = "", pasoActual = 1, totalPasos = 1, elemento = null }) {
+//function mostrarModalGenerico({ titulo = "Título", tabla = "", elemento = null}) {
+function mostrarModalGenerico(elemento) {
+  //console.log(indiceActual);
+  const elid = elemento.id;
+  const numero = 'Dia' + elid.replace(/\D/g, '');
+  //console.log(numero);
+  const aver = document.getElementById(numero).title;
+  const numero1 = elid.replace(/\D/g, '');
+  // if (indiceActual == -1) {
+  //   indiceActual++;
+  // }
+  if (indiceActual < todosIconos.length -1) {
+    const numero2 = Number(numero1) + 1;
+    const numero3 = 'Dia' + numero2;
+    aver2 = document.getElementById(numero3);
+    if (aver2) {
+      titulo = aver2.title;
+    }
+  }
+  if (indiceActual > 0) {
+    const numero4 = Number(numero1) - 1;
+    const numero5 = 'Dia' + numero4;
+    aver3 = document.getElementById(numero5);
+    if (aver3) {
+      titulo2 = aver3.title;
+    }
+  }
+  tablaHTML = [];
+  const loco = aver.split(" ");
+  const loco1 = loco[0].slice(0,3);
+  const estado1 = 'Icon-D' + elid.replace(/\D/g, '');
+  const temp1 = 'Temp-D' + elid.replace(/\D/g, '');
+  //const aver = document.getElementById(elid).title;
+  //const loco = aver.split(" ");
+  //const loco1 = loco[0].slice(0,3);
+  const estado = document.getElementById(estado1);
+  const temp = document.getElementById(temp1);
+  tablaHTML = `
+    <table class="generico">
+      <thead>
+        <tr>
+          <th class="hora">Estado</th>
+          <th class="temp">Temp</th>
+          <th class="info">Información</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="estado"><img src="${estado.src}"><p>${estado.title}</p></td>
+          <td class="temp">${temp.textContent}</td>
+          <td class="infor">${temp.title}</td>
+        </tr>
+      </tbody>
+    </table>`;
+  //tabla = tablaHTML;
+  
+  //const elid = elemento;  
+  Swal.fire({
+    //title: `${titulo}<br><small>Paso ${pasoActual} de ${totalPasos}</small>`,
+    //title: `${titulo}`,
+    title: `Información del día - ${loco1} ${loco[1]}<br><small class="citty">${cityyy2}</small><br><small class="pasos">Día ${indiceActual + 1} de ${todosIconos.length}</small>`,
+    html: tablaHTML,
+    width: 700,
+    padding: '1em',
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: 'Siguiente',
+    denyButtonText: 'Anterior',
+    cancelButtonText: 'Cerrar',
+    reverseButtons: true,
+    didOpen: () => {
+      const botonConfirm = document.querySelector('.swal2-confirm');
+      const botonDeny = document.querySelector('.swal2-deny');
+      const botonCancel = document.querySelector('.swal2-cancel');
+      setTimeout(() => {
+        const infoElement = document.querySelector('.infor');
+        const estadoElement = document.querySelector('.estado');
+        const hghg = document.querySelector('.swal2-html-container');
+      
+        if (infoElement && estadoElement) {
+          const alturaInfo = infoElement.offsetHeight; // mide la altura real
+          estadoElement.style.height = `${alturaInfo}px`; // se la asignás
+          hghg.style.padding = '5px';
+        }
+      }, 100);
+      // const lklk = document.querySelector(".infor");
+      // const lklk2 = document.querySelector(".estado");
+      // console.log(lklk.clientHeight);
+      // console.log(lklk2.clientHeight);
+      // lklk2.style.height = lklk.clientHeight;
+
+      if (botonConfirm) {
+        botonConfirm.setAttribute('title', `Ir al ${titulo}`);
+        if (indiceActual >= todosIconos.length - 1) {
+          botonConfirm.disabled = true;
+          botonConfirm.innerText = 'No hay más';
+          botonConfirm.style.backgroundColor = '#888';
+          botonConfirm.setAttribute('title', 'No hay mas datos');
+        }
+      }
+      if (botonDeny) {
+        botonDeny.setAttribute('title', `Volver al ${titulo2}`);
+        if (indiceActual <= 0) {
+          botonDeny.disabled = true;
+          botonDeny.innerText = 'No disponible';
+          botonDeny.style.backgroundColor = '#888';
+          botonDeny.setAttribute('title', 'No hay nada anterior');
+        }
+      }
+      if (botonCancel) {
+        botonCancel.setAttribute('title', 'Cerrar');
+      }
+    }
+  }).then((result) => {
+    if (result.isConfirmed) {
+      //console.log('Usuario presionó Siguiente');
+      if (indiceActual < todosIconos.length - 1) {
+        indiceActual++;
+        //mostrarModalGenerico(titulo = "Título", tabla = "", todosIconos[indiceActual]);
+        //mostrarModalGenerico({titulo: titulo, tabla: tabla, elemento: todosIconos[indiceActual]});
+        mostrarModalGenerico(todosIconos[indiceActual]);
+      }
+      // Podés disparar alguna función acá
+    } else if (result.isDenied) {
+      //console.log('Usuario presionó Anterior');
+      if (indiceActual > 0) {
+        indiceActual--;
+        //abrirModal(todosIconos[indiceActual]);
+        //mostrarModalGenerico({titulo: titulo, tabla: tabla, elemento: todosIconos[indiceActual]});
+        mostrarModalGenerico(todosIconos[indiceActual]);
+      }
+      // Podés disparar alguna función acá
+    } else if (result.isDismissed) {
+      console.log('Usuario cerró el modal');
+      indiceActual = 0;
+      clase = '';
+      //console.log(indiceActual);
+    }
+  });
+}
+
+for (let icons of allday) {
+  icons.addEventListener("click", function(e) {
+    if (apiweb.checked || apilocal.checked) {
+      if (ciudad.textContent != 'Acceso denegado a ubicación!') {
+        //iconPressed(e);
+        //mostrarModal(e.target.id);
+        // tablaHTML = [];
+        // const elid = e.target.id;
+        // const estado1 = 'Icon-D' + elid.replace(/\D/g, '');
+        // const temp1 = 'Temp-D' + elid.replace(/\D/g, '');
+        // const aver = document.getElementById(elid).title;
+        // const loco = aver.split(" ");
+        // const loco1 = loco[0].slice(0,3);
+        // const estado = document.getElementById(estado1);
+        // const temp = document.getElementById(temp1);
+        // //console.log(aver, estado, temp);
+        // titulo = `Información del día - ${loco1} ${loco[1]}<br><small class="citty">${cityyy2}</small>`;
+        // tablaHTML = `
+        //   <table class="generico">
+        //     <thead>
+        //       <tr>
+        //         <th class="hora">Estado</th>
+        //         <th class="temp">Temp</th>
+        //         <th class="info">Info</th>
+        //       </tr>
+        //     </thead>
+        //     <tbody>
+        //       <tr>
+        //         <td class="estado"><img src="${estado.src}"><p>${estado.title}</p></td>
+        //         <td class="temp">${temp.textContent}</td>
+        //         <td class="infor">${temp.title}</td>
+        //       </tr>
+        //     </tbody>
+        //   </table>`;
+          
+        clase = 'p.DayForecast';
+        //mostrarModal(e.target.id, titulo, tablaHTML, clase);
+        if (indiceActual == -1) {
+          indiceActual = 0;
+        };
+        //console.log(e.target.id);
+        mostrarModal(e.target.id, clase);
+        // mostrarModalGenerico({          
+        //   //titulo: `<p class = "tituI">Información del día - ${loco1} ${loco[1]}</p><br><small class="citty">${cityyy}</small>`,
+        //   titulo: `Información del día - ${loco1} ${loco[1]}<br><small class="citty">${cityyy}</small>`,
+        //   tabla: `
+        //     <table class="generico">
+        //       <thead>
+        //         <tr>
+        //           <th class="hora">Estado</th>
+        //           <th class="temp">Temp</th>
+        //           <th class="info">Info</th>
+        //         </tr>
+        //       </thead>
+        //       <tbody>
+        //         <tr>
+        //           <td class="estado"><img src="${estado.src}"><p>${estado.title}</p></td>
+        //           <td class="temp">${temp.textContent}</td>
+        //           <td class="infor">${temp.title}</td>
+        //         </tr>
+        //       </tbody>
+        //     </table>
+        //   `,
+        //   //pasoActual: 2,
+        //   //totalPasos: 5,
+        //   elemento: e.target.id
+        // });
+      }
+    }
+});
+}
+
+for (let icons of allicon) {
     icons.addEventListener("click", function(e) {
       if (apiweb.checked) {
         if (ciudad.textContent != 'Acceso denegado a ubicación!') {
-          iconPressed(e);
+          //iconPressed(e);
+          clase = 'img.IconForecast';
+          if (indiceActual == -1) {
+            indiceActual = 0;
+          };
+          mostrarModal(e.target.id, clase);
         }
       }
   });
@@ -1509,3 +1887,140 @@ ciudad.addEventListener("mouseover", function() {
   ciudad.title = TituloActual + ', ' + fechaFormateada;
   //console.log(TituloActual);
 });
+
+function ObtenerIconosWeb(desc, horas) {
+  const isday = esDeNoche(horas);
+  if (desc == 'Soleado') {
+    if (isday == 'si') {
+      return sol;
+    } else {
+      return nochedespejada;
+    }
+  } else if (desc == 'Despejado') {
+    if (isday == 'si') {
+      return diadespejado;
+    } else {
+      return nochedespejada;
+    }
+  } else if (desc == 'Parcialmente nublado') {
+    if (isday == 'si') {
+      return nubladoparcial;
+    } else {
+      return nochenubladoparcial;
+    }
+  } else if (desc == 'Lluvia dispersa cerca') {
+    if (isday == 'si') {
+      return lluviadispersa;
+    } else {
+      return nochelluviadispersa;
+    }
+  } else if (desc == 'Llovizna ligera dispersa') {
+    if (isday == 'si') {
+      return lluviadispersa;
+    } else {
+      return nochelluviadispersa;
+    }
+  } else if (desc == 'Llovizna' || desc.includes('Llovizna')) {
+    if (isday == 'si') {
+      return llovizna;
+    } else {
+      return nochellovizna;
+    }
+  } else if (desc == 'Llovizna ligera') {
+    if (isday == 'si') {
+      return lluviadispersa;
+    } else {
+      return nochelluviadispersa;
+    }
+  } else if (desc == 'Lluvia ligera' || desc == 'Lluvia moderada' || desc == 'Lluvia moderada a intervalos') {
+    if (isday == 'si') {
+      return lluvialigera;
+    } else {
+      return nochelluvialigera;
+    }
+  } else if (desc == 'Nieve moderada') {
+    if (isday == 'si') {
+      return nievemoderada;
+    } else {
+      return nochenievemoderada;
+    }
+  } else if (desc == 'Nieve ligera' || desc == 'Nieve ligera dispersa') {
+    if (isday == 'si') {
+      return nieveliviana;
+    } else {
+      return nochenieveliviana;
+    }
+  } else if (desc == 'Chubascos de nieve moderados o fuertes') {
+    if (isday == 'si') {
+      return nievemoderada;
+    } else {
+      return nochenievemoderada;
+    }
+  } else if (desc == 'Mucha nieve') {
+    if (isday == 'si') {
+      return nieveheavy;
+    } else {
+      return nochenieveheavy;
+    }
+  } else if (desc == 'Cielo cubierto') {
+    if (isday == 'si') {
+      return cubierto;
+    } else {
+      return nochenublada;
+    }
+  } else if (desc == 'Nublado') {
+    if (isday == 'si') {
+      return nublado;
+    } else {
+      return nochenublada;
+    }
+  } else if (desc == 'Niebla helada') {
+    if (isday == 'si') {
+      return neblinoso;
+    } else {
+      return nocheneblinoso;
+    }
+  } else if (desc == 'Niebla moderada') {
+    if (isday == 'si') {
+      return neblinoso;
+    } else {
+      return nocheneblinoso;
+    }
+  } else if (desc == 'Neblina') {
+    if (isday == 'si') {
+      return neblina;
+    } else {
+      return nocheneblina;
+    }
+  } else if (desc == 'Lluvia ligera y helada') {
+    if (isday == 'si') {
+      return lluviahelada;
+    } else {
+      return nochelluviahelada;
+    }
+  } else if (desc == 'Cielos tormentosos en las aproximaciones') {
+    if (isday == 'si') {
+      return tormenta;
+    } else {
+      return nochetormenta;
+    }
+  }
+  //icon.alt = description.textContent;
+}
+
+function esDeNoche(hora) {
+  // Convertir la hora a número para compararla
+  const horas = [
+      "00:00", "03:00", "21:00"
+  ];
+
+  const [horaInicio, minutoInicio] = hora.split(":");
+
+  const horaNumerica = parseInt(horaInicio);
+
+  if (horas.includes(hora)) {
+      return 'no';  // Si la hora está entre las definidas como noche
+  } else {
+      return 'si';
+  }
+}

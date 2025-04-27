@@ -427,6 +427,178 @@ footer p {
     height: 20px;
 }
 
+/* .detalle-clima {
+    background-color: #184157;
+} */
+.swal2-container .swal2-popup {
+    background-color: #333 !important;
+}
+.generico {
+    width: 100%;
+    /* border-collapse: collapse; */
+    /* margin-top: 10px; */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    /* background-color: #99b4d1; */
+    border: 4px solid #608094;
+    border-radius: 5px;
+  }
+.tabla-clima {
+    width: 100%;
+    /* border-collapse: collapse; */
+    /* margin-top: 10px; */
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    /* background-color: #99b4d1; */
+    border: 4px solid #608094;
+    border-radius: 5px;
+  }
+
+  .tabla-clima .hora, .tabla-clima .temp {
+    width: 15%;
+  }
+
+  .tabla-clima .estado {
+    width: 70%;
+  }
+
+  .tabla-clima .estados {
+    /* width: 70%; */
+    display: flex;
+    text-align: justify;
+    align-items: center;
+    padding: 5px;
+  }
+
+  .tabla-clima tr {
+    /* background-color: #007BFF; */
+    /* background-color: #184157; */
+    /* background-color: #608094; */
+    background-color: #184157;
+    color: #fff;
+    /* border-radius: 5px; */
+  }
+  
+  .tabla-clima th, .tabla-clima td {
+    /* border: 1px solid #ddd; */
+    /* border: 1px solid blue; */    
+    padding: 8px;
+  }
+
+  .tabla-clima td img {
+    width: 35px;
+    height: 35px;
+    margin-right: 5px;
+    /* width: 1em; */
+    /* height: 1em; */
+    /* width: 30px; */
+    /* height: 30px; */
+  }
+  .tabla-clima .estados p {
+    margin: 0;
+  }
+
+  .tabla-clima td {
+    border-radius: 5px;
+  }
+  
+  .tabla-clima th, .generico th {
+    /* background-color: #4CAF50; */
+    /* background-color: rgb(170, 170, 170); */
+    /* background-color: #184157; */
+    background-color: #608094;
+    color: white;
+    border-radius: 5px;
+  }
+  
+  .tabla-clima tr:nth-child(even) {
+    /* background-color: #f2f2f2; */
+    /* background-color: #007BFF; */
+    /* background-color: #122b38cb; */
+    /* background-color: #99b4d1; */
+    background-color: #122b38cb;
+  }
+
+  .swal2-title {
+    color: #fff !important;
+    padding: 0 !important;
+  }
+  .swal2-title .citty, .swal2-title .pasos {
+    font-size: 1rem !important;
+  }
+
+  .swal2-actions {
+    margin: 0;
+  }
+
+  .swal2-confirm, .swal2-cancel, .swal2-deny {
+    position: relative !important;
+    width: 150px !important;
+    background-color: #007BFF !important;    
+    /* background-color: #6f42c1 !important;*/ /* color de fondo */
+    color: white !important;              /* color de texto */
+    font-size: 18px !important;            /* tamaño del texto */
+    padding: 10px 20px !important;         /* espacio interno */
+    border-radius: 5px !important;        /* bordes redondeados */
+    border: none !important;               /* sin bordes feos */
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2) !important; /* sombra */
+    /*transition: background 0.3s ease !important;*/ /* animación suave */
+    transition: background-color 0.3s ease !important;
+    overflow: hidden !important;
+  }
+
+  .swal2-confirm:before, .swal2-cancel:before, .swal2-deny:before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: rgba(255, 255, 255, 0.3) !important;
+    transform: skewX(-45deg) !important;
+    transition: left 0.5s ease !important;
+  }
+
+  .swal2-confirm:hover:before, .swal2-cancel:hover:before, .swal2-deny:hover:before {
+    left: 100% !important;
+}
+.generico thead .hora {
+    width: 40% !important;
+}
+.generico thead .temp {
+    width: 15% !important;
+}
+.generico thead .info {
+    width: 50% !important;
+}
+.generico thead th {
+    padding: 8px !important;
+}
+.generico tbody tr {
+    background-color: #184157 !important;
+}
+.generico .estado {
+    display: flex !important;
+    align-items: center !important;
+}
+.generico tr {
+    color: #fff !important;
+}
+.generico td img {
+    width: 35px !important;
+    height: 35px !important;
+    margin-right: 5px !important;
+}
+.swal2-title .tituI {
+    font-size: 16px !important;
+}
+  
+  /* .tabla-clima tr:hover {
+    background-color: #ddd;
+  } */
+
 
 /* @media only screen and (max-width: 400px)  { */
 /* @media only screen and (max-width: 450px)  { */
@@ -672,6 +844,91 @@ footer p {
         margin-bottom: 0;
         padding: 5px 0 5px 0;
         width: 100%;
+    }
+    .swal2-container .swal2-popup {
+        border: 1px solid blue !important;
+        /* padding: 1em 0.5em 1em 0.5em !important; */
+        padding: 0.5em !important;
+        background-color: #99b4d1 !important;
+    }
+    .tabla-clima, .generico {
+        font-size: 12px !important;
+        /* border: 1px solid blue !important; */
+        border: 2px solid #608094 !important;
+    }
+    .tabla-clima td img {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .generico td img {
+        width: 30px !important;
+        height: 30px !important;
+        margin: 0 !important;
+    }
+    .tabla-clima thead .hora {
+        width: 10% !important;
+        padding: 3px !important;
+        /* font-size: 10px !important; */
+    }
+    .tabla-clima thead .temp, .generico thead .temp {
+        width: 10% !important;
+        font-size: 10px !important;
+        padding: 3px !important;
+    }
+    .tabla-clima tbody tr, .generico tbody tr {
+        font-size: 10px !important;
+    }
+    .generico .estado {
+        display: block !important;
+    }
+    .generico .estado p {
+        margin: 0 !important;
+    }
+    .generico thead .hora {
+        width: 35% !important;
+        padding: 3px !important;
+    }
+    .tabla-clima tbody .estados, .generico tbody .infor {
+        padding: 3px !important;
+        font-size: 12px !important;
+    }
+    /* .tabla-clima tbody .hora, .tabla-clima tbody .estados { */
+        /* width: 15% !important; */
+        /* padding: 3px !important; */
+        /* font-size: 10px !important; */
+    /* } */
+    .tabla-clima tbody .temp, .tabla-clima tbody .hora, .generico tbody .temp, .generico tbody .hora {
+        /* font-size: 10px !important; */
+        width: 10% !important;
+        padding: 3px !important;
+    }
+    .tabla-clima .estado {
+        width: 60% !important;
+    }
+    /* .tabla-clima .estados p {
+        font-size: 10px !important;
+    } */
+    .swal2-title {
+        font-size: 14px !important;
+        color: #fff !important;
+        padding: 0 !important;
+    }
+    .swal2-title .citty, .swal2-title .pasos {
+        font-size: 12px !important;
+    }
+    .swal2-confirm, .swal2-cancel, .swal2-deny {
+        width: 100px !important;
+        font-size: 12px !important;
+        padding: 5px !important;
+    }
+    .swal2-html-container {
+        padding: 3px !important;
+    }
+    .swal2-actions {
+        flex-wrap: nowrap !important;
+    }
+    .swal2-container .swal2-popup {
+        --swal2-show-animation: none !important;
     }
 }
 
