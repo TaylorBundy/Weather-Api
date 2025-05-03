@@ -456,9 +456,26 @@ footer p {
     border-radius: 5px;
   }
 
-  .tabla-clima .hora, .tabla-clima .temp {
-    width: 15%;
+  .tabla-clima .hora, .tabla-clima .temp, .tabla-clima .wind {
+    width: 10%;
+    font-size: 14px;
+    padding: 8px 3px;
   }
+  .tabla-clima th {
+    font-size: 14px;
+  }
+
+  /* .tabla-clima .temp {
+    width: 10%;
+    font-size: 14px;
+    padding: 3px;
+  }
+
+  .tabla-clima .wind {
+    width: 10%;
+    font-size: 14px;
+    padding: 3px;
+  } */
 
   .tabla-clima .estado {
     width: 70%;

@@ -863,6 +863,19 @@ async function obtener2(lat, long) {
     locations2 = await data2["data"];
     current2 = await locations2["current_condition"][0];
     current3 = await locations2["weather"];
+    console.log(current3);
+    const jsonString = JSON.stringify(await data2, null, 2);
+    const blob = new Blob([jsonString], { type: "application/json" });
+    // Crear enlace de descarga
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "datos.json";
+
+    // Simular click para descargar
+    link.click();
+
+    // Liberar el objeto URL
+    URL.revokeObjectURL(link.href);
   }
   finally {
     weather.style.display = 'block';
@@ -1427,6 +1440,7 @@ let titulo = '';
 let titulo2 = '';
 let numero = '';
 let clase = '';
+let actual = '';
 
 // Función para mostrar el modal
 function mostrarModal(elid, clase) {
@@ -1434,21 +1448,30 @@ function mostrarModal(elid, clase) {
   //const numero1 = elid.replace(/\D/g, '');
   //const numero = 'Dia' + elid.replace(/\D/g, '');
   //console.log(`ID: ${elid} - CLASE: ${clase}`);
-  if (clase == 'img.IconForecast') {
-    numero = 'Icon-D' + elid.replace(/\D/g, '');    
-  } else if (clase == 'p.DayForecast'){
-    numero = 'Dia' + elid.replace(/\D/g, '');    
+  if (clase != '') {
+    if (clase == 'img.IconForecast') {
+      numero = 'Icon-D' + elid.replace(/\D/g, '');    
+    } else if (clase == 'p.DayForecast'){
+      numero = 'Dia' + elid.replace(/\D/g, '');    
+    }
+    todosIconos = [];
+    if (todosIconos.length === 0) {
+      //todosIconos = Array.from(document.querySelectorAll('img.IconForecast')); // ⚡ poné tu clase
+      todosIconos = Array.from(document.querySelectorAll(`${clase}`));
+    }
+    actual = document.getElementById(`${numero}`);
+    indiceActual = todosIconos.indexOf(actual); // Seteamos índiceActual
+  } else {
+    if (elid == 'icon') {
+      numero = elid;
+    }
+    actual = document.getElementById(`${numero}`);
   }
-  todosIconos = [];
-  if (todosIconos.length === 0) {
-    //todosIconos = Array.from(document.querySelectorAll('img.IconForecast')); // ⚡ poné tu clase
-    todosIconos = Array.from(document.querySelectorAll(`${clase}`));
-  }
+  
 
   //var actual = document.getElementById(elid);
   //console.log(todosIconos);
-  var actual = document.getElementById(`${numero}`);
-  indiceActual = todosIconos.indexOf(actual); // Seteamos índiceActual
+  
   if (clase == 'img.IconForecast') {
     //const numero = 'Icon-D' + elid.replace(/\D/g, '');
     //console.log(`ACTUAL: ${actual.id}`);
@@ -1461,6 +1484,8 @@ function mostrarModal(elid, clase) {
     //console.log(indiceActual);
     //mostrarModalGenerico({titulo: titulo, tabla: tabla, elemento: actual});
     mostrarModalGenerico(actual);
+  } else if (elid == 'icon') {
+    abrirModal2(actual);
   }
 }
 
@@ -1514,6 +1539,7 @@ function abrirModal(elemento) {
   const invertida = [partes[2], partes[1], partes[0]].join('-');
   const encontrado = current3.find(item => item.date === invertida);
   const leti = encontrado["hourly"];
+  console.log(leti);
 
   DatosTabla = []; // Limpiamos antes
   for (let c = 0; c < leti.length; c++) {
@@ -1607,6 +1633,176 @@ function abrirModal(elemento) {
       console.log('Usuario cerró el modal');
       indiceActual = 0;
       clase = '';
+      //console.log(indiceActual);
+    }
+  });
+}
+
+// Función para abrir el SweetAlert del ícono actual
+function abrirModal2(elemento) {
+  //const elid = elemento.id;
+  //const numero = 'Dia' + elid.replace(/\D/g, '');
+  //const aver = document.getElementById(numero).title;
+  //const numero1 = elid.replace(/\D/g, '');
+  //console.log(numero1);
+  // if (indiceActual == -1) {
+  //   indiceActual++;
+  // }
+  // if (indiceActual < todosIconos.length -1) {
+  //   const numero2 = Number(numero1) + 1;
+  //   const numero3 = 'Dia' + numero2;
+  //   aver2 = document.getElementById(numero3);
+  //   if (aver2) {
+  //     titulo = aver2.title;
+  //   }
+  // }
+  // if (indiceActual > 0) {
+  //   const numero4 = Number(numero1) - 1;
+  //   const numero5 = 'Dia' + numero4;
+  //   aver3 = document.getElementById(numero5);
+  //   if (aver3) {
+  //     titulo2 = aver3.title;
+  //   }
+  // }
+
+  // const loco = aver.split(" ");
+  // const loco1 = loco[0].slice(0,3);
+  // const partes = loco[1].split('-');
+  // const invertida = [partes[2], partes[1], partes[0]].join('-');
+  // const encontrado = current3.find(item => item.date === invertida);
+  // const leti = encontrado["hourly"];
+
+  //tablaHTML = [];
+  DatosTabla = []; // Limpiamos antes
+  const leti = current3[0]["hourly"];
+  //console.log(leti);
+  for (let c = 0; c < leti.length; c++) {
+    let tiiime = leti[c]["time"];
+    //console.log(tiiime);
+    let texto = leti[c]["lang_es"][0].value.trim();
+    let temp = leti[c]["tempC"];
+    let wind = leti[c]["windspeedKmph"];
+    const str = tiiime.toString().padStart(4, '0');
+    const horaFormateada = `${str.slice(0, 2)}:${str.slice(2)}`;
+    let desssc = texto.replace(/\s+/g, ' ').trim();
+    const icono = ObtenerIconosWeb(desssc, horaFormateada);
+    DatosTabla.push({ hora: horaFormateada, estado: desssc, temp: temp, icono: icono, wind: wind });
+  }
+  //const loco = aver.split(" ");
+  //const loco1 = loco[0].slice(0,3);
+  //const estado1 = 'Icon-D' + elid.replace(/\D/g, '');
+  //const temp1 = 'Temp-D' + elid.replace(/\D/g, '');
+  //const aver = document.getElementById(elid).title;
+  //const loco = aver.split(" ");
+  //const loco1 = loco[0].slice(0,3);
+  //const estado = document.getElementById(estado1);
+  //const temp = document.getElementById(temp1);
+  // tablaHTML = `
+  //   <table class="generico">
+  //     <thead>
+  //       <tr>
+  //         <th class="hora">Hora</th>
+  //         <th class="estado">Estado del clima por hora</th>
+  //         <th class="temp">Temp</th>
+  //       </tr>
+  //     </thead>
+  //     <tbody>
+  //       <tr>
+  //         <td class="hora">${horaFormateada}</td>
+  //         <td class="estados"><img src="${icono}"><p>${desssc}</p></td>
+  //         <td class="temp">${temp}°C</td>
+  //       </tr>
+  //     </tbody>
+  //   </table>`;
+  let tablaHTML = `
+    <table class="tabla-clima">
+      <thead>
+        <tr>
+          <th class="hora">Hora</th>
+          <th class="estado">Estado del clima por hora</th>
+          <th class="temp">Temp</th>
+          <th class="wind">Wind</th>
+        </tr>
+      </thead>
+      <tbody>
+    `;
+  
+    DatosTabla.forEach(item => {
+      tablaHTML += `
+        <tr>
+          <td class="hora">${item.hora}</td>
+          <td class="estados"><img src="${item.icono}"><p>${item.estado}</p></td>
+          <td class="temp">${item.temp}°C</td>
+          <td class="wind">${item.wind} km/h</td>
+        </tr>`;
+    });
+  
+  tablaHTML += `</tbody></table>`;
+
+  Swal.fire({
+    //title: `Estado del clima - ${fechaFormateada} ${ciudad.textContent}<br><small class="citty">${cityyy2}</small><br><small class="pasos">Día ${indiceActual + 1} de ${todosIconos.length}</small>`,
+    title: `Estado del clima - ${fechaFormateada}<br><small class="citty">${cityyy2}</small>`,
+    html: tablaHTML,
+    width: 700,
+    padding: '1em',
+    //showDenyButton: true,
+    //showCancelButton: true,
+    //confirmButtonText: 'Siguiente',
+    //denyButtonText: 'Anterior',
+    //cancelButtonText: 'Cerrar',
+    //reverseButtons: true,
+    didOpen: () => {
+      //const botonConfirm = document.querySelector('.swal2-confirm');
+      //const botonDeny = document.querySelector('.swal2-deny');
+      const botonCancel = document.querySelector('.swal2-cancel');
+
+      // if (botonConfirm) {
+      //   //botonConfirm.setAttribute('title', 'Ir al siguiente clima');
+      //   botonConfirm.setAttribute('title', `Ir al ${titulo}`);
+      //   if (indiceActual >= todosIconos.length - 1) {
+      //     botonConfirm.disabled = true;
+      //     botonConfirm.innerText = 'No hay más';
+      //     botonConfirm.style.backgroundColor = '#888';
+      //     botonConfirm.setAttribute('title', 'No hay mas datos');
+      //   }
+      // }
+
+      // if (botonDeny) {
+      //   //botonDeny.setAttribute('title', 'Volver al anterior');
+      //   botonDeny.setAttribute('title', `Volver al ${titulo2}`);
+      //   if (indiceActual <= 0) {
+      //     botonDeny.disabled = true;
+      //     botonDeny.innerText = 'No disponible';
+      //     botonDeny.style.backgroundColor = '#888';
+      //     botonDeny.setAttribute('title', 'No hay nada anterior');
+      //   }
+      // }
+
+      if (botonCancel) {
+        botonCancel.setAttribute('title', 'Cerrar ventana');
+      }
+    }
+  }).then((result) => {
+    // if (result.isConfirmed) {
+    //   if (indiceActual < todosIconos.length - 1) {
+    //     indiceActual++;
+    //     abrirModal2(todosIconos[indiceActual]);
+    //   }
+    // } else if (result.isDenied) {
+    //   if (indiceActual > 0) {
+    //     indiceActual--;
+    //     abrirModal2(todosIconos[indiceActual]);
+    //   }
+    // } else if (result.isDismissed) {
+    //   console.log('Usuario cerró el modal');
+    //   indiceActual = 0;
+    //   clase = '';
+    //   //console.log(indiceActual);
+    // }
+    if (result.isDismissed) {
+      console.log('Usuario cerró el modal');
+      //indiceActual = 0;
+      //clase = '';
       //console.log(indiceActual);
     }
   });
@@ -1826,6 +2022,22 @@ for (let icons of allday) {
 });
 }
 
+icon.addEventListener("click", function(e) {
+  //console.log(e.target.id);
+  //console.log(current3[0]['hourly']);
+  mostrarModal(e.target.id, '');
+  // if (apiweb.checked) {
+  //   if (ciudad.textContent != 'Acceso denegado a ubicación!') {
+  //     //iconPressed(e);
+  //     clase = 'img.IconForecast';
+  //     if (indiceActual == -1) {
+  //       indiceActual = 0;
+  //     };
+  //     mostrarModal(e.target.id, clase);
+  //   }
+  // }
+});
+
 for (let icons of allicon) {
     icons.addEventListener("click", function(e) {
       if (apiweb.checked) {
@@ -1932,7 +2144,7 @@ function ObtenerIconosWeb(desc, horas) {
     } else {
       return nochelluviadispersa;
     }
-  } else if (desc == 'Lluvia ligera' || desc == 'Lluvia moderada' || desc == 'Lluvia moderada a intervalos') {
+  } else if (desc == 'Lluvia ligera' || desc == 'Lluvia moderada' || desc == 'Lluvia moderada a intervalos' || desc.includes("Ligeras lluvias")) {
     if (isday == 'si') {
       return lluvialigera;
     } else {
@@ -1944,7 +2156,7 @@ function ObtenerIconosWeb(desc, horas) {
     } else {
       return nochenievemoderada;
     }
-  } else if (desc == 'Nieve ligera' || desc == 'Nieve ligera dispersa') {
+  } else if (desc == 'Nieve ligera' || desc == 'Nieve ligera dispersa' || desc.includes("Nevadas ligeras")) {
     if (isday == 'si') {
       return nieveliviana;
     } else {
@@ -1956,7 +2168,7 @@ function ObtenerIconosWeb(desc, horas) {
     } else {
       return nochenievemoderada;
     }
-  } else if (desc == 'Mucha nieve') {
+  } else if (desc == 'Mucha nieve' || desc.includes("Nevadas intensas")) {
     if (isday == 'si') {
       return nieveheavy;
     } else {
