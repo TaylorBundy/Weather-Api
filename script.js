@@ -864,18 +864,18 @@ async function obtener2(lat, long) {
     current2 = await locations2["current_condition"][0];
     current3 = await locations2["weather"];
     console.log(current3);
-    const jsonString = JSON.stringify(await data2, null, 2);
-    const blob = new Blob([jsonString], { type: "application/json" });
-    // Crear enlace de descarga
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "datos.json";
+    // const jsonString = JSON.stringify(await data2, null, 2);
+    // const blob = new Blob([jsonString], { type: "application/json" });
+    // // Crear enlace de descarga
+    // const link = document.createElement("a");
+    // link.href = URL.createObjectURL(blob);
+    // link.download = "datos.json";
 
-    // Simular click para descargar
-    link.click();
+    // // Simular click para descargar
+    // link.click();
 
-    // Liberar el objeto URL
-    URL.revokeObjectURL(link.href);
+    // // Liberar el objeto URL
+    // URL.revokeObjectURL(link.href);
   }
   finally {
     weather.style.display = 'block';
