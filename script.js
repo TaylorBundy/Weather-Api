@@ -758,6 +758,7 @@ async function obtener() {
       descFinal = await data3['narrative'];
       diaActual = data3["dayOfWeek"][0];
       laciudad = locations.neighborhood;
+      laciudad = laciudad.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       laprovincia = torta.value;
       laprovincia = laprovincia.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       obtener4(laciudad, laprovincia);
