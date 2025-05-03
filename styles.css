@@ -865,7 +865,7 @@ footer p {
     .swal2-container .swal2-popup {
         border: 1px solid blue !important;
         /* padding: 1em 0.5em 1em 0.5em !important; */
-        padding: 0.5em !important;
+        padding: 0.5em 0.4em !important;
         background-color: #99b4d1 !important;
     }
     .tabla-clima, .generico {
@@ -885,9 +885,9 @@ footer p {
     .tabla-clima thead .hora {
         width: 10% !important;
         padding: 3px !important;
-        /* font-size: 10px !important; */
+        font-size: 10px !important;
     }
-    .tabla-clima thead .temp, .generico thead .temp {
+    .tabla-clima thead .temp, .tabla-clima thead .wind, .generico thead .temp {
         width: 10% !important;
         font-size: 10px !important;
         padding: 3px !important;
@@ -914,13 +914,18 @@ footer p {
         /* padding: 3px !important; */
         /* font-size: 10px !important; */
     /* } */
+    .tabla-clima tbody .wind {
+        font-size: 9px !important;
+    }
+    
     .tabla-clima tbody .temp, .tabla-clima tbody .hora, .generico tbody .temp, .generico tbody .hora {
-        /* font-size: 10px !important; */
+        font-size: 10px !important;
         width: 10% !important;
         padding: 3px !important;
     }
     .tabla-clima .estado {
         width: 60% !important;
+        font-size: 10px !important;
     }
     /* .tabla-clima .estados p {
         font-size: 10px !important;

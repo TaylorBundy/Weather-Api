@@ -30,6 +30,7 @@ let current = '';
 let current2 = '';
 let current3 = '';
 let current4 = '';
+let current5 = '';
 let country = '';
 let region = '';
 const weather = document.querySelector('#weather-card');
@@ -88,6 +89,9 @@ let toto = '';
 let days = [];
 const favicon = document.querySelector('#favicon');
 const main = document.getElementById('MainForm');
+const ciudadesSelect = document.getElementById("ciudades");
+let laciudad = '';
+let laprovincia = '';
 
 //definimos constante plataforma
 const plataforma = navigator.userAgent;
@@ -214,6 +218,8 @@ let cityyy = '';
 let cityyy2 = '';
 let proviii = '';
 let paiiis = '';
+let nombre_fecha = '';
+let numero_fecha = '';
 
 async function locali(apiip) {
   const API_URL = `https://apiip.net/api/check?accessKey=${apiip}&language=es`;
@@ -268,6 +274,9 @@ window.onload = function() {
       ANIO = date.getFullYear();
 
       fechaFormateada = `${diaNombre} ${DIA}-${MES}-${ANIO}`;
+      const fecha_entera= fechaFormateada.split(" ");
+      nombre_fecha = fecha_entera[0].slice(0,3);
+      numero_fecha = fecha_entera[1];
 
       //console.log(fechaFormateada);
       //console.log(DiaActual);
@@ -556,7 +565,6 @@ function comprobarCookieLocal(clave) {
     }
   //}
 }
-
 //creamos la funcion para ordenar alfabeticamente la lista de ciudades
 function OrdenaCiudades() {
   var my_options = $("#ciudades option");
@@ -616,7 +624,6 @@ function Titulos() {
 // Obtener los elementos del DOM
 //const provinciasSelect = document.getElementById("provincias");
 //const provinciasSelect = document.getElementById("provincias");
-const ciudadesSelect = document.getElementById("ciudades");
 
 const despejado = 'Imagenes/despejado.svg';
 const diadespejado = 'Imagenes/dia-despejado.svg';
@@ -643,6 +650,8 @@ const nievemoderada = 'Imagenes/nieve-moderada.svg';
 const nochenievemoderada = 'Imagenes/nieve-moderada-noche.svg';
 const nieveheavy = 'Imagenes/nieve-heavy.svg';
 const nochenieveheavy = 'Imagenes/nieve-heavy-noche.svg';
+const lluviaheavy = 'Imagenes/lluvia-heavy.svg';
+const nochelluviaheavy = 'Imagenes/lluvia-heavy-noche.svg';
 const nieveliviana = 'Imagenes/nieve-liviana.svg';
 const nochenieveliviana = 'Imagenes/nieve-liviana-noche.svg';
 const tormenta = 'Imagenes/tormenta.svg';
@@ -650,6 +659,10 @@ const tormentas = 'Imagenes/tormentas-2.svg';
 const nochetormenta = 'Imagenes/tormenta-noche.svg';
 const formaciontormenta = 'Imagenes/formacion-tormenta.svg';
 const cubierto = 'Imagenes/cubierto.svg';
+const aguanieve = 'Imagenes/dia-aguanieve.svg';
+const nocheaguanieve = 'Imagenes/noche-aguanieve.svg';
+const lluvia = 'Imagenes/lluvia.svg';
+const nochelluvia = 'Imagenes/lluvia-noche.svg';
 //const nievemoderada2 = 'Imagenes/nieve-moderada-2.gif';
 
 let salesol = '';
@@ -673,21 +686,45 @@ function Actualiza() {
 let diaActual = '';
 //creamos la funcion para obtener los datos del clima
 async function obtener() {
-  var sinacento = ciudadesSelect.value;
-  const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ',' + torta.value + ',Argentina' + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
+  //var sinacento = ciudadesSelect.value;
+  //let laciudad = sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  //console.log(laciudad);
+  //const url1 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ',' + torta.value + ',Argentina' + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
+  //const url1 = `https://api.worldweatheronline.com/premium/v1/weather.ashx?key=${apikey2}&q=${laciudad},${torta.value},argentina&format=json&num_of_days=6&fx=yes&mca=no&fx24=yes&includelocation=no&showlocaltime=yes&lang=es`;
+  //console.log(`url1: ${url1}`);
   try {
     if (apiweb.checked) {
-      origen = url + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + ', Argentina';
+      laciudad = ciudadesSelect.value;
+      laciudad = laciudad.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      laprovincia = torta.value;
+      laprovincia = laprovincia.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      //var sinacento = ciudadesSelect.value;
+      //let laciudad = sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      //let laprovincia = torta.value;
+      //laprovincia = laprovincia.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      //console.log(laprovincia);
+      //const url1 = `https://api.worldweatheronline.com/premium/v1/weather.ashx?key=${apikey2}&q=${laciudad},${torta.value},argentina&format=json&num_of_days=6&fx=yes&mca=no&fx24=yes&includelocation=no&showlocaltime=yes&lang=es`;
+      const url1 = `https://api.worldweatheronline.com/premium/v1/weather.ashx?key=${apikey2}&q=${laciudad},${laprovincia},argentina&format=json&num_of_days=6&fx=yes&mca=no&fx24=yes&includelocation=no&showlocaltime=yes&lang=es`;
+      //console.log(`url1: ${url1}`);
+      //origen = url + sinacento.normalize("NFD").replace(/[\u0300-\u036f]/g, "") + ', ' + torta.value + ', Argentina';
       data2 = await obtenerDatosApi(url1);
       locations2 = await data2["data"];
       current2 = await locations2["current_condition"][0];
+      //console.log(data2);
       current3 = await locations2["weather"];
     } else if (apilocal.checked) {
+      //let fechafinal = `${Number(DIA) + c}-${MES}-${ANIO}`;
+      let fechafinal2 = `${ANIO}${MES}${DIA}`;
+      //console.log(`fechafinal: ${fechafinal2}`);
       document.querySelector("#ciudades").selectedIndex = 1;
-      origen = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
+      origen = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&numericPrecision=decimal&apiKey=a781055ea4224f7b81055ea4224f7b78';
+      //origen = 'https://api.weather.com/v2/pws/observations/current?stationId=IALUMI7&format=json&units=e&apiKey=a781055ea4224f7b81055ea4224f7b78';
       origen1 = 'https://api.weather.com/v2/pws/dailysummary/7day?stationId=IALUMI7&format=json&units=m&apiKey=a781055ea4224f7b81055ea4224f7b78';
       origen2 = 'https://api.weather.com/v3/wx/forecast/daily/5day?geocode=-38.88,-71.19&format=json&units=m&language=es-AR&apiKey=a781055ea4224f7b81055ea4224f7b78';
-      origen3 = 'https://api.weather.com/v2/pws/history/hourly?stationId=' + stationID + '&format=json&units=m&date=20250422&apiKey=' + wunderApiKey;
+      //origen3 = 'https://api.weather.com/v2/pws/history/hourly?stationId=' + stationID + '&format=json&units=m&date=20250422&apiKey=' + wunderApiKey;
+      //origen3 = 'https://api.weather.com/v2/pws/history/hourly?stationId=' + stationID + `&format=json&units=e&date=${fechafinal2}&apiKey=` + wunderApiKey;
+      //let origen4 = 'https://api.weather.com/v2/pws/history/all?stationId=' + stationID + `&format=json&units=e&date=${fechafinal2}&apiKey=` + wunderApiKey;
+      //let origen5 = 'https://api.weather.com/v2/pws/observations/all/1day?stationId=' + stationID + `&format=json&units=m&apiKey=` + wunderApiKey;
       //origen3 = 'https://api.weather.com/v2/pws/history/hourly?stationId=' + stationID + '&format=json&units=m&startDate=20250422&endDate=20250427&apiKey=' + wunderApiKey;
       const options = {
         headers:{
@@ -696,12 +733,22 @@ async function obtener() {
       };
       resp = await fetch(origen, options);
       data = await resp.json();
+      //console.log(data);
+      latitud = await data["observations"][0]["lat"];
+      longitud = await data["observations"][0]["lon"];
+      //console.log(`lat: ${parseFloat(latitud.toFixed(2))} - lon: ${parseFloat(longitud.toFixed(2))}`);
+      //obtener3(parseFloat(latitud.toFixed(2)), parseFloat(longitud.toFixed(2)));
       resp2 = await fetch(origen1, options);
       data2 = await resp2.json();
+      //console.log(data2);
       resp3 = await fetch(origen2, options);
       data3 = await resp3.json();
-      resp4 = await fetch(origen3, options);
-      data4 = await resp4.json();
+      //console.log(data3);
+      //resp4 = await fetch(origen3, options);
+      //data4 = await resp4.json();
+      //console.log(data4);
+      //let resp5 = await fetch(origen5, options);
+      //data5 = await resp5.json();
       locations = await data["observations"][0];
       current = await locations["imperial"]["temp"];
       locations2 = data2["summaries"];
@@ -710,6 +757,11 @@ async function obtener() {
       current3 = await data3['calendarDayTemperatureMax'];
       descFinal = await data3['narrative'];
       diaActual = data3["dayOfWeek"][0];
+      laciudad = locations.neighborhood;
+      laprovincia = torta.value;
+      laprovincia = laprovincia.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      obtener4(laciudad, laprovincia);
+      //console.log(data5);
     }
   }
   finally {
@@ -829,6 +881,7 @@ async function obtener() {
           fechas.push(data3['validTimeLocal'][c]);
         }
       }
+      //console.log(fechas);
       if (Horas >= 6 && Horas < 21) {
         isday = 'si';
       } else {
@@ -863,7 +916,7 @@ async function obtener2(lat, long) {
     locations2 = await data2["data"];
     current2 = await locations2["current_condition"][0];
     current3 = await locations2["weather"];
-    console.log(current3);
+    //console.log(current3);
     // const jsonString = JSON.stringify(await data2, null, 2);
     // const blob = new Blob([jsonString], { type: "application/json" });
     // // Crear enlace de descarga
@@ -930,6 +983,46 @@ async function obtener2(lat, long) {
   }
 }
 
+//creamos la funcion para obtener los datos del clima posicion actual
+// async function obtener3(lat, long) {
+//   //origen = url + lat + ',' + long;
+//   const url10 = `https://api.worldweatheronline.com/premium/v1/weather.ashx?key=${apikey2}&q=${laciudad},${laprovincia},argentina&format=json&num_of_days=6&fx=yes&mca=no&fx24=yes&includelocation=no&showlocaltime=yes&lang=es`;
+//   //let url10 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + lat + ',' + long + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
+//   try {
+//     data2 = await obtenerDatosApi(url10);
+//     //console.log(data2);
+//     locations2 = await data2["data"];
+//     current2 = await locations2["current_condition"][0];
+//     //current3 = await locations2["weather"];
+//   }
+//   finally {
+//     temp.title = 'Sensación Térmica: ' + current2.FeelsLikeC + '°C';
+//   }
+// }
+
+async function obtener4(ciud, prov) {
+  //origen = url + lat + ',' + long;
+  const url10 = `https://api.worldweatheronline.com/premium/v1/weather.ashx?key=${apikey2}&q=${ciud},${prov},argentina&format=json&num_of_days=6&fx=yes&mca=no&fx24=yes&includelocation=no&showlocaltime=yes&lang=es`;
+  //let url10 = 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=' + apikey2 + '&q=' + lat + ',' + long + '&format=json&num_of_days=6&mca=no&fx=yes&includelocation=no&showlocaltime=yes&lang=es';
+  try {
+    //data2 = await obtenerDatosApi(url1);
+    // locations2 = await data2["data"];
+    // current2 = await locations2["current_condition"][0];
+    // //console.log(data2);
+    // current3 = await locations2["weather"];
+    data2 = await obtenerDatosApi(url10);
+    //console.log(data2);
+    locations2 = await data2["data"];
+    current2 = await locations2["current_condition"][0];
+    current5 = await locations2["weather"];
+    //console.log(current5);
+    //current3 = await locations2["weather"];
+  }
+  finally {
+    temp.title = 'Sensación Térmica: ' + current2.FeelsLikeC + '°C';
+  }
+}
+
 // Obtener datos de API
 async function obtenerDatosApi(url) {
   const response = await fetch(url);
@@ -991,6 +1084,12 @@ function IconosLocalExt() {
         toto = lluvialigera;
       } else if (item == 'Cielo prácticamente cubierto') {
         toto = nublado;
+      } else if (item == 'Lluvia') {
+        if (isday == 'si') {
+          toto = lluvia;
+        } else {
+          toto = nochelluvia;
+        }
       }
     }
     allicon[index].src = toto;
@@ -1167,6 +1266,12 @@ function IconosLocal() {
     } else {
       icon.src = nochelluvialigera;
     }
+  } else if (descFinal == 'Lluvia') {
+    if (isday == 'si') {
+      icon.src = lluvia;
+    } else {
+      icon.src = nochelluvia;
+    }
   }
   icon.alt = description.textContent;
 }
@@ -1336,15 +1441,16 @@ function TitulosFechas() {
 }
 
 function TitulosFechas2() {
-  try {
-    fechas = [];
-  }
-  finally {
-    for (let c = 1; c < 6; c++) {
-      let fechafinal = `${Number(DIA) + c}-${MES}-${ANIO}`;
-      fechas.push(fechafinal);
-    }
-  }
+  // try {
+  //   fechas = [];
+  // }
+  // finally {
+  //   for (let c = 1; c < 6; c++) {
+  //     //let fechafinal = `${Number(DIA) + c}-${MES}-${ANIO}`;
+  //     let fechafinal = `${DIA}-${MES}-${ANIO}`;
+  //     fechas.push(fechafinal);
+  //   }
+  // }
 
   fechas.forEach((item, index) => {
     for (x = 0; x < allday.length; x++) {
@@ -1353,7 +1459,11 @@ function TitulosFechas2() {
     for (let c = 0; c < days.length; c++) {
       fff = days[c];
       if (fff.includes(dia)) {
-        allday[index].title = days[c] + ' ' + item;
+        item = item.split("T")[0];
+        const partes = item.split('-');
+        const invertida = [partes[2], partes[1], partes[0]].join('-');
+        //console.log(days[c] + ' ' + invertida);
+        allday[index].title = days[c] + ' ' + invertida;
       }
     }
   })
@@ -1443,68 +1553,71 @@ let clase = '';
 let actual = '';
 
 // Función para mostrar el modal
-function mostrarModal(elid, clase) {
-  //indiceActual = '';
-  //const numero1 = elid.replace(/\D/g, '');
-  //const numero = 'Dia' + elid.replace(/\D/g, '');
-  //console.log(`ID: ${elid} - CLASE: ${clase}`);
-  if (clase != '') {
-    if (clase == 'img.IconForecast') {
-      numero = 'Icon-D' + elid.replace(/\D/g, '');    
-    } else if (clase == 'p.DayForecast'){
-      numero = 'Dia' + elid.replace(/\D/g, '');    
-    }
-    todosIconos = [];
-    if (todosIconos.length === 0) {
-      //todosIconos = Array.from(document.querySelectorAll('img.IconForecast')); // ⚡ poné tu clase
-      todosIconos = Array.from(document.querySelectorAll(`${clase}`));
-    }
-    actual = document.getElementById(`${numero}`);
-    indiceActual = todosIconos.indexOf(actual); // Seteamos índiceActual
-  } else {
-    if (elid == 'icon') {
-      numero = elid;
-    }
-    actual = document.getElementById(`${numero}`);
-  }
-  
-
-  //var actual = document.getElementById(elid);
-  //console.log(todosIconos);
-  
-  if (clase == 'img.IconForecast') {
-    //const numero = 'Icon-D' + elid.replace(/\D/g, '');
-    //console.log(`ACTUAL: ${actual.id}`);
-    //console.log(indiceActual);
-    abrirModal(actual);
-  } else if (clase == 'p.DayForecast'){
-    //const numero = 'Dia' + elid.replace(/\D/g, '');
-    //console.log(numero);
-    //console.log(`ACTUAL: ${actual.id}`);
-    //console.log(indiceActual);
-    //mostrarModalGenerico({titulo: titulo, tabla: tabla, elemento: actual});
-    mostrarModalGenerico(actual);
-  } else if (elid == 'icon') {
-    abrirModal2(actual);
-  }
-}
-
-// function mostrarModal2(elid, titulo, tabla, clase) {
-//   console.log(`ID: ${elid} - TITULO: ${titulo} - CLASE: ${clase}`);
-//   if (todosIconos.length === 0) {
-//     //todosIconos = Array.from(document.querySelectorAll('img.IconForecast')); // ⚡ poné tu clase
-//     todosIconos = Array.from(document.querySelectorAll(`${clase}`));
+// function mostrarModal(elid, clase) {
+//   //indiceActual = '';
+//   //const numero1 = elid.replace(/\D/g, '');
+//   //const numero = 'Dia' + elid.replace(/\D/g, '');
+//   //console.log(`ID: ${elid} - CLASE: ${clase}`);
+//   if (clase != '') {
+//     if (clase == 'img.IconForecast') {
+//       numero = 'Icon-D' + elid.replace(/\D/g, '');
+//     } else if (clase == 'p.DayForecast'){
+//       numero = 'Dia' + elid.replace(/\D/g, '');
+//     }
+//     todosIconos = [];
+//     if (todosIconos.length === 0) {
+//       //todosIconos = Array.from(document.querySelectorAll('img.IconForecast')); // ⚡ poné tu clase
+//       todosIconos = Array.from(document.querySelectorAll(`${clase}`));
+//     }
+//     actual = document.getElementById(`${numero}`);
+//     indiceActual = todosIconos.indexOf(actual); // Seteamos índiceActual
+//     //console.log(`indiceActual: ${indiceActual}`);
+//     //console.log(`actual: ${actual.id}`);
+//   } else {
+//     if (elid == 'icon') {
+//       //numero = elid;
+//       abrirModal2();
+//     }
+//     //actual = document.getElementById(`${numero}`);
 //   }
 
-//   var actual = document.getElementById(elid);
-//   indiceActual = todosIconos.indexOf(actual); // Seteamos índiceActual
-//   if (clase == '') {
+
+//   //var actual = document.getElementById(elid);
+//   //console.log(todosIconos);
+
+//   if (clase == 'img.IconForecast') {
+//     //const numero = 'Icon-D' + elid.replace(/\D/g, '');
+//     //console.log(`ACTUAL: ${actual.id}`);
+//     //console.log(indiceActual);
 //     abrirModal(actual);
-//   }
-//   if (clase == 'p.DayForecast'){
-//     mostrarModalGenerico({titulo, tabla, elid});
+//   } else if (clase == 'p.DayForecast'){
+//     //const numero = 'Dia' + elid.replace(/\D/g, '');
+//     //console.log(numero);
+//     //console.log(`ACTUAL: ${actual.id}`);
+//     //console.log(indiceActual);
+//     //mostrarModalGenerico({titulo: titulo, tabla: tabla, elemento: actual});
+//     mostrarModalGenerico(actual);
+//   } else if (elid == 'icon') {
+//     abrirModal2();
 //   }
 // }
+
+function mostrarModal(elid, clase) {
+  if (clase) {
+    const num = elid.replace(/\D/g, '');
+    numero = clase === 'img.IconForecast' ? `Icon-D${num}` : `Dia${num}`;
+    todosIconos = Array.from(document.querySelectorAll(clase));
+    actual = document.getElementById(numero);
+    indiceActual = todosIconos.indexOf(actual);
+  }
+  if (clase === 'img.IconForecast') {
+    abrirModal(actual);
+  } else if (clase === 'p.DayForecast') {
+    mostrarModalGenerico(actual);
+  } else if (elid === 'icon') {
+    abrirModal2();
+  }
+}
 
 // Función para abrir el SweetAlert del ícono actual
 function abrirModal(elemento) {
@@ -1512,10 +1625,7 @@ function abrirModal(elemento) {
   const numero = 'Dia' + elid.replace(/\D/g, '');
   const aver = document.getElementById(numero).title;
   const numero1 = elid.replace(/\D/g, '');
-  //console.log(numero1);
-  // if (indiceActual == -1) {
-  //   indiceActual++;
-  // }
+
   if (indiceActual < todosIconos.length -1) {
     const numero2 = Number(numero1) + 1;
     const numero3 = 'Dia' + numero2;
@@ -1537,20 +1647,25 @@ function abrirModal(elemento) {
   const loco1 = loco[0].slice(0,3);
   const partes = loco[1].split('-');
   const invertida = [partes[2], partes[1], partes[0]].join('-');
-  const encontrado = current3.find(item => item.date === invertida);
+  if (apiweb.checked) {
+    var encontrado = current3.find(item => item.date === invertida);
+  } else if (apilocal.checked) {
+    var encontrado = current5.find(item => item.date === invertida);
+  }
+  //const encontrado = current3.find(item => item.date === invertida);
   const leti = encontrado["hourly"];
-  console.log(leti);
 
   DatosTabla = []; // Limpiamos antes
   for (let c = 0; c < leti.length; c++) {
     let tiiime = leti[c]["time"];
     let texto = leti[c]["lang_es"][0].value.trim();
     let temp = leti[c]["tempC"];
+    let wind = leti[c]["windspeedKmph"];
     const str = tiiime.toString().padStart(4, '0');
     const horaFormateada = `${str.slice(0, 2)}:${str.slice(2)}`;
     let desssc = texto.replace(/\s+/g, ' ').trim();
     const icono = ObtenerIconosWeb(desssc, horaFormateada);
-    DatosTabla.push({ hora: horaFormateada, estado: desssc, temp: temp, icono: icono });
+    DatosTabla.push({ hora: horaFormateada, estado: desssc, temp: temp, icono: icono, wind: wind });
   }
 
   let tablaHTML = `
@@ -1560,6 +1675,7 @@ function abrirModal(elemento) {
         <th class="hora">Hora</th>
         <th class="estado">Estado del clima por hora</th>
         <th class="temp">Temp</th>
+        <th class="wind">Wind</th>
       </tr>
     </thead>
     <tbody>
@@ -1571,15 +1687,21 @@ function abrirModal(elemento) {
         <td class="hora">${item.hora}</td>
         <td class="estados"><img src="${item.icono}"><p>${item.estado}</p></td>
         <td class="temp">${item.temp}°C</td>
+        <td class="wind">${item.wind} km/h</td>
       </tr>`;
   });
 
   tablaHTML += `</tbody></table>`;
+  if (plataforma.includes('Win')) {
+    var textoform = 'Estado del clima';
+  } else if (plataforma.includes('Android')) {
+    var textoform = 'Clima';
+  }
 
   Swal.fire({
-    title: `Estado del clima - ${loco1} ${loco[1]}<br><small class="citty">${cityyy2}</small><br><small class="pasos">Día ${indiceActual + 1} de ${todosIconos.length}</small>`,
+    title: `${textoform} - ${loco1} ${loco[1]}<br><small class="citty">${cityyy2}</small><br><small class="pasos">Día ${indiceActual + 1} de ${todosIconos.length}</small>`,
     html: tablaHTML,
-    width: 600,
+    width: 700,
     padding: '1em',
     showDenyButton: true,
     showCancelButton: true,
@@ -1588,12 +1710,18 @@ function abrirModal(elemento) {
     cancelButtonText: 'Cerrar',
     reverseButtons: true,
     didOpen: () => {
+      const th = document.querySelector('th.estado');
       const botonConfirm = document.querySelector('.swal2-confirm');
       const botonDeny = document.querySelector('.swal2-deny');
       const botonCancel = document.querySelector('.swal2-cancel');
 
+      if (plataforma.includes('Win')) {
+        th.textContent = 'Estado del clima por hora';
+      } else if (plataforma.includes('Android')) {
+        th.textContent = 'Clima por hora';
+      }
+
       if (botonConfirm) {
-        //botonConfirm.setAttribute('title', 'Ir al siguiente clima');
         botonConfirm.setAttribute('title', `Ir al ${titulo}`);
         if (indiceActual >= todosIconos.length - 1) {
           botonConfirm.disabled = true;
@@ -1604,7 +1732,6 @@ function abrirModal(elemento) {
       }
 
       if (botonDeny) {
-        //botonDeny.setAttribute('title', 'Volver al anterior');
         botonDeny.setAttribute('title', `Volver al ${titulo2}`);
         if (indiceActual <= 0) {
           botonDeny.disabled = true;
@@ -1630,55 +1757,24 @@ function abrirModal(elemento) {
         abrirModal(todosIconos[indiceActual]);
       }
     } else if (result.isDismissed) {
-      console.log('Usuario cerró el modal');
+      //console.log('Usuario cerró el modal');
       indiceActual = 0;
       clase = '';
-      //console.log(indiceActual);
     }
   });
 }
 
 // Función para abrir el SweetAlert del ícono actual
-function abrirModal2(elemento) {
-  //const elid = elemento.id;
-  //const numero = 'Dia' + elid.replace(/\D/g, '');
-  //const aver = document.getElementById(numero).title;
-  //const numero1 = elid.replace(/\D/g, '');
-  //console.log(numero1);
-  // if (indiceActual == -1) {
-  //   indiceActual++;
-  // }
-  // if (indiceActual < todosIconos.length -1) {
-  //   const numero2 = Number(numero1) + 1;
-  //   const numero3 = 'Dia' + numero2;
-  //   aver2 = document.getElementById(numero3);
-  //   if (aver2) {
-  //     titulo = aver2.title;
-  //   }
-  // }
-  // if (indiceActual > 0) {
-  //   const numero4 = Number(numero1) - 1;
-  //   const numero5 = 'Dia' + numero4;
-  //   aver3 = document.getElementById(numero5);
-  //   if (aver3) {
-  //     titulo2 = aver3.title;
-  //   }
-  // }
-
-  // const loco = aver.split(" ");
-  // const loco1 = loco[0].slice(0,3);
-  // const partes = loco[1].split('-');
-  // const invertida = [partes[2], partes[1], partes[0]].join('-');
-  // const encontrado = current3.find(item => item.date === invertida);
-  // const leti = encontrado["hourly"];
-
-  //tablaHTML = [];
+function abrirModal2() {
   DatosTabla = []; // Limpiamos antes
-  const leti = current3[0]["hourly"];
-  //console.log(leti);
+  if (apiweb.checked) {
+    var leti = current3[0]["hourly"];
+  } else if (apilocal.checked) {
+    var leti = current5[0]["hourly"];
+  }
+  //const leti = current3[0]["hourly"];
   for (let c = 0; c < leti.length; c++) {
     let tiiime = leti[c]["time"];
-    //console.log(tiiime);
     let texto = leti[c]["lang_es"][0].value.trim();
     let temp = leti[c]["tempC"];
     let wind = leti[c]["windspeedKmph"];
@@ -1688,32 +1784,7 @@ function abrirModal2(elemento) {
     const icono = ObtenerIconosWeb(desssc, horaFormateada);
     DatosTabla.push({ hora: horaFormateada, estado: desssc, temp: temp, icono: icono, wind: wind });
   }
-  //const loco = aver.split(" ");
-  //const loco1 = loco[0].slice(0,3);
-  //const estado1 = 'Icon-D' + elid.replace(/\D/g, '');
-  //const temp1 = 'Temp-D' + elid.replace(/\D/g, '');
-  //const aver = document.getElementById(elid).title;
-  //const loco = aver.split(" ");
-  //const loco1 = loco[0].slice(0,3);
-  //const estado = document.getElementById(estado1);
-  //const temp = document.getElementById(temp1);
-  // tablaHTML = `
-  //   <table class="generico">
-  //     <thead>
-  //       <tr>
-  //         <th class="hora">Hora</th>
-  //         <th class="estado">Estado del clima por hora</th>
-  //         <th class="temp">Temp</th>
-  //       </tr>
-  //     </thead>
-  //     <tbody>
-  //       <tr>
-  //         <td class="hora">${horaFormateada}</td>
-  //         <td class="estados"><img src="${icono}"><p>${desssc}</p></td>
-  //         <td class="temp">${temp}°C</td>
-  //       </tr>
-  //     </tbody>
-  //   </table>`;
+
   let tablaHTML = `
     <table class="tabla-clima">
       <thead>
@@ -1726,7 +1797,7 @@ function abrirModal2(elemento) {
       </thead>
       <tbody>
     `;
-  
+
     DatosTabla.forEach(item => {
       tablaHTML += `
         <tr>
@@ -1736,90 +1807,43 @@ function abrirModal2(elemento) {
           <td class="wind">${item.wind} km/h</td>
         </tr>`;
     });
-  
+
   tablaHTML += `</tbody></table>`;
 
+  if (plataforma.includes('Win')) {
+    var textoform = 'Estado del clima';
+  } else if (plataforma.includes('Android')) {
+    var textoform = 'Clima';
+  }
+
   Swal.fire({
-    //title: `Estado del clima - ${fechaFormateada} ${ciudad.textContent}<br><small class="citty">${cityyy2}</small><br><small class="pasos">Día ${indiceActual + 1} de ${todosIconos.length}</small>`,
-    title: `Estado del clima - ${fechaFormateada}<br><small class="citty">${cityyy2}</small>`,
+    //title: `Estado del clima - ${nombre_fecha} ${numero_fecha}<br><small class="citty">${cityyy2}</small>`,
+    title: `${textoform} - ${nombre_fecha} ${numero_fecha}<br><small class="citty">${cityyy2}</small>`,
     html: tablaHTML,
     width: 700,
     padding: '1em',
-    //showDenyButton: true,
-    //showCancelButton: true,
-    //confirmButtonText: 'Siguiente',
-    //denyButtonText: 'Anterior',
-    //cancelButtonText: 'Cerrar',
-    //reverseButtons: true,
+    confirmButtonText: 'Cerrar',
     didOpen: () => {
-      //const botonConfirm = document.querySelector('.swal2-confirm');
-      //const botonDeny = document.querySelector('.swal2-deny');
-      const botonCancel = document.querySelector('.swal2-cancel');
-
-      // if (botonConfirm) {
-      //   //botonConfirm.setAttribute('title', 'Ir al siguiente clima');
-      //   botonConfirm.setAttribute('title', `Ir al ${titulo}`);
-      //   if (indiceActual >= todosIconos.length - 1) {
-      //     botonConfirm.disabled = true;
-      //     botonConfirm.innerText = 'No hay más';
-      //     botonConfirm.style.backgroundColor = '#888';
-      //     botonConfirm.setAttribute('title', 'No hay mas datos');
-      //   }
-      // }
-
-      // if (botonDeny) {
-      //   //botonDeny.setAttribute('title', 'Volver al anterior');
-      //   botonDeny.setAttribute('title', `Volver al ${titulo2}`);
-      //   if (indiceActual <= 0) {
-      //     botonDeny.disabled = true;
-      //     botonDeny.innerText = 'No disponible';
-      //     botonDeny.style.backgroundColor = '#888';
-      //     botonDeny.setAttribute('title', 'No hay nada anterior');
-      //   }
-      // }
-
-      if (botonCancel) {
-        botonCancel.setAttribute('title', 'Cerrar ventana');
+      const th = document.querySelector('th.estado');
+      const botonConfirm = document.querySelector('.swal2-confirm');
+      if (plataforma.includes('Win')) {
+        th.textContent = 'Estado del clima por hora';
+      } else if (plataforma.includes('Android')) {
+        th.textContent = 'Clima por hora';
+      }
+      if (botonConfirm) {
+        botonConfirm.setAttribute('title', `Cerrar Ventana`);
       }
     }
-  }).then((result) => {
-    // if (result.isConfirmed) {
-    //   if (indiceActual < todosIconos.length - 1) {
-    //     indiceActual++;
-    //     abrirModal2(todosIconos[indiceActual]);
-    //   }
-    // } else if (result.isDenied) {
-    //   if (indiceActual > 0) {
-    //     indiceActual--;
-    //     abrirModal2(todosIconos[indiceActual]);
-    //   }
-    // } else if (result.isDismissed) {
-    //   console.log('Usuario cerró el modal');
-    //   indiceActual = 0;
-    //   clase = '';
-    //   //console.log(indiceActual);
-    // }
-    if (result.isDismissed) {
-      console.log('Usuario cerró el modal');
-      //indiceActual = 0;
-      //clase = '';
-      //console.log(indiceActual);
-    }
-  });
+  })
 }
 
-//function mostrarModalGenerico({ titulo = "Título", tabla = "", pasoActual = 1, totalPasos = 1, elemento = null }) {
-//function mostrarModalGenerico({ titulo = "Título", tabla = "", elemento = null}) {
 function mostrarModalGenerico(elemento) {
-  //console.log(indiceActual);
   const elid = elemento.id;
   const numero = 'Dia' + elid.replace(/\D/g, '');
-  //console.log(numero);
   const aver = document.getElementById(numero).title;
   const numero1 = elid.replace(/\D/g, '');
-  // if (indiceActual == -1) {
-  //   indiceActual++;
-  // }
+
   if (indiceActual < todosIconos.length -1) {
     const numero2 = Number(numero1) + 1;
     const numero3 = 'Dia' + numero2;
@@ -1841,9 +1865,6 @@ function mostrarModalGenerico(elemento) {
   const loco1 = loco[0].slice(0,3);
   const estado1 = 'Icon-D' + elid.replace(/\D/g, '');
   const temp1 = 'Temp-D' + elid.replace(/\D/g, '');
-  //const aver = document.getElementById(elid).title;
-  //const loco = aver.split(" ");
-  //const loco1 = loco[0].slice(0,3);
   const estado = document.getElementById(estado1);
   const temp = document.getElementById(temp1);
   tablaHTML = `
@@ -1863,12 +1884,8 @@ function mostrarModalGenerico(elemento) {
         </tr>
       </tbody>
     </table>`;
-  //tabla = tablaHTML;
-  
-  //const elid = elemento;  
+
   Swal.fire({
-    //title: `${titulo}<br><small>Paso ${pasoActual} de ${totalPasos}</small>`,
-    //title: `${titulo}`,
     title: `Información del día - ${loco1} ${loco[1]}<br><small class="citty">${cityyy2}</small><br><small class="pasos">Día ${indiceActual + 1} de ${todosIconos.length}</small>`,
     html: tablaHTML,
     width: 700,
@@ -1887,18 +1904,13 @@ function mostrarModalGenerico(elemento) {
         const infoElement = document.querySelector('.infor');
         const estadoElement = document.querySelector('.estado');
         const hghg = document.querySelector('.swal2-html-container');
-      
+
         if (infoElement && estadoElement) {
           const alturaInfo = infoElement.offsetHeight; // mide la altura real
           estadoElement.style.height = `${alturaInfo}px`; // se la asignás
           hghg.style.padding = '5px';
         }
       }, 100);
-      // const lklk = document.querySelector(".infor");
-      // const lklk2 = document.querySelector(".estado");
-      // console.log(lklk.clientHeight);
-      // console.log(lklk2.clientHeight);
-      // lklk2.style.height = lklk.clientHeight;
 
       if (botonConfirm) {
         botonConfirm.setAttribute('title', `Ir al ${titulo}`);
@@ -1924,28 +1936,19 @@ function mostrarModalGenerico(elemento) {
     }
   }).then((result) => {
     if (result.isConfirmed) {
-      //console.log('Usuario presionó Siguiente');
       if (indiceActual < todosIconos.length - 1) {
         indiceActual++;
-        //mostrarModalGenerico(titulo = "Título", tabla = "", todosIconos[indiceActual]);
-        //mostrarModalGenerico({titulo: titulo, tabla: tabla, elemento: todosIconos[indiceActual]});
         mostrarModalGenerico(todosIconos[indiceActual]);
       }
-      // Podés disparar alguna función acá
     } else if (result.isDenied) {
-      //console.log('Usuario presionó Anterior');
       if (indiceActual > 0) {
         indiceActual--;
-        //abrirModal(todosIconos[indiceActual]);
-        //mostrarModalGenerico({titulo: titulo, tabla: tabla, elemento: todosIconos[indiceActual]});
         mostrarModalGenerico(todosIconos[indiceActual]);
       }
-      // Podés disparar alguna función acá
     } else if (result.isDismissed) {
-      console.log('Usuario cerró el modal');
+      //console.log('Usuario cerró el modal');
       indiceActual = 0;
       clase = '';
-      //console.log(indiceActual);
     }
   });
 }
@@ -1954,69 +1957,11 @@ for (let icons of allday) {
   icons.addEventListener("click", function(e) {
     if (apiweb.checked || apilocal.checked) {
       if (ciudad.textContent != 'Acceso denegado a ubicación!') {
-        //iconPressed(e);
-        //mostrarModal(e.target.id);
-        // tablaHTML = [];
-        // const elid = e.target.id;
-        // const estado1 = 'Icon-D' + elid.replace(/\D/g, '');
-        // const temp1 = 'Temp-D' + elid.replace(/\D/g, '');
-        // const aver = document.getElementById(elid).title;
-        // const loco = aver.split(" ");
-        // const loco1 = loco[0].slice(0,3);
-        // const estado = document.getElementById(estado1);
-        // const temp = document.getElementById(temp1);
-        // //console.log(aver, estado, temp);
-        // titulo = `Información del día - ${loco1} ${loco[1]}<br><small class="citty">${cityyy2}</small>`;
-        // tablaHTML = `
-        //   <table class="generico">
-        //     <thead>
-        //       <tr>
-        //         <th class="hora">Estado</th>
-        //         <th class="temp">Temp</th>
-        //         <th class="info">Info</th>
-        //       </tr>
-        //     </thead>
-        //     <tbody>
-        //       <tr>
-        //         <td class="estado"><img src="${estado.src}"><p>${estado.title}</p></td>
-        //         <td class="temp">${temp.textContent}</td>
-        //         <td class="infor">${temp.title}</td>
-        //       </tr>
-        //     </tbody>
-        //   </table>`;
-          
         clase = 'p.DayForecast';
-        //mostrarModal(e.target.id, titulo, tablaHTML, clase);
         if (indiceActual == -1) {
           indiceActual = 0;
         };
-        //console.log(e.target.id);
         mostrarModal(e.target.id, clase);
-        // mostrarModalGenerico({          
-        //   //titulo: `<p class = "tituI">Información del día - ${loco1} ${loco[1]}</p><br><small class="citty">${cityyy}</small>`,
-        //   titulo: `Información del día - ${loco1} ${loco[1]}<br><small class="citty">${cityyy}</small>`,
-        //   tabla: `
-        //     <table class="generico">
-        //       <thead>
-        //         <tr>
-        //           <th class="hora">Estado</th>
-        //           <th class="temp">Temp</th>
-        //           <th class="info">Info</th>
-        //         </tr>
-        //       </thead>
-        //       <tbody>
-        //         <tr>
-        //           <td class="estado"><img src="${estado.src}"><p>${estado.title}</p></td>
-        //           <td class="temp">${temp.textContent}</td>
-        //           <td class="infor">${temp.title}</td>
-        //         </tr>
-        //       </tbody>
-        //     </table>
-        //   `,
-        //   //pasoActual: 2,
-        //   //totalPasos: 5,
-        //   elemento: e.target.id
-        // });
       }
     }
 });
@@ -2040,7 +1985,7 @@ icon.addEventListener("click", function(e) {
 
 for (let icons of allicon) {
     icons.addEventListener("click", function(e) {
-      if (apiweb.checked) {
+      if (apiweb.checked || apilocal.checked) {
         if (ciudad.textContent != 'Acceso denegado a ubicación!') {
           //iconPressed(e);
           clase = 'img.IconForecast';
@@ -2096,7 +2041,8 @@ function hasScrolled() {
 
 ciudad.addEventListener("mouseover", function() {
   const TituloActual = ciudad.textContent;
-  ciudad.title = TituloActual + ', ' + fechaFormateada;
+  //ciudad.title = TituloActual + ', ' + fechaFormateada;
+  ciudad.title = TituloActual + ', ' + `${nombre_fecha} ${numero_fecha}`;
   //console.log(TituloActual);
 });
 
@@ -2144,7 +2090,13 @@ function ObtenerIconosWeb(desc, horas) {
     } else {
       return nochelluviadispersa;
     }
-  } else if (desc == 'Lluvia ligera' || desc == 'Lluvia moderada' || desc == 'Lluvia moderada a intervalos' || desc.includes("Ligeras lluvias")) {
+  } else if (desc == 'Ligeras precipitaciones de aguanieve') {
+    if (isday == 'si') {
+      return aguanieve;
+    } else {
+      return nocheaguanieve;
+    }
+  } else if (desc == 'Lluvia ligera' || desc == 'Lluvia moderada' || desc == 'Lluvia moderada a intervalos' || desc.includes("Ligeras lluvias") || desc.includes("Lluvias ligeras")) {
     if (isday == 'si') {
       return lluvialigera;
     } else {
@@ -2173,6 +2125,12 @@ function ObtenerIconosWeb(desc, horas) {
       return nieveheavy;
     } else {
       return nochenieveheavy;
+    }
+  } else if (desc == 'Fuertes lluvias') {
+    if (isday == 'si') {
+      return lluviaheavy;
+    } else {
+      return nochelluviaheavy;
     }
   } else if (desc == 'Cielo cubierto') {
     if (isday == 'si') {
