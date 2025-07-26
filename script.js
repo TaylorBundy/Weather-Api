@@ -1778,6 +1778,7 @@ function abrirModal2() {
     let tiiime = leti[c]["time"];
     let texto = leti[c]["lang_es"][0].value.trim();
     let temp = leti[c]["tempC"];
+consola.log(temp);
     let wind = leti[c]["windspeedKmph"];
     const str = tiiime.toString().padStart(4, '0');
     const horaFormateada = `${str.slice(0, 2)}:${str.slice(2)}`;
