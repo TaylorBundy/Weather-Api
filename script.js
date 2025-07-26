@@ -1770,15 +1770,17 @@ function abrirModal2() {
   DatosTabla = []; // Limpiamos antes
   if (apiweb.checked) {
     var leti = current3[0]["hourly"];
+console.log(current3[0]);
   } else if (apilocal.checked) {
     var leti = current5[0]["hourly"];
+console.log(current5[0]);
   }
   //const leti = current3[0]["hourly"];
   for (let c = 0; c < leti.length; c++) {
     let tiiime = leti[c]["time"];
     let texto = leti[c]["lang_es"][0].value.trim();
     let temp = leti[c]["tempC"];
-console.log(temp);
+//console.log(temp);
     let wind = leti[c]["windspeedKmph"];
     const str = tiiime.toString().padStart(4, '0');
     const horaFormateada = `${str.slice(0, 2)}:${str.slice(2)}`;
