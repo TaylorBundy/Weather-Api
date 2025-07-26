@@ -1770,10 +1770,10 @@ function abrirModal2() {
   DatosTabla = []; // Limpiamos antes
   if (apiweb.checked) {
     var leti = current3[0]["hourly"];
-console.log(current3[0]);
+//console.log(current3[0]);
   } else if (apilocal.checked) {
     var leti = current5[0]["hourly"];
-console.log(current5[0]);
+//console.log(current5[0]);
   }
   //const leti = current3[0]["hourly"];
   for (let c = 0; c < leti.length; c++) {
